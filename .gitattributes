@@ -1,0 +1,21 @@
+# Force LF (Unix-style) for text files (scripts, configs, etc.)
+*.js      text eol=lf
+*.mjs     text eol=lf
+*.json    text eol=lf
+*.html    text eol=lf
+*.css     text eol=lf
+*.svg     text eol=lf
+*.md      text eol=lf
+*.drawio  text eol=lf
+
+# Use CRLF (Windows-style) for any specific files, if needed
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# For binary files, leave them untouched
+*.png     binary
+*.jpg     binary
+*.gif     binary
+*.pdf     binary
+*.zip     binary
+*.bkp     binary
