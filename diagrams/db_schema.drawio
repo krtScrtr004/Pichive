@@ -1,0 +1,74 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Page-1" id="jvlQo6_DeTbrSUPzmIi1">
+    <mxGraphModel dx="1042" dy="2326" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="RWLrIDuddstVYK90-xoj-1" value="User&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ID&lt;/div&gt;&lt;div&gt;Username&lt;/div&gt;&lt;div&gt;Email&lt;/div&gt;&lt;div&gt;Password&lt;/div&gt;&lt;div&gt;Profile Image&lt;/div&gt;&lt;div&gt;Bio&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="230" y="300" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="RWLrIDuddstVYK90-xoj-2" target="RWLrIDuddstVYK90-xoj-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-2" value="Post&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ID&lt;/div&gt;&lt;div&gt;Title&lt;/div&gt;&lt;div&gt;Image URL&lt;/div&gt;&lt;div&gt;Description&lt;/div&gt;&lt;div&gt;PosterID&lt;/div&gt;&lt;div&gt;DateTime&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Likes&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry y="70" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-4" value="PosterID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="205" y="120" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-5" value="ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="305" y="210" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="RWLrIDuddstVYK90-xoj-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="RWLrIDuddstVYK90-xoj-6" target="RWLrIDuddstVYK90-xoj-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-6" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;Post Comments&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ID&lt;/div&gt;&lt;div&gt;CommenterID&lt;/div&gt;&lt;div&gt;PostID&lt;/div&gt;&lt;div&gt;Comment&lt;/div&gt;&lt;div&gt;DateTime&lt;/div&gt;&lt;div&gt;Likes&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="222.5" y="-155" width="155" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-8" value="CommenterID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="300" y="70" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-10" value="PostID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="120" y="-112" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-11" value="ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-30" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="RWLrIDuddstVYK90-xoj-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-12" value="Follow&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;MyD&lt;/div&gt;&lt;div&gt;TheirID&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="390" y="490" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-19" value="ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="260" y="490" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-21" value="FollowerID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="310" y="560" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="RWLrIDuddstVYK90-xoj-22" target="RWLrIDuddstVYK90-xoj-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-22" value="Chat&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ID&lt;/div&gt;&lt;div&gt;SenderID&lt;/div&gt;&lt;div&gt;ReceiverID&lt;/div&gt;&lt;div&gt;Message&lt;/div&gt;&lt;div&gt;DateTime&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="420" y="100" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-24" value="SenderID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="420" y="288" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-25" value="ReceiverID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="490" y="288" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RWLrIDuddstVYK90-xoj-26" value="ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="410" y="368" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
