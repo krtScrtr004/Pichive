@@ -16,6 +16,7 @@ signup_btn.onclick = function (e) {
 		c_password: c_password.value,
 	})
 		.then((data) => {
+            // Redirect to home
 			document.querySelector('#result').innerHTML = data['message']
 		})
 		.catch((error) => {
