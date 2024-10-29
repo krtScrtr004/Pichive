@@ -8,10 +8,10 @@ function validateUsername($username)
     try {
         // Check is username is valid
         if (strlen($username) < 3 || strlen($username) > 15) {
-            return 'Username must be between 3 and 15 characters long.';
+            return 'Username must be between 3 and 15 characters long';
         }
         if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-            return 'Username can only contain letters, numbers, and underscores.';
+            return 'Username can only contain letters, numbers, and underscores';
         }
 
         // Check if username address is already used
@@ -21,7 +21,7 @@ function validateUsername($username)
         ]);
         $result = $query->fetchAll();
         if (count($result) > 0) {
-            return 'Username address already exists!';
+            return 'Username already exists!';
         }
 
         return true;
@@ -58,19 +58,19 @@ function validateEmail($email)
 
 function validatePassword($password) {
     if (strlen($password) < 8 || strlen($password) > 128) {
-        return 'Username must be between 3 and 128 characters long.';
+        return 'Username must be between 3 and 128 characters long';
     }
     if (!preg_match('/[A-Z]/', $password)) {
-        return 'Password must contain at least one uppercase letter.';
+        return 'Password must contain at least one uppercase letter';
     }
     if (!preg_match('/[a-z]/', $password)) {
-        return 'Password must contain at least one lowercase letter.';
+        return 'Password must contain at least one lowercase letter';
     }
     if (!preg_match('/[0-9]/', $password)) {
-        return 'Password must contain at least one number.';
+        return 'Password must contain at least one number';
     }
     if (!preg_match('/[\W_]/', $password)) { // \W matches any "non-word" character
-        return 'Password must contain at least one special character.';
+        return 'Password must contain at least one special character';
     }
     return true;
 }

@@ -8,11 +8,12 @@ export async function sendData(URL, OBJ) {
 			body: JSON.stringify(OBJ),
 		})
 
-		if (response.statusCode !== 200) {
-			const error = await response.json()
-			console.error(`Response Error: ${error.message}`)
-			return error
+		const data = await response.json()
+		if (response.status !== 200) {
+			console.error(`Response Error: ${data.message}`)
 		}
+
+		return data
 	} catch (e) {
 		console.error(`Network Error: ${e}`)
 	}
