@@ -38,10 +38,10 @@ if (!empty($error)) {
         $result = $query->fetch();
 
         if ($result && password_verify($data['password'], $result['password'])) {
-            echo json_encode(array([
+            echo json_encode(array(
                 'status' => 'success',
                 'message' => 'Account successfully logged in'
-            ]));
+            ));
 
              // Initialize session
              $_SESSION['user_id'] = $result['id'];
