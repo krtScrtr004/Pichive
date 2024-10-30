@@ -17,18 +17,17 @@ signup_btn.onclick = function (e) {
 	})
 		.then((data) => {
 			// TODO: Display error on modal
+			const result = document.querySelector('#result')
 			if (data['status'] === 'fail') {
-				const result = document.querySelector('#result')
 				if (data.hasOwnProperty('error')) {
 					Object.values(data['error']).forEach((error) => {
 						const paragraph = document.createElement('p')
 						paragraph.textContent = error
 						result.appendChild(paragraph)
 					})
-				} else {
-					result.innerHTML = data['message']
 				}
 			}
+			result.innerHTML = data['message']
 			// TODO: Display successfull message on modal
 			// TODO: Redirect to home if successful
 		})
