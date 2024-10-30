@@ -1,7 +1,7 @@
 <?php
 
-include_once '../config/database.php';
-include_once '../config/session.php';
+require_once '../config/database.php';
+require_once '../config/session.php';
 include_once '../utils/validation.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

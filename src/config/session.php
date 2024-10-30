@@ -2,21 +2,17 @@
 
 /*--------------------------------------------- SESSION MANAGEMENT ---------------------------------------------------*/
 
+require_once 'load_env.php';
+
 ini_set('session.use_only_cookies', 1);             // Use only cookie for session ID
 ini_set('session.use_strict_mode', 1);              // Refuse to use invalid session ID
 
-$lifetime = 1800;
-$domain = 'localhost';
-$path = '/';
-$secure = false;
-$httponly = true;
-
 session_set_cookie_params([
-    'lifetime' => $lifetime,                          // Valid for 30 minutes
-    'domain' => $domain,                              // Default
-    'path' => $path,                                  // Valid for files within the project
-    'secure' => $secure,                              // Use HTTPS
-    'httponly' => $httponly                           // Prevent script execution
+    'lifetime' => $_ENV['SS_LIFETIME'],            // Valid for 30 minutes
+    'domain' => $_ENV['SS_DOMAIN'],                 // Default
+    'path' => $_ENV['SS_PATH'],                     // Valid for files within the project
+    'secure' => $_ENV['SS_SECURE'],                 // Use HTTPS
+    'httponly' => $_ENV['SS_HTTPONLY']              // Prevent script execution
 ]);
 
 session_start();

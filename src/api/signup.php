@@ -1,6 +1,6 @@
 <?php
 
-include_once '../config/database.php';
+require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/uuid.php';
 
