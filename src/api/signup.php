@@ -16,14 +16,19 @@ $username_result = validateUsername($data['username']);
 if ($username_result !== true) {
     $error['username'] = $username_result;
 } else {
-    // Check if username address is already used
-    $query = $pdo->prepare('SELECT username FROM user WHERE username = :username');
-    $query->execute([
-        'username' => $username
-    ]);
-    $result = $query->fetchAll();
-    if (count($result) > 0) {
-        $error['username'] = 'Username already exists!';
+    try {
+        // Check if username address is already used
+        $query = $pdo->prepare('SELECT username FROM user WHERE username = :username');
+        $query->execute([
+            'username' => $data['username']
+        ]);
+        $result = $query->fetchAll();
+        if (count($result) > 0) {
+            $error['username'] = 'Username already exists!';
+        }
+    } catch (PDOException $e) {
+        echo json_encode(array('status' => 'fail', 'message' => 'An error occurred while signing up: ' . $e->getMessage()));
+        exit();
     }
 }
 
@@ -31,14 +36,20 @@ $email_result = validateEmail($data['email']);
 if ($email_result !==  true) {
     $error['email'] = $email_result;
 } else {
-    // Check if email address is already used
-    $query = $pdo->prepare('SELECT email FROM user WHERE email = :email');
-    $query->execute([
-        'email' => $email
-    ]);
-    $result = $query->fetchAll();
-    if (count($result) > 0) {
-        $error['email'] = 'Email address already exists!';
+
+    try {
+        // Check if email address is already used
+        $query = $pdo->prepare('SELECT email FROM user WHERE email = :email');
+        $query->execute([
+            'email' => $data['email']
+        ]);
+        $result = $query->fetchAll();
+        if (count($result) > 0) {
+            $error['email'] = 'Email address already exists!';
+        }
+    } catch (PDOException $e) {
+        echo json_encode(array('status' => 'fail', 'message' => 'An error occurred while signing up: ' . $e->getMessage()));
+        exit();
     }
 }
 
@@ -55,15 +66,9 @@ if (!empty($error)) {
     echo json_encode(array('status' => 'fail', 'error' => $error));
 } else {
     try {
-        $uuid = generateUUID();
-        if ($uuid === null) {
-            echo json_encode(array('status' => 'fail', 'message' => 'Failed to generate UUID'));
-            exit();
-        }
-
         $query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
         $query->execute([
-            ':id' => $uuid,
+            ':id' => generateUUID(),
             ':username' => $data['username'],
             ':email' => $data['email'],
             ':password' => password_hash($data['password'], PASSWORD_DEFAULT)
