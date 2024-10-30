@@ -1,3 +1,11 @@
+<?php
+include '../config/session.php';
+// if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
+//     header('Location:');    // TODO: Add redirect here
+//     exit();
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +21,9 @@
 </style>
 
 <body>
-
     <main>
+        <h1 id="result"></h1>
+
         <!-- Banner Section -->
         <section></section>
 
@@ -42,11 +51,10 @@
                 <input type="password" name="c_password" id="c_password" required>
                 <button id="signup_btn" type="submit">SUBMIT</button>
             </form>
-
-            <span id="result"></span>
           </section>
     </main>
 
+    <script type="module" src="../assets/js/login.js"></script>
     <script type="module" src="../assets/js/signup.js"></script>
     
 </body>

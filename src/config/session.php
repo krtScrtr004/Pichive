@@ -8,7 +8,7 @@ ini_set('session.use_strict_mode', 1);              // Refuse to use invalid ses
 $lifetime = 1800;
 $domain = 'localhost';
 $path = '/';
-$secure = true;
+$secure = false;
 $httponly = true;
 
 session_set_cookie_params([

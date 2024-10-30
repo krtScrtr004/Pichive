@@ -4,40 +4,29 @@ include_once '../config/database.php';
 // Username Validator
 function validateUsername($username)
 {
-    global $pdo;
-    try {
-        // Check is username is valid
-        if (strlen($username) < 3 || strlen($username) > 15) {
-            return 'Username must be between 3 and 15 characters long';
-        }
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-            return 'Username can only contain letters, numbers, and underscores';
-        }
-
-        return true;
-    } catch (PDOException $e) {
-        return 'Query failed: ' . $e->getMessage();
+    // Check is username is valid
+    if (strlen($username) < 3 || strlen($username) > 15) {
+        return 'Username must be between 3 and 15 characters long';
     }
+    if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+        return 'Username can only contain letters, numbers, and underscores';
+    }
+
+    return true;
 }
 
 // Email Validator 
 function validateEmail($email)
 {
-    global $pdo;
-    try {
-        // Check if email address is valid
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return 'Invalid email address!';
-        }
-
-       
-        return true;
-    } catch (PDOException $e) {
-        return 'Query failed! ' . $e->getMessage();
+    // Check if email address is valid
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return 'Invalid email address!';
     }
+    return true;
 }
 
-function validatePassword($password) {
+function validatePassword($password)
+{
     if (strlen($password) < 8 || strlen($password) > 128) {
         return 'Username must be between 3 and 128 characters long';
     }
