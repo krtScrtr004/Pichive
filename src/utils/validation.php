@@ -14,16 +14,6 @@ function validateUsername($username)
             return 'Username can only contain letters, numbers, and underscores';
         }
 
-        // Check if username address is already used
-        $query = $pdo->prepare('SELECT username FROM user WHERE username = :username');
-        $query->execute([
-            'username' => $username
-        ]);
-        $result = $query->fetchAll();
-        if (count($result) > 0) {
-            return 'Username already exists!';
-        }
-
         return true;
     } catch (PDOException $e) {
         return 'Query failed: ' . $e->getMessage();
@@ -40,16 +30,7 @@ function validateEmail($email)
             return 'Invalid email address!';
         }
 
-        // Check if email address is already used
-        $query = $pdo->prepare('SELECT email FROM user WHERE email = :email');
-        $query->execute([
-            'email' => $email
-        ]);
-        $result = $query->fetchAll();
-        if (count($result) > 0) {
-            return 'Email address already exists!';
-        }
-
+       
         return true;
     } catch (PDOException $e) {
         return 'Query failed! ' . $e->getMessage();
