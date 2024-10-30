@@ -1,12 +1,12 @@
 import { sendData } from './utils.js'
 
-const username = document.querySelector('#username')
-const email = document.querySelector('#email')
-const password = document.querySelector('#password')
-const c_password = document.querySelector('#c_password')
-const signup_btn = document.querySelector('#signup_btn')
+const username = document.querySelector('#signup>#signup_form>#username')
+const email = document.querySelector('#signup>#signup_form>#email')
+const password = document.querySelector('#signup>#signup_form>#password')
+const c_password = document.querySelector('#signup>#signup_form>#c_password')
+const signup_btn = document.querySelector('#signup>#signup_form>#signup_btn')
 
-signup_btn.onclick = function (e) {
+signup_btn.onclick = (e) => {
 	e.preventDefault()
 	// Send data to backend for validation
 	sendData('../api/signup.php', {
