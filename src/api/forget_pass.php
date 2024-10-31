@@ -22,7 +22,7 @@ if ($email_result !== true) {
     $error['email'] = $email_result;
 } else {
     try {
-        $query = $pdo->prepare('SELECT email FROM user WHERE email = :email');
+        $query = $pdo->prepare('SELECT id FROM user WHERE email = :email');
         $query->execute([
             ':email' => $data['email']
         ]);
@@ -38,6 +38,15 @@ if ($email_result !== true) {
                 'email' => $data['email'],
                 'otp' => $otp
             ])) {
+
+                // Record otp  with id in db
+                $query = $pdo->prepare('INSERT INTO otp(otp_code, user_id, record_time) VALUES(:otp_code, :user_id, :record_time)');
+                $query->execute([
+                    ':otp_code' => $otp,
+                    ':user_id' => $result['id'],
+                    ':record_time' => date("H:i:s")
+                ]);
+
                 echo json_encode(array(
                    'status' =>'success',
                    'message' => 'OTP sent successfully!'
