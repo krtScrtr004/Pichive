@@ -26,36 +26,37 @@ if ($password_result !== true) {
 
 if (!empty($error)) {
     echo json_encode(array(
-        'status' => 'fail', 
+        'status' => 'fail',
         'error' => $error
     ));
-} else {
-    try {
-        $query = $pdo->prepare('SELECT id, email, password FROM user WHERE email = :email');
-        $query->execute([
-            ':email' => $data['email'],
-        ]);
-        $result = $query->fetch();
+    exit();
+}
 
-        if ($result && password_verify($data['password'], $result['password'])) {
-            echo json_encode(array(
-                'status' => 'success',
-                'message' => 'Account successfully logged in'
-            ));
-
-             // Initialize session
-             $_SESSION['user_id'] = $result['id'];
-             $_SESSION['user_email'] = $result['email'];
-        } else {
-            echo json_encode(array(
-                'status' => 'success', 
-                'message' => 'Invalid email and/or password!'
-            ));
-        }
-    } catch (Exception $e) {
+try {
+    $query = $pdo->prepare('SELECT id, email, password FROM user WHERE email = :email');
+    $query->execute([
+        ':email' => $data['email'],
+    ]);
+    $result = $query->fetch();
+    if (!$result || !password_verify($data['password'], $result['password'])) {
         echo json_encode(array(
-            'status' => 'fail', 
-            'message' => 'An error occurred while signing up: ' . $e->getMessage()
+            'status' => 'success',
+            'message' => 'Invalid email and/or password!'
         ));
+        exit();
     }
+
+    echo json_encode(array(
+        'status' => 'success',
+        'message' => 'Account successfully logged in'
+    ));
+
+    // Initialize session
+    $_SESSION['user_id'] = $result['id'];
+    $_SESSION['user_email'] = $result['email'];
+} catch (Exception $e) {
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => 'Database error: ' . $e->getMessage()
+    ));
 }

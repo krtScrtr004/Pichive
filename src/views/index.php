@@ -54,8 +54,8 @@ include '../config/session.php';
           </section>
     </main>
 
-    <script type="module" src="../assets/js/login.js"></script>
-    <script type="module" src="../assets/js/signup.js"></script>
+    <script type="module" src="../assets/js/event/login.js"></script>
+    <script type="module" src="../assets/js/event/signup.js"></script>
     
 </body>
 </html>
