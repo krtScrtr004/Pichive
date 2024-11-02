@@ -23,7 +23,8 @@ if (!$data) {
 }
 
 try {
-    if (!$search_existing_record($data['user_id'], $data['otp_code'])) {
+    $existing_record = search_existing_record($data['user_id'], $data['otp_code']);
+    if (!$existing_record) {
         echo json_encode(array(
             'status' => 'fail',
             'message' => 'Invalid OTP and/or user not found!'
@@ -32,7 +33,7 @@ try {
     }
 
     $current_time = new DateTime();
-    $record_time = new DateTime($result['record_time']);
+    $record_time = new DateTime($existing_record['record_time']);
     $time_difference = $current_time->getTimestamp() - $record_time->getTimestamp();
     // Check if 5 minutes have passed
     if ($time_difference >= 300) {

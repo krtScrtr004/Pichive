@@ -1,6 +1,3 @@
-<!----------------------------------------
-    FORGET PASSWORD UTILITY FUNCTIONS
------------------------------------------>
 <?php
 function search_existing_record($id, $otp = null)
 {
@@ -59,7 +56,6 @@ function delete_otp_record($id, $otp) {
             ':otp_code' => $id,
             ':user_id' => encodeUUID($otp)
         ]);
-        return true;
     } catch (PDOException $e) {
         return json_encode(array(
             'status' => 'fail',

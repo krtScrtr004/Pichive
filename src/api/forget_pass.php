@@ -2,6 +2,9 @@
 
 // Script to authenticate email and send OTP
 
+// TODO: When user has existing OTP and he wants to send another, 
+// instead of forcing him to use the previous otp, update it 
+
 require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/uuid.php';
