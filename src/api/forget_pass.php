@@ -6,8 +6,13 @@ require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/uuid.php';
 include_once '../utils/request.php';
+include_once '../utils/forget_pass.util.php';
 
 use OTPHP\TOTP;
+
+$totp = TOTP::generate();       // Generate secret (64-bit)
+$totp->setDigits(6);            // Set OTP length to 6-digit long
+$otp = $totp->now();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
@@ -18,6 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
+if (!$data) {
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => 'Data cannot be parsed!'
+    ));
+    exit();
+}
 
 $email_result = validateEmail($data['email']);
 if ($email_result !== true) {
@@ -42,33 +54,44 @@ try {
         exit();
     }
 
-    // Create POST request to mail sender script 
-    $url = 'http://localhost/Pichive/src/utils/send_otp.php';
-    $response = sendData($url, [
-        'email' => $data['email'],
-        'otp' => $otp,
-        'username' => $result['username']
-    ]);
-    if ($reponse['status'] === 'fail') {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Failed to send OTP!'
-        ));
-    }
-
     // Search existing otp in user inbox
     if (search_existing_record($result['id'])) {
         echo json_encode(array(
             'status' => 'fail',
             'message' => 'You have an existing OTP in your inbox!'
         ));
+        exit();
+    }
+
+    // Send OTP to the user via gmail
+    $request = sendData('http://localhost/Pichive/src/api/send_otp.php', [
+        'email' => $data['email'],
+        'username' => $result['username'],
+        'otp_code' => $otp
+    ]);
+    if (
+        !$request ||
+        !isset($request->status) ||
+        $request->status === 'fail'
+    ) {
+        echo json_encode(array(
+            'status' => 'fail',
+            'message' => $request['message'] ?? 'Data cannot be processed!'
+        ));
+        exit();
     }
 
     // Insert otp with user_id to db
     insert_otp_record($result['id']);
     echo json_encode(array(
         'status' => 'success',
-        'message' => 'OTP sent successfully!'
+        'message' => 'OTP sent successfully!',
+        'user' => [
+            'user_email' => $data['email'],
+            'user_username' => $result['username'],
+            'user_id' => parseUUID($result['id']),
+        ],
+        'otp_code' => $otp
     ));
 } catch (PDOException $e) {
     echo json_encode(array(
@@ -76,50 +99,4 @@ try {
         'message' => 'Database error: ' . $e->getMessage()
     ));
     exit();
-}
-
-// TODO: Move this to utils file
-function search_existing_record($id)
-{
-    global $pdo;
-    try {
-        $search_existing_query = $pdo->prepare('SELECT otp_code FROM otp WHERE user_id = :user_id');
-        $search_existing_query->execute([
-            ':user_id' => $id
-        ]);
-        $search_existing_result = $search_existing_query->fetch();
-        return $search_existing_result ? true : false;
-    } catch (PDOException $e) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
-        exit();
-    }
-}
-
-function insert_otp_record($id)
-{
-    global $pdo;
-    try {
-        date_default_timezone_set('Asia/Manila');
-
-        $totp = TOTP::generate();       // Generate secret (64-bit)
-        $totp->setDigits(6);            // Set OTP length to 6-digit long
-        $otp = $totp->now();
-
-        // Record otp  with id in db
-        $insert_query = $pdo->prepare('INSERT INTO otp(otp_code, user_id, record_time) VALUES(:otp_code, :user_id, :record_time)');
-        $insert_query->execute([
-            ':otp_code' => $otp,
-            ':user_id' => $id,
-            ':record_time' => (new DateTime())->format('Y-m-d H:i:s')
-        ]);
-    } catch (PDOException $e) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
-        exit();
-    }
 }

@@ -39,20 +39,21 @@ try {
     // Recipients
     $mail->setFrom($_ENV['ML_USERNAME'], 'pichive.com');
     $mail->addAddress($data['email'], $data['username']);       // Name is optional
+
     // Content
-    $mail->isHTML(true);                                         // Set email format to HTML
+    $mail->isHTML(true);  // Set email format to HTML
     $mail->Subject = 'One Time Password';
     $mail->Body    =    '<h1>OTP for Password Reset</h1>
                         <h3>Pichive</h3> <br>
                         <p><strong>Do not share</strong> this OTP!</p>
                         <p>This is only valid for 5 minutes.</p>
-                        <h2>' . $data['otp'] . '</h2>';
+                        <h2>' . $data['otp_code'] . '</h2>';
     $mail->AltBody = 'One Time Password for password reset';
 
     $mail->send();
     echo json_encode(array(
-        'status' => 'success',
-        'message' => 'OTP sent successfully!'
+       'status' =>'success',
+       'message' => 'OTP sent successfully!'
     ));
 } catch (Exception $e) {
     echo json_encode(array(

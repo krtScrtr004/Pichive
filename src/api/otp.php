@@ -2,6 +2,8 @@
 // Script to authenticate OTP
 
 require_once '../config/database.php';
+include_once '../utils/uuid.php';
+include_once '../utils/forget_pass.util.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
@@ -12,19 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-try {
-    $search_query = $pdo->prepare('SELECT * FROM otp WHERE otp_code = :otp_code AND user_id = :user_id');
-    $search_query->execute([
-        'otp_code' => $data['otp_code'],
-        'user_id' => $data['user_id']
-    ]);
+if (!$data) {
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => 'Data cannot be parsed!'
+    ));
+    exit();
+}
 
-    $result = $search_query->fetch();
+try {
+    if (!$search_existing_record($data['user_id'], $data['otp_code'])) {
+        echo json_encode(array(
+            'status' => 'fail',
+            'message' => 'Invalid OTP and/or user not found!'
+        ));
+        exit();
+    }
 
     $current_time = new DateTime();
     $record_time = new DateTime($result['record_time']);
     $time_difference = $current_time->getTimestamp() - $record_time->getTimestamp();
-    // If 5 minutes have passed
+    // Check if 5 minutes have passed
     if ($time_difference >= 300) {
         echo json_encode(array(
             'status' => 'success',
@@ -34,12 +44,7 @@ try {
     }
 
     // Delete otp after use
-    $delete_query = $pdo->prepare('DELETE FROM otp WHERE otp_code = :otp_code AND user_id = :user_id');
-    $delete_query->execute([
-        ':otp_code' => $data['otp_code'],
-        ':user_id' => $data['user_id']
-    ]);
-
+    delete_otp_record($data['user_id'], $data['otp_code']);
     echo json_encode(array(
         'status' => 'success',
         'message' => 'OTP confirmed!'

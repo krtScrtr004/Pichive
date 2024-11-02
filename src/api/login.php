@@ -12,6 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
+if (!$data) {
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => 'Data cannot be parsed!'
+    ));
+    exit();
+}
 $error = [];
 
 $email_result = validateEmail($data['email']);
@@ -40,8 +47,10 @@ try {
     $result = $query->fetch();
     if (!$result || !password_verify($data['password'], $result['password'])) {
         echo json_encode(array(
-            'status' => 'success',
-            'message' => 'Invalid email and/or password!'
+            'status' => 'fail',
+            'error' => [
+                'Invalid email and/or password!'
+                ]
         ));
         exit();
     }

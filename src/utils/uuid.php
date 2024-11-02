@@ -1,6 +1,7 @@
 <?php
 require_once '../config/database.php';
 
+// Generate UUID through MYSQL
 function generateUUID()
 {
     global $pdo;
@@ -8,7 +9,7 @@ function generateUUID()
         // Fetch the UUID directly from the database
         $generate_uuid = $pdo->query('SELECT UUID() AS ID');
         $uuid = $generate_uuid->fetch();
-        $uuid = hex2bin(str_replace('-', '', $uuid['ID']));         // Remove dashes and convert the UUID string to binary
+        $uuid = encodeUUID($uuid['ID']);    
 
         return $uuid; // Return UUID as BINARY(16)
 
@@ -19,7 +20,12 @@ function generateUUID()
     }
 }
 
+// Convert UUID string to binary
+function encodeUUID($str_uuid) {
+    return hex2bin(str_replace('-', '', $str_uuid));      // Remove dashes and convert the UUID string to binary
+}
 
+// Convert UUID binary to string
 function parseUUID($bin_uuid)
 {
     $hex_uuid = bin2hex($bin_uuid);

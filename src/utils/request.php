@@ -4,11 +4,10 @@ function sendData($url, $obj)
 {
     $obj = json_encode($obj);
     if ($obj === null) {
-        echo json_encode(array(
+        return json_encode(array(
             'status' => 'fail',
-            'message' => 'Data cannot be parsed!'
+            'message' => 'Data cannot be processed!'
         ));
-        exit();
     }
 
     $options = array(
@@ -23,13 +22,11 @@ function sendData($url, $obj)
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     $response = json_decode($result);
-    if ($response === null) {
-        echo json_encode(array(
+    if (!$response) {
+        return json_encode(array(
             'status' => 'fail',
-            'message' => 'Data cannot be parsed!'
+            'message' => 'Data cannot be processed!'
         ));
-        exit();
     }
-
     return $response;
 }
