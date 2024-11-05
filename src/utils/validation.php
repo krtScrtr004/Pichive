@@ -2,7 +2,7 @@
 require_once '../config/database.php';
 
 // Username Validator
-function validateUsername($username)
+function validate_username($username)
 {
     // Check is username is valid
     if (strlen($username) < 3 || strlen($username) > 15) {
@@ -16,7 +16,7 @@ function validateUsername($username)
 }
 
 // Email Validator 
-function validateEmail($email)
+function validate_email($email)
 {
     // Check if email address is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -25,7 +25,7 @@ function validateEmail($email)
     return true;
 }
 
-function validatePassword($password)
+function validate_password($password)
 {
     if (strlen($password) < 8 || strlen($password) > 128) {
         return 'Username must be between 3 and 128 characters long';

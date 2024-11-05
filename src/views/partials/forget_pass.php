@@ -28,12 +28,15 @@
     <section id="change_password">
         <form id="change_password_form" action="" method="POST">
             <label for="new_password">New Password</label>
-            <input type="passwordword" name="new_password" id="new_password" require>
+            <input type="password" name="new_password" id="new_password" require>
             <label for="c_password">Confirm Password</label>
-            <input type="passwordword" name="c_password" id="c_password" require>
+            <input type="password" name="c_password" id="c_password" require>
             <button id="change_password_btn" type="submit">CHANGE PASSWORD</button>
         </form>
     </section>
+
+    <span>Didn't get otp? <a href="#" id="resend_otp"> Resend OTP</a>
+    </span>
 
     <script type="module" src="../../assets/js/event/forget_pass.js"></script>
 </body>

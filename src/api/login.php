@@ -21,12 +21,12 @@ if (!$data) {
 }
 $error = [];
 
-$email_result = validateEmail($data['email']);
+$email_result = validate_email($data['email']);
 if ($email_result !==  true) {
     $error['email'] = $email_result;
 }
 
-$password_result = validatePassword($data['password']);
+$password_result = validate_password($data['password']);
 if ($password_result !== true) {
     $error['password'] = $password_result;
 }

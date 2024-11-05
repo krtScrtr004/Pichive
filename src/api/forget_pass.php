@@ -11,11 +11,7 @@ include_once '../utils/uuid.php';
 include_once '../utils/request.php';
 include_once '../utils/forget_pass.util.php';
 
-use OTPHP\TOTP;
-
-$totp = TOTP::generate();       // Generate secret (64-bit)
-$totp->setDigits(6);            // Set OTP length to 6-digit long
-$otp = $totp->now();
+$otp = generate_otp();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
@@ -34,7 +30,7 @@ if (!$data) {
     exit();
 }
 
-$email_result = validateEmail($data['email']);
+$email_result = validate_email($data['email']);
 if ($email_result !== true) {
     echo json_encode(array(
         'status' => 'fail',
@@ -61,7 +57,7 @@ try {
     if (search_existing_record($result['id'])) {
         echo json_encode(array(
             'status' => 'fail',
-            'message' => 'You have an existing OTP in your inbox!'
+            'message' => 'An OTP has already been sent to this email!'
         ));
         exit();
     }
@@ -85,14 +81,14 @@ try {
     }
 
     // Insert otp with user_id to db
-    insert_otp_record($result['id']);
+    insert_otp_record($result['id'], $otp);
     echo json_encode(array(
         'status' => 'success',
-        'message' => 'OTP sent successfully!',
+        'message' => 'OTP successfully sent!',
         'user' => [
             'user_email' => $data['email'],
             'user_username' => $result['username'],
-            'user_id' => parseUUID($result['id']),
+            'user_id' => parse_uuid($result['id']),
         ],
         'otp_code' => $otp
     ));

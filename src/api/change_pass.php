@@ -33,7 +33,7 @@ if (!$data) {
 }
 $error = [];
 
-$password_result = validatePassword($data['new_password']);
+$password_result = validate_password($data['new_password']);
 if ($password_result !== true) {
     $error['password'] = $password_result;
 }
@@ -54,7 +54,7 @@ try {
     $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :user_id');
     $query->execute([
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
-        ':user_id' => encodeUUID($data['user_id'])
+        ':user_id' => encode_uuid($data['user_id'])
     ]);
 
     echo json_encode(array(

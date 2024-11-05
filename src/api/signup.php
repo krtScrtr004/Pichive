@@ -23,7 +23,7 @@ if (!$data) {
 $error = [];
 
 try {
-    $username_result = validateUsername($data['username']);
+    $username_result = validate_username($data['username']);
     if ($username_result !== true) {
         $error['username'] = $username_result;
     } else {
@@ -38,7 +38,7 @@ try {
         }
     }
 
-    $email_result = validateEmail($data['email']);
+    $email_result = validate_email($data['email']);
     if ($email_result !==  true) {
         $error['email'] = $email_result;
     } else {
@@ -53,7 +53,7 @@ try {
         }
     }
 
-    $password_result = validatePassword($data['password']);
+    $password_result = validate_password($data['password']);
     if ($password_result !== true) {
         $error['password'] = $password_result;
     }
@@ -71,7 +71,7 @@ try {
     }
     $insert_query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
     $insert_query->execute([
-        ':id' => generateUUID(),
+        ':id' => generate_uuid(),
         ':username' => $data['username'],
         ':email' => $data['email'],
         ':password' => password_hash($data['password'], PASSWORD_DEFAULT)

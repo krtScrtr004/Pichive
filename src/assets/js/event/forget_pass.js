@@ -21,6 +21,7 @@ const c_password = document.querySelector(
 const change_password_btn = document.querySelector(
 	'#change_password>#change_password_form>#change_password_btn'
 )
+const resend_otp = document.querySelector('span>#resend_otp')
 
 let response = null
 
@@ -59,7 +60,7 @@ send_otp_btn.onclick = (e) => {
 
 reset_password_btn.onclick = (e) => {
 	e.preventDefault()
-	sendData('../../api/otp.php', {
+	sendData('../../api/authenticate_otp.php', {
 		otp_code: otp.value,
 		user_id: response['user']['user_id'],
 	})
@@ -104,6 +105,32 @@ change_password_btn.onclick = (e) => {
 
 			// TODO: Handle success
 			result.innerHTML = data['message']
+		})
+		.catch((error) => {
+			result.innerHTML = error['message']
+		})
+}
+
+resend_otp.onclick = (e) => {
+	sendData('../../api/authenticate_otp.php', {
+		email: email.value,
+	})
+		.then((data) => {
+			if (!data) {
+				result.innerHTML = 'Data cannot be processed!'
+				return
+			}
+
+			if (data['status'] === 'fail') {
+				// TODO: Handle fauilure
+				result.innerHTML = data['message']
+				return
+			}
+
+			result.innerHTML = data['message']
+			response = data
+
+			// TODO: Handle success
 		})
 		.catch((error) => {
 			result.innerHTML = error['message']
