@@ -34,10 +34,7 @@ function search_existing_record($id, $otp = null)
 
         return $query->fetch();
     } catch (PDOException $e) {
-        return json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
+        throw new PDOException('Database error: ' . $e->getMessage());
     }
 }
 
@@ -53,10 +50,7 @@ function insert_otp_record($id, $otp)
             ':record_time' => (new DateTime())->format('Y-m-d H:i:s')
         ]);
     } catch (PDOException $e) {
-        return json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
+        throw new PDOException('Database error: ' . $e->getMessage());
     }
 }
 
@@ -71,10 +65,7 @@ function update_otp_record($id, $otp)
             ':user_id' => $id,
         ]);
     } catch (PDOException $e) {
-        return json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
+        throw new PDOException('Database error: ' . $e->getMessage());
     }
 }
 
@@ -88,9 +79,6 @@ function delete_otp_record($id, $otp)
             ':user_id' => $id
         ]);
     } catch (PDOException $e) {
-        return json_encode(array(
-            'status' => 'fail',
-            'message' => 'Database error: ' . $e->getMessage()
-        ));
+        throw new PDOException('Database error: ' . $e->getMessage());
     }
 }

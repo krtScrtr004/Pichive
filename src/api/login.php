@@ -3,6 +3,7 @@
 require_once '../config/database.php';
 require_once '../config/session.php';
 include_once '../utils/validation.php';
+include_once '../utils/authenticate_user.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
@@ -40,17 +41,13 @@ if (!empty($error)) {
 }
 
 try {
-    $query = $pdo->prepare('SELECT id, email, password FROM user WHERE email = :email');
-    $query->execute([
-        ':email' => $data['email'],
-    ]);
-    $result = $query->fetch();
-    if (!$result || !password_verify($data['password'], $result['password'])) {
+    $search_email = authenticate_email($data['email']);
+    if (!$search_email || !password_verify($data['password'], $search_email['password'])) {
         echo json_encode(array(
             'status' => 'fail',
-            'error' => [
+            'error' => array(
                 'Invalid email and/or password!'
-                ]
+            )
         ));
         exit();
     }
@@ -66,6 +63,6 @@ try {
 } catch (Exception $e) {
     echo json_encode(array(
         'status' => 'fail',
-        'message' => 'Database error: ' . $e->getMessage()
+        'message' => $e->getMessage()
     ));
 }

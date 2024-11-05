@@ -112,7 +112,7 @@ change_password_btn.onclick = (e) => {
 }
 
 resend_otp.onclick = (e) => {
-	sendData('../../api/authenticate_otp.php', {
+	sendData('../../api/resend_otp.php', {
 		email: email.value,
 	})
 		.then((data) => {

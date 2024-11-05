@@ -2,6 +2,7 @@
 
 require_once '../config/database.php';
 include_once '../utils/validation.php';
+include_once '../utils/authenticate_user.php';
 include_once '../utils/uuid.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -28,12 +29,8 @@ try {
         $error['username'] = $username_result;
     } else {
         // Check if username address is already used
-        $username_query = $pdo->prepare('SELECT username FROM user WHERE username = :username');
-        $username_query->execute([
-            'username' => $data['username']
-        ]);
-        $result = $username_query->fetchAll();
-        if (count($result) > 0) {
+        $search_duplicate_username = authenticate_username($data['username']);
+        if ($result) {
             $error['username'] = 'Username already exists!';
         }
     }
@@ -43,12 +40,8 @@ try {
         $error['email'] = $email_result;
     } else {
         // Check if email address is already used
-        $email_query = $pdo->prepare('SELECT email FROM user WHERE email = :email');
-        $email_query->execute([
-            'email' => $data['email']
-        ]);
-        $result = $email_query->fetchAll();
-        if (count($result) > 0) {
+        $search_duplicate_email = authenticate_email($data['email']);
+        if ($result) {
             $error['email'] = 'Email address already exists!';
         }
     }
@@ -70,12 +63,12 @@ try {
         exit();
     }
     $insert_query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
-    $insert_query->execute([
+    $insert_query->execute(array(
         ':id' => generate_uuid(),
         ':username' => $data['username'],
         ':email' => $data['email'],
         ':password' => password_hash($data['password'], PASSWORD_DEFAULT)
-    ]);
+    ));
     echo json_encode(array(
         'status' => 'success',
         'message' => 'Account successfully signed up'

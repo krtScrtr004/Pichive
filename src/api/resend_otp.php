@@ -1,5 +1,8 @@
 <?php
 
+include_once '../utils/authenticate_user.php';
+include_once '../utils/forget_pass.util.php';
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
         'status' => 'fail',
@@ -18,12 +21,8 @@ if (!$data) {
 }
 
 try {
-    $query = $pdo->prepare('SELECT id, username FROM user WHERE email = :email');
-    $query->execute([
-        ':email' => $data['email']
-    ]);
-    $result = $query->fetch();
-    if (!$result) {
+    $search_user = authenticate_email($data['email']);
+    if (!$search_user) {
         echo json_encode(array(
             'status' => 'fail',
             'message' => 'Email not found!'
@@ -31,30 +30,30 @@ try {
         exit();
     }
 
-    if (search_existing_record($result['id'])) {
-        // TODO: Move this to Resend OTP link on FE
-        $otp = generate_otp();
-        update_otp_record($result['id'], $otp);
+    if (!search_existing_record($search_user['id'])) {
         echo json_encode(array(
-            'status' => 'success',
-            'message' => 'New OTP sent successfully!',
-            'user' => [
-                'user_email' => $data['email'],
-                'user_username' => $result['username'],
-                'user_id' => parse_uuid($result['id']),
-            ],
-            'otp_code' => $otp    
+            'status' => 'fail',
+            'message' => 'User record not found!'
         ));
-    } else {
-       echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'User record not found!'
-       ));   
+        exit();
     }
+
+    $otp = generate_otp();
+    update_otp_record($search_user['id'], $otp);
+    echo json_encode(array(
+        'status' => 'success',
+        'message' => 'New OTP was sent successfully!',
+        'user' => array(
+            'user_email' => $data['email'],
+            'user_username' => $search_user['username'],
+            'user_id' => parse_uuid($search_user['id']),
+        ),
+        'otp_code' => $otp
+    ));
 } catch (PDOException $e) {
     echo json_encode(array(
         'status' => 'fail',
-        'message' => 'Database error: ' . $e->getMessage()
+        'message' => $e->getMessage()
     ));
     exit();
 }

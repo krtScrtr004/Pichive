@@ -5,11 +5,11 @@
 // TODO: When user has existing OTP and he wants to send another, 
 // instead of forcing him to use the previous otp, update it 
 
-require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/uuid.php';
 include_once '../utils/request.php';
 include_once '../utils/forget_pass.util.php';
+include_once '../utils/authenticate_user.php';
 
 $otp = generate_otp();
 
@@ -40,12 +40,8 @@ if ($email_result !== true) {
 }
 
 try {
-    $query = $pdo->prepare('SELECT id, username FROM user WHERE email = :email');
-    $query->execute([
-        ':email' => $data['email']
-    ]);
-    $result = $query->fetch();
-    if (!$result) {
+    $search_user = authenticate_email($data['email']);
+    if (!$search_user) {
         echo json_encode(array(
             'status' => 'fail',
             'message' => 'Email not found!'
@@ -54,7 +50,7 @@ try {
     }
 
     // Search existing otp in user inbox
-    if (search_existing_record($result['id'])) {
+    if (search_existing_record($search_user['id'])) {
         echo json_encode(array(
             'status' => 'fail',
             'message' => 'An OTP has already been sent to this email!'
@@ -65,7 +61,7 @@ try {
     // Send OTP to the user via gmail
     $request = sendData('http://localhost/Pichive/src/api/send_otp.php', [
         'email' => $data['email'],
-        'username' => $result['username'],
+        'username' => $search_user['username'],
         'otp_code' => $otp
     ]);
     if (
@@ -81,21 +77,21 @@ try {
     }
 
     // Insert otp with user_id to db
-    insert_otp_record($result['id'], $otp);
+    insert_otp_record($search_user['id'], $otp);
     echo json_encode(array(
         'status' => 'success',
         'message' => 'OTP successfully sent!',
-        'user' => [
+        'user' => array(
             'user_email' => $data['email'],
-            'user_username' => $result['username'],
-            'user_id' => parse_uuid($result['id']),
-        ],
+            'user_username' => $search_user['username'],
+            'user_id' => parse_uuid($search_user['id']),
+        ),
         'otp_code' => $otp
     ));
 } catch (PDOException $e) {
     echo json_encode(array(
         'status' => 'fail',
-        'message' => 'Database error: ' . $e->getMessage()
+        'message' => $e->getMessage()
     ));
     exit();
 }

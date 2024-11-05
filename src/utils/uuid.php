@@ -13,10 +13,8 @@ function generate_uuid()
 
         return $uuid; // Return UUID as BINARY(16)
 
-    } catch (PDOException $e) {
-        // Optionally handle the exception (e.g., log the error)
-        echo "Error: " . $e->getMessage();
-        return null; // Return null on error
+    } catch (Exception $e) {
+        throw new Exception($e->getMessage());
     }
 }
 
