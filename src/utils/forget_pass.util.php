@@ -23,12 +23,12 @@ function search_existing_record($id, $otp = null)
             $query = $pdo->prepare('SELECT * FROM otp WHERE otp_code = :otp_code AND user_id = :user_id');
             $query->execute([
                 'otp_code' => $otp,
-                'user_id' => $id
+                'user_id' => encode_uuid($id)
             ]);
         } else {
             $query = $pdo->prepare('SELECT otp_code FROM otp WHERE user_id = :user_id');
             $query->execute([
-                ':user_id' => $id
+                ':user_id' => encode_uuid($id)
             ]);
         }
 

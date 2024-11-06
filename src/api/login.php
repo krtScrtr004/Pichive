@@ -58,8 +58,8 @@ try {
     ));
 
     // Initialize session
-    $_SESSION['user_id'] = $result['id'];
-    $_SESSION['user_email'] = $result['email'];
+    $_SESSION['user_id'] = parse_uuid($search_email['id']);
+    $_SESSION['user_email'] = $search_email['email'];
 } catch (Exception $e) {
     echo json_encode(array(
         'status' => 'fail',

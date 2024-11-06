@@ -31,6 +31,7 @@ login_btn.onclick = (e) => {
 			}
 
 			// TODO: Display successfull message on modal
+			result.innerHTML = data['message']
 		})
 		.catch((error) => {
 			// TODO: Display error on modal

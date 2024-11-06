@@ -30,7 +30,7 @@ try {
     } else {
         // Check if username address is already used
         $search_duplicate_username = authenticate_username($data['username']);
-        if ($result) {
+        if ($search_duplicate_username) {
             $error['username'] = 'Username already exists!';
         }
     }
@@ -41,7 +41,7 @@ try {
     } else {
         // Check if email address is already used
         $search_duplicate_email = authenticate_email($data['email']);
-        if ($result) {
+        if ($search_duplicate_email) {
             $error['email'] = 'Email address already exists!';
         }
     }
@@ -60,11 +60,14 @@ try {
             'status' => 'fail',
             'error' => $error
         ));
+     
         exit();
     }
-    $insert_query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
-    $insert_query->execute(array(
-        ':id' => generate_uuid(),
+
+    $uuid =  generate_uuid();
+    $query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
+    $query->execute(array(
+        ':id' => $uuid,
         ':username' => $data['username'],
         ':email' => $data['email'],
         ':password' => password_hash($data['password'], PASSWORD_DEFAULT)
@@ -74,11 +77,11 @@ try {
         'message' => 'Account successfully signed up'
     ));
 
-    $_SESSION['user_id'] = $uuid;
+    $_SESSION['user_id'] = parse_uuid($uuid);
     $_SESSION['user_email'] = $data['email'];
 } catch (PDOException $e) {
     echo json_encode(array(
         'status' => 'fail',
-        'message' => 'Database error: ' . $e->getMessage()
+        'message' => $e->getMessage()
     ));
 }

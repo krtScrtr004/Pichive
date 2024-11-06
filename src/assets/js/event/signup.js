@@ -36,6 +36,7 @@ signup_btn.onclick = (e) => {
 			}
 
 			// TODO: Handle success
+			result.innerHTML = data['message']
 		})
 		.catch((error) => {
 			// TODO: Display error on modal
