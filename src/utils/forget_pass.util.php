@@ -1,4 +1,5 @@
 <?php
+// Forget Password and OTP Utils Functions
 
 require_once '../config/database.php';
 include_once '../utils/uuid.php';
@@ -20,15 +21,15 @@ function search_existing_record($id, $otp = null)
     try {
         $query = null;
         if ($otp) {
-            $query = $pdo->prepare('SELECT * FROM otp WHERE otp_code = :otp_code AND user_id = :user_id');
+            $query = $pdo->prepare('SELECT * FROM otp WHERE otp_code = :otp_code AND user_id = :id');
             $query->execute([
-                'otp_code' => $otp,
-                'user_id' => encode_uuid($id)
+                ':otp_code' => $otp,
+                ':id' => encode_uuid($id)
             ]);
         } else {
-            $query = $pdo->prepare('SELECT otp_code FROM otp WHERE user_id = :user_id');
+            $query = $pdo->prepare('SELECT otp_code FROM otp WHERE user_id = :id');
             $query->execute([
-                ':user_id' => encode_uuid($id)
+                ':id' => encode_uuid($id)
             ]);
         }
 
@@ -43,10 +44,10 @@ function insert_otp_record($id, $otp)
     global $pdo;
     try {
         // Record otp  with id in db
-        $query = $pdo->prepare('INSERT INTO otp(otp_code, user_id, record_time) VALUES(:otp_code, :user_id, :record_time)');
+        $query = $pdo->prepare('INSERT INTO otp(otp_code, user_id, record_time) VALUES(:otp_code, :id, :record_time)');
         $query->execute([
             ':otp_code' => $otp,
-            ':user_id' => $id,
+            ':id' => $id,
             ':record_time' => (new DateTime())->format('Y-m-d H:i:s')
         ]);
     } catch (PDOException $e) {
@@ -58,11 +59,11 @@ function update_otp_record($id, $otp)
 {
     global $pdo;
     try {
-        $query = $pdo->prepare('UPDATE otp SET otp_code = :otp_code, record_time = :record_time WHERE user_id = :user_id');
+        $query = $pdo->prepare('UPDATE otp SET otp_code = :otp_code, record_time = :record_time WHERE user_id = :id');
         $query->execute([
             ':otp_code' => $otp,
             ':record_time' => (new DateTime())->format('Y-m-d H:i:s'),  // Corrected order
-            ':user_id' => $id,
+            ':id' => $id,
         ]);
     } catch (PDOException $e) {
         throw new PDOException('Database error: ' . $e->getMessage());
@@ -73,10 +74,10 @@ function delete_otp_record($id, $otp)
 {
     global $pdo;
     try {
-        $query = $pdo->prepare('DELETE FROM otp WHERE otp_code = :otp_code AND user_id = :user_id');
+        $query = $pdo->prepare('DELETE FROM otp WHERE otp_code = :otp_code AND user_id = :id');
         $query->execute([
             ':otp_code' => $otp,
-            ':user_id' => $id
+            ':id' => $id
         ]);
     } catch (PDOException $e) {
         throw new PDOException('Database error: ' . $e->getMessage());

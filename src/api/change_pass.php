@@ -5,7 +5,7 @@
 
     Req:
     OBJ = {
-        user_id,
+        id,
         new_password,
         c_password
     }
@@ -51,10 +51,10 @@ if (!empty($error)) {
 }
 
 try {
-    $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :user_id');
+    $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
     $query->execute(array(
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
-        ':user_id' => encode_uuid($data['user_id'])
+        ':id' => encode_uuid($data['id'])
     ));
 
     echo json_encode(array(

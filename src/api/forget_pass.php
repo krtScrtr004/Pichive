@@ -1,6 +1,13 @@
 <?php
 
-// Script to authenticate email and send OTP
+/*
+    Email Authenticator and OTP Sender API 
+
+    Req:
+    OBJ = {
+        email
+    }
+*/
 
 // TODO: When user has existing OTP and he wants to send another, 
 // instead of forcing him to use the previous otp, update it 
@@ -82,9 +89,9 @@ try {
         'status' => 'success',
         'message' => 'OTP successfully sent!',
         'user' => array(
-            'user_email' => $data['email'],
-            'user_username' => $search_user['username'],
-            'user_id' => parse_uuid($search_user['id']),
+            'email' => $data['email'],
+            'username' => $search_user['username'],
+            'id' => parse_uuid($search_user['id']),
         ),
         'otp_code' => $otp
     ));

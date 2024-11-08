@@ -1,4 +1,14 @@
 <?php
+/*
+    OTP Sender API 
+
+    Req:
+    OBJ = {
+        email,
+        username, 
+        otp_code
+    }
+*/
 
 require_once '../config/load_env.php';
 require '../../vendor/autoload.php';

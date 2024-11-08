@@ -1,5 +1,13 @@
 <?php
-// Script to authenticate OTP
+/*
+    OTP Authenticator API 
+
+    Req:
+    OBJ = {
+        otp_code,
+        id
+    }
+*/
 
 require_once '../config/database.php';
 include_once '../utils/uuid.php';
@@ -23,7 +31,7 @@ if (!$data) {
 }
 
 try {
-    $existing_record = search_existing_record($data['user_id'], $data['otp_code']);
+    $existing_record = search_existing_record($data['id'], $data['otp_code']);
     if (!$existing_record) {
         echo json_encode(array(
             'status' => 'fail',
@@ -45,7 +53,7 @@ try {
     }
 
     // Delete otp after use
-    delete_otp_record($data['user_id'], $data['otp_code']);
+    delete_otp_record($data['id'], $data['otp_code']);
     echo json_encode(array(
         'status' => 'success',
         'message' => 'OTP confirmed!'

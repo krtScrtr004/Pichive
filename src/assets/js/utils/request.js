@@ -1,3 +1,5 @@
+// HTTP Operation Functions
+
 export async function sendData(URL, OBJ) {
 	try {
 		const response = await fetch(URL, {

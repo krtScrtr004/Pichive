@@ -1,4 +1,6 @@
 <?php
+// User Authenticator Functions
+
 // TODO: Make this a class
 
 require_once '../config/database.php';

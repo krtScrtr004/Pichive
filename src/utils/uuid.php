@@ -1,4 +1,6 @@
 <?php
+// UUID Util Functions
+
 require_once '../config/database.php';
 
 // Generate UUID through MYSQL

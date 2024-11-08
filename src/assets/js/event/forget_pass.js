@@ -62,7 +62,7 @@ reset_password_btn.onclick = (e) => {
 	e.preventDefault()
 	sendData('../../api/authenticate_otp.php', {
 		otp_code: otp.value,
-		user_id: response['user']['user_id'],
+		id: response['user']['id'],
 	})
 		.then((data) => {
 			if (!data) {
@@ -87,7 +87,7 @@ reset_password_btn.onclick = (e) => {
 change_password_btn.onclick = (e) => {
 	e.preventDefault()
 	sendData('../../api/change_pass.php', {
-		user_id: response['user']['user_id'],
+		id: response['user']['id'],
 		new_password: new_password.value,
 		c_password: c_password.value,
 	})

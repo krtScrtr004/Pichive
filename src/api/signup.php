@@ -1,5 +1,17 @@
 <?php
 
+/*
+    Signup API 
+
+    Req:
+    OBJ = {
+        username,
+        email,
+        password,
+        c_password
+    }
+*/
+
 require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/authenticate_user.php';

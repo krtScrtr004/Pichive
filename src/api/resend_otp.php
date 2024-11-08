@@ -44,9 +44,9 @@ try {
         'status' => 'success',
         'message' => 'New OTP was sent successfully!',
         'user' => array(
-            'user_email' => $data['email'],
-            'user_username' => $search_user['username'],
-            'user_id' => parse_uuid($search_user['id']),
+            'email' => $data['email'],
+            'username' => $search_user['username'],
+            'id' => parse_uuid($search_user['id']),
         ),
         'otp_code' => $otp
     ));

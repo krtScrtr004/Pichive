@@ -1,4 +1,6 @@
 <?php
+// Cridential Validation Functions
+
 require_once '../config/database.php';
 
 // Username Validator
