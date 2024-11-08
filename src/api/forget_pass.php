@@ -66,7 +66,7 @@ try {
     }
 
     // Send OTP to the user via gmail
-    $request = sendData('http://localhost/Pichive/src/api/send_otp.php', [
+    $request = send_data('http://localhost/Pichive/src/api/send_otp.php', [
         'email' => $data['email'],
         'username' => $search_user['username'],
         'otp_code' => $otp

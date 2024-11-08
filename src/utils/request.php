@@ -1,7 +1,7 @@
 <?php
 // HTTP Operation Functions
 
-function sendData($url, $obj)
+function send_data($url, $obj)
 {
     $obj = json_encode($obj);
     if ($obj === null) {
@@ -11,23 +11,20 @@ function sendData($url, $obj)
         ));
     }
 
-    $options = array(
-        'http' => array(
-            'method'  => 'POST',
-            'content' => $obj,
-            'header' =>  "Content-Type: application/json\r\n" .
-                "Accept: application/json\r\n"
-        )
-    );
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $obj);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    $response = json_decode($result);
+    $response = curl_exec($ch);
+    curl_close($ch);
     if (!$response) {
         return json_encode(array(
             'status' => 'fail',
             'message' => 'Data cannot be processed!'
         ));
     }
-    return $response;
+    return json_decode($response);
 }
+
