@@ -29,7 +29,7 @@ function search_existing_record($id, $otp = null)
         } else {
             $query = $pdo->prepare('SELECT otp_code FROM otp WHERE user_id = :id');
             $query->execute([
-                ':id' => encode_uuid($id)
+                ':id' => $id
             ]);
         }
 
@@ -77,7 +77,7 @@ function delete_otp_record($id, $otp)
         $query = $pdo->prepare('DELETE FROM otp WHERE otp_code = :otp_code AND user_id = :id');
         $query->execute([
             ':otp_code' => $otp,
-            ':id' => $id
+            ':id' => encode_uuid($id)
         ]);
     } catch (PDOException $e) {
         throw new PDOException('Database error: ' . $e->getMessage());
