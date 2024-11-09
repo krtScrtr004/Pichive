@@ -66,19 +66,19 @@ try {
     }
 
     // Send OTP to the user via gmail
-    $request = send_data('http://localhost/Pichive/src/api/send_otp.php', [
+    $response = send_data('http://localhost/Pichive/src/api/send_otp.php', [
         'email' => $data['email'],
         'username' => $search_user['username'],
         'otp_code' => $otp
     ]);
     if (
-        !$request ||
-        !isset($request->status) ||
-        $request->status === 'fail'
+        !$response ||
+        !isset($response->status) ||
+        $response->status === 'fail'
     ) {
         echo json_encode(array(
             'status' => 'fail',
-            'message' => $request['message'] ?? 'Data cannot be processed!'
+            'message' => $response['message'] ?? 'Data cannot be processed!'
         ));
         exit();
     }

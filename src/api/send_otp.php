@@ -71,6 +71,3 @@ try {
         'message' => 'Message could not be sent. Mailer Error: ' . $e->getMessage(),
     ));
 }
-
-// For PHPMailer : composer require phpmailer/phpmailer
-// For OTP       : composer require spomky-labs/otphp
