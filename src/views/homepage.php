@@ -13,8 +13,9 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
 </head>
+<?php include '../component/header.php' ?>
+
 <body>
-    <button id="create_post_btn" popovertarget="create_post_modal">CREATE POST</button>
 </body>
 
 <script type="module" src="../assets/js/event/create_post.js"></script>
