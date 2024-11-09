@@ -6,7 +6,7 @@
     <title>Forget Password</title>
 </head>
 <body>
-    <div id="result"></div>
+    <section id="result"></section>
 
     <section id="forget_password">
         <form id="forget_password_form" action="" method="POST">

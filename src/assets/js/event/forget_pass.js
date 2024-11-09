@@ -1,4 +1,4 @@
-import { sendData } from '../utils/request.js'
+import { send_data } from '../utils/request.js'
 
 const result = document.querySelector('#result')
 
@@ -28,7 +28,7 @@ let response = null
 send_otp_btn.onclick = (e) => {
 	e.preventDefault()
 	// Authenticate email
-	sendData('../../api/forget_pass.php', {
+	send_data('../../api/forget_pass.php', {
 		email: email.value,
 	})
 		.then((data) => {
@@ -60,7 +60,7 @@ send_otp_btn.onclick = (e) => {
 
 reset_password_btn.onclick = (e) => {
 	e.preventDefault()
-	sendData('../../api/authenticate_otp.php', {
+	send_data('../../api/authenticate_otp.php', {
 		otp_code: otp.value,
 		id: response['user']['id'],
 	})
@@ -86,7 +86,7 @@ reset_password_btn.onclick = (e) => {
 
 change_password_btn.onclick = (e) => {
 	e.preventDefault()
-	sendData('../../api/change_pass.php', {
+	send_data('../../api/change_pass.php', {
 		id: response['user']['id'],
 		new_password: new_password.value,
 		c_password: c_password.value,
@@ -112,7 +112,7 @@ change_password_btn.onclick = (e) => {
 }
 
 resend_otp.onclick = (e) => {
-	sendData('../../api/resend_otp.php', {
+	send_data('../../api/resend_otp.php', {
 		email: email.value,
 	})
 		.then((data) => {

@@ -1,4 +1,4 @@
-import { sendData } from '../utils/request.js'
+import { send_data } from '../utils/request.js'
 
 const username = document.querySelector('#signup>#signup_form>#username')
 const email = document.querySelector('#signup>#signup_form>#email')
@@ -11,7 +11,7 @@ const result = document.querySelector('#result')
 signup_btn.onclick = (e) => {
 	e.preventDefault()
 	// Send data to backend for validation
-	sendData('../api/signup.php', {
+	send_data('../api/signup.php', {
 		username: username.value,
 		email: email.value,
 		password: password.value,

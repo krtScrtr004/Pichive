@@ -1,6 +1,6 @@
 // HTTP Operation Functions
 
-export async function sendData(URL, OBJ) {
+export async function send_data(URL, OBJ) {
 	try {
 		const response = await fetch(URL, {
 			method: 'POST',

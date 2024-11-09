@@ -51,6 +51,7 @@ post_btn.onclick = (e) => {
 				image_picker.value = ''
 			}, '3000')
             form.hidePopover()
+            result_box.innerHTML = ''
 		})
 		.catch((error) => {
 			result_box.innerHTML = error['message']

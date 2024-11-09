@@ -1,4 +1,4 @@
-import { sendData } from '../utils/request.js'
+import { send_data } from '../utils/request.js'
 
 const email = document.querySelector('#login>#login_form>#email')
 const password = document.querySelector('#login>#login_form>#password')
@@ -8,7 +8,7 @@ const result = document.querySelector('#result')
 login_btn.onclick = (e) => {
 	e.preventDefault()
 	// Send data to backend for authentication
-	sendData('../api/login.php', {
+	send_data('../api/login.php', {
 		email: email.value,
 		password: password.value,
 	})
