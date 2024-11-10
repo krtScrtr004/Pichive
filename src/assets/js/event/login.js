@@ -5,10 +5,10 @@ const password = document.querySelector('#login>#login_form>#password')
 const login_btn = document.querySelector('#login>#login_form>#login_btn')
 const result = document.querySelector('#result')
 
-login_btn.onclick = (e) => {
+login_btn.onclick = async (e) => {
 	e.preventDefault()
 	// Send data to backend for authentication
-	send_data('../api/login.php', {
+	await send_data('../api/login.php', {
 		email: email.value,
 		password: password.value,
 	})

@@ -1,5 +1,6 @@
 <?php
 include_once 'partials/create_post.php';
+
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     header('Location: index.php');
     exit();
@@ -26,10 +27,25 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         height: 100%;
     }
 
+    .wrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal {
+        width: 80%;
+        height: 70%;
+        display: flex;
+        z-index: 100;
+    }
+
+    .show_modal {
+        display: flex !important;
+    }
+
     .img_grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        ;
         gap: 10px;
     }
 
@@ -50,15 +66,15 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 </style>
 
 <body>
-    <?php include '../component/header.php' ?>
+    <?php
+    include_once '../component/header.php';
+    include_once 'partials/post_modal.php';
+    ?>
 
-    <main id=wrapper>
-        <!-- <div id="result_box"></div> -->
+    <main class="wrapper">
+        <div id="result_box"></div>
 
         <div class="img_grid">
-            <div class="img_cont">
-                <img src="../assets/img/default_img_prev.png" alt="">
-            </div>
         </div>
 
         <div id="loading">Loading more images...</div>

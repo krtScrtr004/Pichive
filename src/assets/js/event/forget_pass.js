@@ -25,10 +25,10 @@ const resend_otp = document.querySelector('span>#resend_otp')
 
 let response = null
 
-send_otp_btn.onclick = (e) => {
+send_otp_btn.onclick = async (e) => {
 	e.preventDefault()
 	// Authenticate email
-	send_data('../../api/forget_pass.php', {
+	await send_data('../../api/forget_pass.php', {
 		email: email.value,
 	})
 		.then((data) => {
@@ -58,9 +58,9 @@ send_otp_btn.onclick = (e) => {
 		})
 }
 
-reset_password_btn.onclick = (e) => {
+reset_password_btn.onclick = async (e) => {
 	e.preventDefault()
-	send_data('../../api/authenticate_otp.php', {
+	await send_data('../../api/authenticate_otp.php', {
 		otp_code: otp.value,
 		id: response['user']['id'],
 	})
@@ -84,9 +84,9 @@ reset_password_btn.onclick = (e) => {
 		})
 }
 
-change_password_btn.onclick = (e) => {
+change_password_btn.onclick = async (e) => {
 	e.preventDefault()
-	send_data('../../api/change_pass.php', {
+	await send_data('../../api/change_pass.php', {
 		id: response['user']['id'],
 		new_password: new_password.value,
 		c_password: c_password.value,
@@ -111,8 +111,8 @@ change_password_btn.onclick = (e) => {
 		})
 }
 
-resend_otp.onclick = (e) => {
-	send_data('../../api/resend_otp.php', {
+resend_otp.onclick = async (e) => {
+	await send_data('../../api/resend_otp.php', {
 		email: email.value,
 	})
 		.then((data) => {

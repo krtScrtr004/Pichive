@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$limit = 10;
+$limit = 9;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 
 try {

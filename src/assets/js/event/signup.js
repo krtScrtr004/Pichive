@@ -8,10 +8,10 @@ const signup_btn = document.querySelector('#signup>#signup_form>#signup_btn')
 
 const result = document.querySelector('#result')
 
-signup_btn.onclick = (e) => {
+signup_btn.onclick = async`` (e) => {
 	e.preventDefault()
 	// Send data to backend for validation
-	send_data('../api/signup.php', {
+	await send_data('../api/signup.php', {
 		username: username.value,
 		email: email.value,
 		password: password.value,
