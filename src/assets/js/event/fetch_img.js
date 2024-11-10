@@ -1,37 +1,52 @@
 import { get_data } from '../utils/request.js'
 
-const wrapper = document.querySelector('.wrapper')
+const wrapper = document.querySelector('#wrapper')
+const img_grid = document.querySelector('.img_grid')
 const result_box = document.querySelector('#result-box')
 
 document.addEventListener('DOMContentLoaded', () => {
 	let offset = 0
 	const limit = 10
+	let is_loading = false // Flag to prevent multiple calls
 
-    function handle_scroll() {
+	load_posts()
+
+	// Add scroll event listener
+	window.addEventListener('scroll', handle_scroll)
+
+	function handle_scroll() {
 		if (
 			window.innerHeight + window.scrollY >=
 			document.body.offsetHeight - 100
 		) {
-			loadPosts()
+			load_posts()
 		}
 	}
 
-	async function loadPosts() {
-		// window.location.href = `../api/fetch_img.php?offset=${offset}`
-		const loading = document.querySelector('#loading')
+	async function load_posts() {
+		if (is_loading) {
+			return
+		}
+		is_loading = true
 
+		const loading = document.querySelector('#loading')
 		loading.style.display = 'block'
 
-		let response = await get_data(`../api/fetch_img.php?offset=${offset}`)
+		let response = await get_data(
+			`../api/fetch_img.php?offset=${offset}&limit=${limit}`
+		)
+
 		if (!response) {
 			result_box.innerHTML = 'Failed to fetch data'
 			window.removeEventListener('scroll', handle_scroll)
-            loading.style.display = 'none'
-            return  
+			loading.style.display = 'none'
+			is_loading = false
+			return
 		} else if (response['status'] === 'fail') {
 			result_box.innerHTML = response['message']
 			window.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
+			is_loading = false
 			return
 		}
 
@@ -39,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (data.length === 0) {
 			window.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
+			is_loading = false
 			return
 		}
 
@@ -54,15 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			new_img_cont.classList.add('img_cont')
 			new_img_cont.appendChild(img)
 
-			wrapper.appendChild(new_img_cont)
+			img_grid.appendChild(new_img_cont)
 		})
 
 		// Update offset for the next batch of data
 		offset += limit
 		loading.style.display = 'none'
+		is_loading = false // Reset loading flag
 	}
-
-	// Add scroll event listener
-	window.addEventListener('scroll', handle_scroll)
-	loadPosts()
 })

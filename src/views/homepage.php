@@ -26,13 +26,14 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         height: 100%;
     }
 
-    .wrapper {
+    .img_grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;;
+        grid-template-columns: 1fr 1fr 1fr;
+        ;
         gap: 10px;
     }
 
-    .wrapper>div {
+    .img_grid>div {
         width: 300px;
         height: 300px;
         display: flex;
@@ -51,15 +52,17 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 <body>
     <?php include '../component/header.php' ?>
 
-    <div id="result_box"></div>
+    <main id=wrapper>
+        <!-- <div id="result_box"></div> -->
 
-    <div class="wrapper">
-        <div class="img_cont">
-            <img src="../assets/img/default_img_prev.png" alt="">
+        <div class="img_grid">
+            <div class="img_cont">
+                <img src="../assets/img/default_img_prev.png" alt="">
+            </div>
         </div>
-    </div>
-    
-    <div id="loading">Loading more images...</div>
+
+        <div id="loading">Loading more images...</div>
+    </main>
 </body>
 
 <script type="module" src="../assets/js/event/create_post.js"></script>

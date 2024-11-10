@@ -7,12 +7,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 ?>
 
 <style>
-    main {
-        width: 1000px;
-        height: 500px;
-        background-color: red;
-    }
-
     #image_preview {
         width: 400px;
         height: 400px;
