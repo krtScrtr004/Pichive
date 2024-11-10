@@ -17,7 +17,7 @@ image_picker.onchange = () => {
 }
 
 // FIXME
-post_btn.onclick = (e) => {
+post_btn.onclick = async (e) => {
 	e.preventDefault()
 	const image = image_picker.files[0]
 	if (!image) {
@@ -30,7 +30,7 @@ post_btn.onclick = (e) => {
 	form_data.append('image', image)
 	form_data.append('description', description.value)
 
-	send_file('../api/upload_image.php', form_data)
+	await send_file('../api/upload_image.php', form_data)
 		.then((data) => {
 			if (!data) {
 				result_box.innerHTML =
@@ -50,8 +50,8 @@ post_btn.onclick = (e) => {
 				description.value = ''
 				image_picker.value = ''
 			}, '3000')
-            form.hidePopover()
             result_box.innerHTML = ''
+			location.reload()
 		})
 		.catch((error) => {
 			result_box.innerHTML = error['message']

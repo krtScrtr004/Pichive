@@ -8,6 +8,13 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 }
 ?>
 
+<style>
+    header {
+        border: solid 1px red;   
+        margin-bottom: 10px;      
+    }
+</style>
+
 <header>
     <button id="create_post_btn" popovertarget="create_post_modal">CREATE POST</button>
 </header>

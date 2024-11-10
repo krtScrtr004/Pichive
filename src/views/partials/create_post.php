@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     }
 </style>
 
-<main id="create_post_modal" popover>
+<section id="create_post_modal" popover>
     <section id="result_box"></section>
     <form id="create_post_form" action="" method="POST">
         <section id="result
@@ -43,4 +43,4 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
             <button id="cancel_btn">CANCEL</button>
         </section>
     </form>
-</main>
+</section>
