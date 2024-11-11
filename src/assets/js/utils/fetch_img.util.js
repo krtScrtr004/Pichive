@@ -93,9 +93,26 @@ async function fetch_post_details(id) {
     }
 
     document.querySelector('#img_view>img').src = data['img_url']
-    document.querySelector('#post_detail>#poster_name').textContent = data['poster_name']
-    document.querySelector('#post_detail>#poster_id').textContent = data['poster_id']
-    document.querySelector('#post_detail>#title').textContent = data['title']
-    document.querySelector('#post_detail>#description').textContent = data['description']
-    document.querySelector('#post_detail>#date').textContent = data['date']
+    document.querySelector('.post_detail>#poster_name').textContent = data['poster_name']
+    document.querySelector('.post_detail>#poster_id').textContent = data['poster_id']
+    document.querySelector('.post_detail>#title').textContent = data['title']
+    document.querySelector('.post_detail>#description').textContent = data['description']
+    document.querySelector('.post_detail>#date').textContent = data['date']
 }
+
+// async function fetch_post_comments(id) {
+//     const response = await get_data(`../api/fetch_img_comments.php?id=${id}`)
+//     if (!response) {
+//         result_box.innerHTML = 'Failed to fetch post comments!'
+//         return null
+//     } else if (response['status'] === 'fail') {
+//         result_box.innerHTML = response['message']
+//         return null
+//     }
+
+//     const data = response['data']
+//     if (data.length === 0) {
+//         result_box.innerHTML = response['message']
+//         return null
+//     }
+// }

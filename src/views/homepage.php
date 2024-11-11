@@ -20,6 +20,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     * {
         padding: 0;
         margin: 0;
+        box-sizing: border-box;
     }
 
     body {
@@ -37,6 +38,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         height: 70%;
         display: flex;
         z-index: 100;
+        overflow-y: hidden;
     }
 
     .show_modal {

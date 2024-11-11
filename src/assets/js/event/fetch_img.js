@@ -1,6 +1,5 @@
 import { handle_scroll, load_posts } from '../utils/fetch_img.util.js'
 
-
 document.addEventListener('DOMContentLoaded', async () => {
 	await load_posts()
 
