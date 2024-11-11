@@ -1,14 +1,14 @@
 import { send_data } from '../utils/request.js'
 
-const username = document.querySelector('#signup>#signup_form>#username')
-const email = document.querySelector('#signup>#signup_form>#email')
-const password = document.querySelector('#signup>#signup_form>#password')
-const c_password = document.querySelector('#signup>#signup_form>#c_password')
-const signup_btn = document.querySelector('#signup>#signup_form>#signup_btn')
+const username = document.querySelector('#signup_form>#username')
+const email = document.querySelector('#signup_form>#email')
+const password = document.querySelector('#signup_form>#password')
+const c_password = document.querySelector('#signup_form>#c_password')
+const signup_btn = document.querySelector('#signup_form>#signup_btn')
 
 const result = document.querySelector('#result')
 
-signup_btn.onclick = async`` (e) => {
+signup_btn.onclick = async (e) => {
 	e.preventDefault()
 	// Send data to backend for validation
 	await send_data('../api/signup.php', {

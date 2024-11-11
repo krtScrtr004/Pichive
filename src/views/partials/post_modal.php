@@ -35,7 +35,7 @@
     }
 
     #post_detail>p {
-        display: block;;
+        display: block;
     }
 </style>
 
@@ -44,6 +44,7 @@
         <section id="img_view">
             <img src="../assets/img/default_img_prev.png" alt="Image preview">
         </section>
+
         <section id="detail">
             <section id="post_detail">
                 <!-- TODO: Add more details here -->
@@ -53,7 +54,32 @@
                 <h2 id="description"></h2>
                 <p id="date"></p>
             </section>
-            <section id="comment"></section>
+
+            <section id="comment">
+                <div class="comment_list">
+                    <div class="comment_wrapper">
+                        <!-- Original comment -->
+                        <section id="original_comment">
+                            <div class="commenter_img"></div>
+                            <div class="comment_header">
+                                <div class="commenter_name"></div>
+                                <div class="comment_date"></div>
+                            </div>
+                            <div class="comment_content"></div>
+                        </section>
+
+                        <!-- Replied comment -->
+                        <section id="reply_list">
+                            <div class="commenter_img"></div>
+                            <div class="comment_header">
+                                <div class="commenter_name"></div>
+                                <div class="comment_date"></div>
+                            </div>
+                            <div class="comment_content"></div>
+                        </section>
+                    </div>
+                </div>
+            </section>
         </section>
     </section>
 </div>

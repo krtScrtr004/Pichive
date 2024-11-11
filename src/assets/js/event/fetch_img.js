@@ -1,4 +1,4 @@
-import { handle_scroll, load_posts, fetch_post_details } from '../utils/fetch_img.util.js'
+import { handle_scroll, load_posts } from '../utils/fetch_img.util.js'
 
 
 document.addEventListener('DOMContentLoaded', async () => {

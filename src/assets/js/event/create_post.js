@@ -4,7 +4,7 @@ const form = document.querySelector('#create_post_modal')
 const result_box = document.querySelector('#result_box')
 const title = document.querySelector('#title')
 const image_picker = document.querySelector('#file_picker')
-const image_preview = document.querySelector('#image_preview')
+const image_preview = document.querySelector('.img_preview')
 const description = document.querySelector('#description')
 const post_btn = document.querySelector('#post_btn')
 const cancel_btn = document.querySelector('#cancel_btn')
@@ -49,7 +49,7 @@ post_btn.onclick = async (e) => {
 				image_preview.src = ''
 				description.value = ''
 				image_picker.value = ''
-			}, '3000')
+			}, '1000')
             result_box.innerHTML = ''
 			location.reload()
 		})

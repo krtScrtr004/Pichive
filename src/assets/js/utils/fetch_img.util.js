@@ -76,7 +76,7 @@ export async function load_posts() {
     is_loading = false // Reset loading flag
 }
 
-export async function fetch_post_details(id) {
+async function fetch_post_details(id) {
     const response = await get_data(`../api/fetch_img_detail.php?id=${id}`)
     if (!response) {
         result_box.innerHTML = 'Failed to fetch post details!'

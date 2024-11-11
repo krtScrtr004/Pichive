@@ -3,25 +3,25 @@ import { send_data } from '../utils/request.js'
 const result = document.querySelector('#result')
 
 const email = document.querySelector(
-	'#forget_password>#forget_password_form>#email'
+	'#forget_password_form>#email'
 )
 const send_otp_btn = document.querySelector(
-	'#forget_password>#forget_password_form>#send_otp_btn'
+	'#forget_password_form>#send_otp_btn'
 )
-const otp = document.querySelector('#otp>#otp_form>#otp_code')
+const otp = document.querySelector('#otp_form>#otp_code')
 const reset_password_btn = document.querySelector(
-	'#otp>#otp_form>#reset_password_btn'
+	'#otp_form>#reset_password_btn'
 )
 const new_password = document.querySelector(
-	'#change_password>#change_password_form>#new_password'
+	'#change_password_form>#new_password'
 )
 const c_password = document.querySelector(
-	'#change_password>#change_password_form>#c_password'
+	'#change_password_form>#c_password'
 )
 const change_password_btn = document.querySelector(
-	'#change_password>#change_password_form>#change_password_btn'
+	'#change_password_form>#change_password_btn'
 )
-const resend_otp = document.querySelector('span>#resend_otp')
+const resend_otp = document.querySelector('#resend_otp')
 
 let response = null
 

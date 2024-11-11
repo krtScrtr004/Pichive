@@ -1,8 +1,8 @@
 import { send_data } from '../utils/request.js'
 
-const email = document.querySelector('#login>#login_form>#email')
-const password = document.querySelector('#login>#login_form>#password')
-const login_btn = document.querySelector('#login>#login_form>#login_btn')
+const email = document.querySelector('#login_form>#email')
+const password = document.querySelector('#login_form>#password')
+const login_btn = document.querySelector('#login_form>#login_btn')
 const result = document.querySelector('#result')
 
 login_btn.onclick = async (e) => {
