@@ -28,6 +28,7 @@ try {
     }
     unset($row);
 
+
     echo json_encode(array(
         'status' => 'success',
         'message' => 'Successfully retrieved post data!',

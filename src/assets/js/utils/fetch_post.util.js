@@ -1,4 +1,4 @@
-import { get_data } from '../utils/request.js'
+import { get_data } from './request.js'
 
 const img_grid = document.querySelector('.img_grid')
 const result_box = document.querySelector('#result-box')
@@ -26,7 +26,7 @@ export async function load_posts() {
     const loading = document.querySelector('#loading')
     loading.style.display = 'block'
 
-    let response = await get_data(`../api/fetch_img.php?offset=${offset}&limit=${limit}`)
+    let response = await get_data(`../api/fetch_post.php?offset=${offset}&limit=${limit}`)
     if (!response) {
         result_box.innerHTML = 'Failed to fetch posts data!'
         window.removeEventListener('scroll', handle_scroll)
@@ -77,7 +77,7 @@ export async function load_posts() {
 }
 
 async function fetch_post_details(id) {
-    const response = await get_data(`../api/fetch_img_detail.php?id=${id}`)
+    const response = await get_data(`../api/fetch_post_detail.php?id=${id}`)
     if (!response) {
         result_box.innerHTML = 'Failed to fetch post details!'
         return null

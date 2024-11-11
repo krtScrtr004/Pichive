@@ -103,9 +103,9 @@
         flex: 1;
     }
 
-    .reply_list {
+    /* .reply_list {
         padding-left: 1rem;
-    }
+    } */
 
     #write_comment_form {
         width: 100%;
@@ -148,7 +148,7 @@
                 <section class="comment_list">
                     <div class="comment_wrapper">
                         <!-- Original comment -->
-                        <section class="original_comment comment_box">
+                        <!-- <section class="original_comment comment_box">
                             <div class="commenter_img">
                                 <img src="../assets/img/default_img_prev.png" alt="">
                             </div>
@@ -161,8 +161,9 @@
                                     asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
                                 </p>
                             </div>
-                        </section>
+                        </section> -->
 
+                        <!-- TODO: If have time, add this -->
                         <!-- Replied comment -->
                         <!-- <section class="reply_list comment_box">
                             <div class="commenter_img">
@@ -193,5 +194,5 @@
     </section>
 </div>
 
-<script type="module" src="../assets/js/event/fetch_img.js"></script>
+<script type="module" src="../assets/js/event/fetch_post.js"></script>
 <script type="module" src="../assets/js/event/comment.js"></script>
