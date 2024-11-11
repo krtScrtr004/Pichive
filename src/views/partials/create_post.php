@@ -37,3 +37,5 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         </section>
     </form>
 </section>
+
+<script type="module" src="../assets/js/event/create_post.js"></script>

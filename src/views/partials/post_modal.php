@@ -103,7 +103,7 @@
         flex: 1;
     }
 
-    #reply_list {
+    .reply_list {
         padding-left: 1rem;
     }
 
@@ -116,15 +116,20 @@
     #write_comment_form>form {
         width: 100%;
         height: 100%;
+        display: grid;
+        grid-template-rows: 2fr 1fr;
     }
 
-    #write_comment {
+    #input_comment {
         width: 100%;
     }
 </style>
 
 <div class="modal_wrapper">
+    <span class="result"></span>
+
     <section class="modal">
+
         <section id="img_view">
             <img src="../assets/img/default_img_prev.png" alt="Image preview">
         </section>
@@ -143,114 +148,50 @@
                 <section class="comment_list">
                     <div class="comment_wrapper">
                         <!-- Original comment -->
-                        <section id="original_comment" class="comment_box">
+                        <section class="original_comment comment_box">
                             <div class="commenter_img">
-                                <img src="../../assets/img/default_img_prev.png" alt="">
+                                <img src="../assets/img/default_img_prev.png" alt="">
                             </div>
                             <div class="comment_detail">
                                 <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
+                                    <h4 class="commenter_name">Julius Caesar</h4>
+                                    <p class="comment_date">123123</p>
                                 </div>
-                                <div class="comment_content">
+                                <p class="comment_content">
                                     asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
+                                </p>
                             </div>
                         </section>
 
                         <!-- Replied comment -->
-                        <section id="reply_list" class="comment_box">
+                        <!-- <section class="reply_list comment_box">
                             <div class="commenter_img">
                                 <img src="../../assets/img/default_img_prev.png" alt="">
                             </div>
                             <div class="comment_detail">
                                 <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
+                                    <h4 class="commenter_name">Julius Caesar</h4>
+                                    <p class="comment_date">123123</p>
                                 </div>
-                                <div class="comment_content">
+                                <p class="comment_content">
                                     asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
+                                </p>
                             </div>
-                        </section>
-                    </div>
-
-                    <div class="comment_wrapper">
-                        <!-- Original comment -->
-                        <section id="original_comment" class="comment_box">
-                            <div class="commenter_img">
-                                <img src="../../assets/img/default_img_prev.png" alt="">
-                            </div>
-                            <div class="comment_detail">
-                                <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
-                                </div>
-                                <div class="comment_content">
-                                    asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Replied comment -->
-                        <section id="reply_list" class="comment_box">
-                            <div class="commenter_img">
-                                <img src="../../assets/img/default_img_prev.png" alt="">
-                            </div>
-                            <div class="comment_detail">
-                                <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
-                                </div>
-                                <div class="comment_content">
-                                    asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="comment_wrapper">
-                        <!-- Original comment -->
-                        <section id="original_comment" class="comment_box">
-                            <div class="commenter_img">
-                                <img src="../../assets/img/default_img_prev.png" alt="">
-                            </div>
-                            <div class="comment_detail">
-                                <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
-                                </div>
-                                <div class="comment_content">
-                                    asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Replied comment -->
-                        <section id="reply_list" class="comment_box">
-                            <div class="commenter_img">
-                                <img src="../../assets/img/default_img_prev.png" alt="">
-                            </div>
-                            <div class="comment_detail">
-                                <div class="comment_header">
-                                    <div class="commenter_name">Julius Caesar</div>
-                                    <div class="comment_date">123123</div>
-                                </div>
-                                <div class="comment_content">
-                                    asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
-                                </div>
-                            </div>
-                        </section>
+                        </section> -->
                     </div>
                 </section>
 
-                <!-- <section id="write_comment_form">
+                <section id="write_comment_form">
                     <form action="" method="POST">
-                        <input type="text" name="write_comment" id="write_comment" min="1" max="300" required>
-                        <button type="submit" id="write_comment_btn">Send</button>
+                        <input type="text" name="write_comment" id="input_comment" min="1" max="300" required>
+                        <button type="submit" id="submit_comment_btn">Send</button>
                     </form>
-                </section> -->
+                </section>
+
             </section>
         </section>
     </section>
 </div>
+
+<script type="module" src="../assets/js/event/fetch_img.js"></script>
+<script type="module" src="../assets/js/event/comment.js"></script>

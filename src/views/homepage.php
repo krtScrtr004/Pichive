@@ -83,7 +83,5 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     </main>
 </body>
 
-<script type="module" src="../assets/js/event/create_post.js"></script>
-<script type="module" src="../assets/js/event/fetch_img.js"></script>
 
 </html>

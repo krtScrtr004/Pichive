@@ -1,4 +1,5 @@
 import { handle_scroll, load_posts } from '../utils/fetch_img.util.js'
+import { remove_comment } from '../utils/comment.util.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
 	await load_posts()
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.onclick = (e) => {
 		if (e.target === modal_wrapper) {
 			modal_wrapper.classList.remove('show_modal')
+			remove_comment()
 		}
 	}
 })

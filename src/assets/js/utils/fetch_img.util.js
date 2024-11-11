@@ -92,6 +92,7 @@ async function fetch_post_details(id) {
         return null
     }
 
+    document.querySelector('#img_view>img').setAttribute('data-id', id)
     document.querySelector('#img_view>img').src = data['img_url']
     document.querySelector('.post_detail>#poster_name').textContent = data['poster_name']
     document.querySelector('.post_detail>#poster_id').textContent = data['poster_id']
