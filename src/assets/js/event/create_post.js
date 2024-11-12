@@ -1,4 +1,4 @@
-import { send_file } from '../utils/request.js'
+import { send_file, test_response } from '../utils/request.js'
 
 const form = document.querySelector('#create_post_modal')
 const result_box = document.querySelector('#result_box')
@@ -30,32 +30,26 @@ post_btn.onclick = async (e) => {
 	form_data.append('image', image)
 	form_data.append('description', description.value)
 
-	await send_file('../api/upload_image.php', form_data)
-		.then((data) => {
-			if (!data) {
-				result_box.innerHTML =
-					'Response was not successfully recieved while uploading image!'
-				return
-			}
+	try {
+		const response = await send_file('../api/upload_image.php', form_data)
+		const test = test_response(response)
+		if (!test) {
+			result_box.innerHTML = test['message']
+			return
+		}
 
-			if (data['status'] === 'fail') {
-				result_box.innerHTML = data['message']
-				return
-			}
-
-			setTimeout(() => {
-				result_box.innerHTML = data['message']
-				title.value = ''
-				image_preview.src = ''
-				description.value = ''
-				image_picker.value = ''
-			}, '1000')
-            result_box.innerHTML = ''
-			location.reload()
-		})
-		.catch((error) => {
-			result_box.innerHTML = error['message']
-		})
+		setTimeout(() => {
+			result_box.innerHTML = response['message']
+			title.value = ''
+			image_preview.src = ''
+			description.value = ''
+			image_picker.value = ''
+		}, '1000')
+		result_box.innerHTML = ''
+		location.reload()
+	} catch(error) {
+		result_box.innerHTML = error['message']
+	}
 }
 
 cancel_btn.onclick = () => {

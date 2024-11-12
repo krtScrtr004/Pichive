@@ -15,8 +15,8 @@ export async function send_data(URL, OBJ) {
 
 		const data = await response.json()
 		return data
-	} catch (e) {
-		throw new Error(`Network Error: ${e}`)
+	} catch (error) {
+		throw new Error(`Network Error: ${error}`)
 	}
 }
 
@@ -32,22 +32,40 @@ export async function send_file(URL, OBJ) {
 
 		const data = await response.json()
 		return data
-	} catch (e) {
-		throw new Error(`Network Error: ${e}`)
+	} catch (error) {
+		throw new Error(`Network Error: ${error}`)
 	}
 }
 
 export async function get_data(URL) {
 	try {
-        const response = await fetch(URL)
-        if (response.status !== 200) {
-            throw new Error(`HTTP error! status: ${response.status}`)
-        }
+		const response = await fetch(URL)
+		if (response.status !== 200) {
+			throw new Error(`HTTP error! status: ${response.status}`)
+		}
 
-        const data = await response.json()
-        return data
-    } catch (e) {
-        throw new Error(`Network Error: ${e}`)
-    }
+		const data = await response.json()
+		return data
+	} catch (error) {
+		throw new Error(`Network Error: ${error}`)
+	}
 }
 
+export function test_response(response) {
+	if (!response) {
+		return {
+			status: false,
+			message: 'No response was sent back to the request!',
+		}
+	} else if (response['status'] === 'fail') {
+		return {
+			status: false,
+			message: response['message'],
+		}
+	}
+
+	return {
+		status: true,
+		data: response['message'],
+	}
+}

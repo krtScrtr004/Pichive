@@ -1,4 +1,4 @@
-import { send_data } from '../utils/request.js'
+import { send_data, test_response } from '../utils/request.js'
 import { display_comment, fetch_post_comments } from '../utils/comment.util.js'
 import { has_already_ran } from '../utils/comment.util.js'
 
@@ -13,27 +13,24 @@ submit_comment_btn.onclick = async (e) => {
 
 	const input_comment = document.querySelector('#input_comment')
 	try {
-		const data = await send_data('../api/write_comment.php', {
+		const response = await send_data('../api/write_comment.php', {
 			post_id: img_source.getAttribute('data-id'),
 			comment: input_comment.value,
 		})
 
-		if (!data) {
-			result.innerHTML =
-				'Response was not successfully recieved while adding comment!'
-			return
-		} else if (data['status'] === 'fail') {
-			result.innerHTML = data['message']
+		const test = test_response(response)
+		if (!test['status']) {
+			result.innerHTML = test['message']
 			return
 		}
 
-		result.innserHTML = data['message']
+		result.innserHTML = response['message']
 		display_comment({
 			// Display new comment
-			img_url: data['data']['img_url'],
-			commenter_name: data['data']['commenter_name'],
+			img_url: response['data']['img_url'],
+			commenter_name: response['data']['commenter_name'],
 			comment_content: input_comment.value,
-			comment_date: data['data']['comment_date'],
+			comment_date: response['data']['comment_date'],
 		})
 	} catch (error) {
 		result.innserHTML = error['message']

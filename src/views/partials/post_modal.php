@@ -131,17 +131,11 @@
     <section class="modal">
 
         <section id="img_view">
-            <img src="../assets/img/default_img_prev.png" alt="Image preview">
         </section>
 
         <section id="detail">
             <section class="post_detail">
                 <!-- TODO: Add more details here -->
-                <h3 id="poster_name"></h3>
-                <p id="poster_id"></p>
-                <h1 id="title"></h1>
-                <h2 id="description"></h2>
-                <p id="date"></p>
             </section>
 
             <section id="comment">
