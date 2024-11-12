@@ -39,7 +39,7 @@ try {
         }
         unset($value['commenter_id']); // Remove commenter_id before returning the response
     }
-    unset($row);
+    unset($value);
 
 
     echo json_encode(array(

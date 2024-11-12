@@ -20,14 +20,29 @@ $limit = 9;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 
 try {
-    $query = $pdo->prepare("SELECT * FROM post ORDER BY date_time DESC LIMIT $limit OFFSET $offset");
+    $query = $pdo->prepare("SELECT 
+                                p.id,
+                                p.title, 
+                                p.img_url, 
+                                p.description, 
+                                p.date_time, 
+                                p.likes,
+                                p.poster_id, 
+                                u.username 
+                            FROM 
+                                post as p 
+                            INNER JOIN 
+                                user as u 
+                            ON 
+                                p.poster_id = u.id 
+                            ORDER BY date_time DESC 
+                            LIMIT $limit OFFSET $offset");
     $query->execute();
     $result = $query->fetchAll();
     foreach ($result as $key => &$value) {
         $value['poster_id'] = parse_uuid($value['poster_id']);
     }
-    unset($row);
-
+    unset($value);
 
     echo json_encode(array(
         'status' => 'success',

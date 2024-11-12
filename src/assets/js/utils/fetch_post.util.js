@@ -49,8 +49,6 @@ export async function load_posts() {
 			const img = document.createElement('img')
 			img.src = post['img_url']
 			img.loading = 'lazy'
-			img.setAttribute('data-id', post['id'])
-			// TODO: Add more attributes to display here
 
 			// Create image container
 			const new_img_cont = document.createElement('div')
@@ -58,7 +56,7 @@ export async function load_posts() {
 			new_img_cont.appendChild(img)
 			new_img_cont.onclick = async () => {
 				// Open post modal when img container it clicked
-				await add_post_details(img.getAttribute('data-id'))
+				await add_post_details(post)
 			}
 			document.querySelector('.img_grid').appendChild(new_img_cont)
 
@@ -72,16 +70,24 @@ export async function load_posts() {
 	}
 }
 
-async function add_post_details(img_id) {
-	// Open post modal
-    const modal_wrapper = document.querySelector('.modal_wrapper')
-	modal_wrapper.classList.add('show_modal')
-
-	// Fetch post details
-	const fetch_detail = await fetch_post_details(img_id)
-	if (!fetch_detail) {
-		modal_wrapper.classList.remove('show_modal')
+async function add_post_details(post) {
+	if (!post) {
+		result_box.innerHTML = 'Failed to fetch post details!'
+        return
 	}
+
+	// Open post modal
+	const modal_wrapper = document.querySelector('.modal_wrapper')
+	modal_wrapper.classList.add('show_modal')
+	display_detail({
+		id: post['id'],
+		img_url: post['img_url'],
+		username: post['username'],
+		poster_id: post['poster_id'],
+		title: post['title'],
+		description: post['description'],
+		date: post['date_time'],
+	})
 
 	// Fetch post comments
 	const img_source = document.querySelector('#img_view>img')
@@ -95,34 +101,6 @@ async function add_post_details(img_id) {
 	has_already_ran['status'] = true
 }
 
-async function fetch_post_details(id) {
-	const response = await get_data(`../api/fetch_post_detail.php?id=${id}`)
-	const test = test_response(response)
-	if (!test) {
-		result_box.innerHTML = test['message']
-		return null
-	}
-
-	const data = response['data']
-	if (data.length === 0) {
-		result_box.innerHTML = response['message']
-		return null
-	}
-
-	// Display post details
-	display_detail({
-		id: id,
-		img_url: data['img_url'],
-		poster_name: data['poster_name'],
-		poster_id: data['poster_id'],
-		title: data['title'],
-		description: data['description'],
-		date: data['date'],
-	})
-
-	return true
-}
-
 function display_detail(data) {
 	const img_view = document.querySelector('#img_view')
 	const img_HTML = `<img src="${
@@ -132,7 +110,7 @@ function display_detail(data) {
 
 	const post_detail = document.querySelector('.post_detail')
 	const detail_HTML = `
-                <h3 id="poster_name">${data.poster_name || 'Anonymous'}</h3>
+                <h3 id="poster_name">${data.username || 'Anonymous'}</h3>
                 <p id="poster_id">${data.poster_id || 'Unknown'}</p>
                 <h1 id="title">${data.title || 'Untitled'}</h1>
                 <h2 id="description">${data.description || 'NA'}</h2>
