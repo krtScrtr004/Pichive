@@ -72,11 +72,14 @@ export async function load_posts() {
 				}
 
 				const img_source = document.querySelector('#img_view>img')
-				const fetch_comment = await fetch_post_comments(img_source)
+				let fetch_comment = null
+				if (!has_already_ran['status']) {
+					fetch_comment = await fetch_post_comments(img_source)
+				}
 				if (!fetch_comment['status']) {
 					result_box.innerHTML = 'Failed to fetch comments!'
-					has_already_ran['status'] = true
 				}
+                has_already_ran['status'] = true
 			}
 
 			img_grid.appendChild(new_img_cont)
