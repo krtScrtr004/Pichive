@@ -72,7 +72,7 @@
         <ul class="list-wrapper">
             <!-- Home Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="../views/home_explore.php?page=home">
                     <img src="../assets/img/icons/Light/Home.svg" alt="" width="32" height="32">
                     <h3>Home</h3>
                 </a>
@@ -86,21 +86,21 @@
             </li>
             <!-- Followed Users Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="#">
                     <img src="../assets/img/icons/Light/User.svg" alt="" width="32" height="32">
                     <h3>Followed User</h3>
                 </a>
             </li>
             <!-- Chat Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="#">
                     <img src="../assets/img/icons/Light/Chat.svg" alt="" width="32" height="32">
                     <h3>Chat</h3>
                 </a>
             </li>
             <!-- Profile Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="#">
                     <img src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
                     <h3>Profile</h3>
                 </a>
@@ -114,7 +114,7 @@
         <h4 class="halve-title">Followed Users</h4>
         <ul>
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="#">
                     <img class="circle" src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
                     <h3>Username</h3>
                 </a>
