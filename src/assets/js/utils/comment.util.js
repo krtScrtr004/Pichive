@@ -69,7 +69,7 @@ export let has_already_ran = { status: false }
 export async function fetch_post_comments(img_source) {
 	try {
 		const data = await get_data(
-			`../api/fetch_post_comment.php?has_already_ran=${has_already_ran['status']}`
+			`../api/fetch_comment.php?has_already_ran=${has_already_ran['status']}`
 		)
 		if (!data) {
 			return {

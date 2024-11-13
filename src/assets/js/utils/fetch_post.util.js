@@ -102,6 +102,10 @@ async function add_post_details(post) {
 }
 
 function display_detail(data) {
+	if (!data) {
+		return
+	}
+
 	const img_view = document.querySelector('#img_view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
