@@ -83,7 +83,7 @@ if (!isset($_SESSION['user_id']) ||
     }
 </style>
 
-<body class="wrapper" data-page="<?$_GET['page']?>">
+<body id="page_type" class="wrapper" data-page="<?$_GET['page']?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>

@@ -23,8 +23,11 @@ export async function load_posts() {
 	loading.style.display = 'block'
 
 	try {
+		const page_type = document.querySelector('#page_type')
 		let response = await get_data(
-			`../api/fetch_post.php?offset=${offset}&limit=${limit}`
+			`../api/fetch_post.php?page_type=${page_type.getAttribute(
+				'data-page'
+			)}&offset=${offset}&limit=${limit}`
 		)
 		const test = test_response(response)
 		if (!test) {
@@ -73,7 +76,7 @@ export async function load_posts() {
 async function add_post_details(post) {
 	if (!post) {
 		result_box.innerHTML = 'Failed to fetch post details!'
-        return
+		return
 	}
 
 	// Open post modal
