@@ -1,8 +1,11 @@
 <?php
+require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['user_id']) || 
+    !isset($_SESSION['user_email']) ||
+    !isset($_GET['page'])) {
     header('Location: index.php');
     exit();
 }
@@ -80,7 +83,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     }
 </style>
 
-<body class="wrapper">
+<body class="wrapper" data-page="<?$_GET['page']?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>

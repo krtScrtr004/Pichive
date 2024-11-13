@@ -32,7 +32,7 @@ login_btn.onclick = async (e) => {
 
 		// TODO: Display successfull message on modal
 		result.innerHTML = response['message']
-		window.location.href = '../views/home_explore.php'
+		window.location.href = '../views/home_explore.php?page=home'
 	} catch (error) {
 		result.innerHTML = error['message']
 	}
