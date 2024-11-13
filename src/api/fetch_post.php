@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$page_type = isset($_GET['page_type']) ? $_GET['page_type'] : 'home';
+$content_type = isset($_GET['content_type']) ? $_GET['content_type'] : 'home';
 $limit = 9;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 
 try {
     $query = null;
-    if ($page_type === 'home') {
+    if ($content_type === 'home') {
         // TODO: Ayusin mo ito putang ina ka
         $query = $pdo->prepare("SELECT 
                                 p.id,
@@ -42,7 +42,7 @@ try {
                             ORDER BY date_time DESC 
                             LIMIT $limit OFFSET $offset");
         $query->execute();
-    } else if ($page_type === 'explore') {
+    } else if ($content_type === 'explore') {
         $query = $pdo->prepare("SELECT 
                                 p.id,
                                 p.title, 
@@ -61,7 +61,7 @@ try {
                             ORDER BY date_time DESC 
                             LIMIT $limit OFFSET $offset");
         $query->execute();
-    } else if ($page_type === 'profile') {
+    } else if ($content_type === 'profile') {
         $query = $pdo->prepare("SELECT 
                                     p.id,
                                     p.title, 

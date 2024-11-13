@@ -19,14 +19,14 @@ export async function load_posts() {
 	}
 	is_loading = true
 
-	const loading = document.querySelector('#loading')
+	const loading = document.querySelector('.loading')
 	loading.style.display = 'block'
 
 	try {
-		const page_type = document.querySelector('#page_type')
+		const img_grid = document.querySelector('.img_grid')
 		let response = await get_data(
-			`../api/fetch_post.php?page_type=${page_type.getAttribute(
-				'data-page'
+			`../api/fetch_post.php?content_type=${img_grid.getAttribute(
+				'data-content'
 			)}&offset=${offset}&limit=${limit}`
 		)
 		const test = test_response(response)
@@ -61,7 +61,7 @@ export async function load_posts() {
 				// Open post modal when img container it clicked
 				await add_post_details(post)
 			}
-			document.querySelector('.img_grid').appendChild(new_img_cont)
+			img_grid.appendChild(new_img_cont)
 
 			// Update offset for the next batch of data
 			offset += limit

@@ -79,7 +79,7 @@
             </li>
             <!-- Explore Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php">
+                <a class="nav-link" href="../views/home_explore.php?page=explore">
                     <img src="../assets/img/icons/Light/Explore.svg" alt="" width="32" height="32">
                     <h3>Explore</h3>
                 </a>
