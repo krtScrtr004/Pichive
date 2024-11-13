@@ -1,5 +1,6 @@
 <?php
 include_once 'partials/create_post.php';
+include_once 'partials/post_modal.php';
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     header('Location: index.php');
@@ -23,14 +24,25 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         box-sizing: border-box;
     }
 
+    html,
     body {
         width: 100%;
-        height: 100%;
     }
 
     .wrapper {
         width: 100%;
-        height: 100%;
+        display: flex;
+    }
+
+    .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden auto;
+    }
+
+    .center>main {
+        flex: 1;
     }
 
     .modal {
@@ -38,7 +50,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         height: 70%;
         display: flex;
         z-index: 100;
-        overflow-y: hidden;
+        overflow: hidden auto;
     }
 
     .show_modal {
@@ -47,17 +59,18 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
     .img_grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
     }
 
     .img_grid>div {
-        width: 300px;
-        height: 300px;
+        max-width: 1200px;
         display: flex;
         align-items: center;
         justify-content: center;
         border: solid 1px black;
+        aspect-ratio: 1 / 1;
     }
 
     .img_cont>img {
@@ -67,21 +80,21 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     }
 </style>
 
-<body>
-    <?php
-    include_once '../component/header.php';
-    include_once 'partials/post_modal.php';
-    ?>
+<body class="wrapper">
+    <?php include_once '../component/sidenav.php' ?>
 
-    <main class="wrapper">
-        <div id="result_box"></div>
+    <section class=center>
+        <?php include_once '../component/header.php' ?>
 
-        <div class="img_grid">
-        </div>
+        <main>
+            <div id="result_box"></div>
+            <div class="img_grid"></div>
 
-        <div id="loading">Loading more images...</div>
-    </main>
+            <div id="loading">Loading more images...</div>
+        </main>
+    </section>
+
+    <script type="module" src="../assets/js/event/fetch_post.js"></script>
 </body>
-
 
 </html>

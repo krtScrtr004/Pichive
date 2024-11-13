@@ -1,11 +1,3 @@
-<?php
-include '../config/session.php';
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
-    header('Location: index.php');    
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
