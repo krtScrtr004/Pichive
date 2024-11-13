@@ -1,7 +1,7 @@
 import { send_file, test_response } from '../utils/request.js'
 
 const form = document.querySelector('#create_post_modal')
-const result_box = document.querySelector('#result_box')
+const result_box = document.querySelector('.result_box')
 const title = document.querySelector('#title')
 const image_picker = document.querySelector('#file_picker')
 const image_preview = document.querySelector('.img_preview')

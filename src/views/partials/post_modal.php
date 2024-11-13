@@ -10,6 +10,7 @@
         justify-content: center;
         align-items: center;
         position: fixed;
+        z-index: 1000;
     }
 
     #img_view {

@@ -5,7 +5,11 @@
         box-sizing: border-box;
     }
 
-    .side_nav {
+    a {
+        text-decoration: none;
+    }
+
+    .side-nav {
         width: 20%;
         background-color: black;
         color: white;
@@ -13,29 +17,107 @@
         top: 0;
         display: flex;
         flex-direction: column;
+        padding: 1.5em;
+        overflow: auto;
     }
 
-    .upper_halve, .lower_halve {
+    .halve-divider {
+        width: 100%;
+        color: white;
+    }
+
+    .upper-halve {
+        height: fit-content;
+        margin-bottom: 1rem;
+    }
+
+    .lower-halve {
         flex: 1;
         overflow: auto hidden;
     }
+
+    .halve-title {
+        padding: 1rem 0;
+    }
+
+    .list-wrapper,
+    .link-wrapper,
+    .nav-link {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .list-wrapper {
+        flex-direction: column;
+        align-items: start;
+        gap: 1.5rem;
+    }
+
+    .nav-link>img {
+        height: 2rem;
+        margin-right: 1em;
+    }
+
+    .circle {
+        width: 100%;
+        height: auto;
+        border-radius: 100%;
+        aspect-ratio: 1/1;
+    }
 </style>
 
-<aside class="side_nav">
-    <section class="upper_halve">
-        <h2>Upper Half</h2>
-        <ul>
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
+<aside class="side-nav" data-content="main">
+    <section class="upper-halve">
+        <ul class="list-wrapper">
+            <!-- Home Page -->
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img src="../assets/img/icons/Light/Home.svg" alt="" width="32" height="32">
+                    <h3>Home</h3>
+                </a>
+            </li>
+            <!-- Explore Page -->
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img src="../assets/img/icons/Light/Explore.svg" alt="" width="32" height="32">
+                    <h3>Explore</h3>
+                </a>
+            </li>
+            <!-- Followed Users Page -->
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img src="../assets/img/icons/Light/User.svg" alt="" width="32" height="32">
+                    <h3>Followed User</h3>
+                </a>
+            </li>
+            <!-- Chat Page -->
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img src="../assets/img/icons/Light/Chat.svg" alt="" width="32" height="32">
+                    <h3>Chat</h3>
+                </a>
+            </li>
+            <!-- Profile Page -->
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
+                    <h3>Profile</h3>
+                </a>
+            </li>
         </ul>
     </section>
-    <section class="lower_halve">
-    <h2>Lower Half</h2>
+
+    <hr class="halve-divider">
+
+    <section class="lower-halve">
+        <h4 class="halve-title">Followed Users</h4>
         <ul>
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-        </ul>
+            <li class="link-wrapper">
+                <a class="nav-link" href="../views/home_explore.php">
+                    <img class="circle" src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
+                    <h3>Username</h3>
+                </a>
+            </li>
     </section>
 </aside>
