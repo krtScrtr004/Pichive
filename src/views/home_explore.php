@@ -84,7 +84,7 @@ if (!isset($_SESSION['user_id']) ||
 </style>
 
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
-<body id="page_type" class="wrapper" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
+<body class="wrapper" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>

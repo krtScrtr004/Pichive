@@ -1,3 +1,15 @@
+<?php 
+require_once '../config/session.php';
+include_once 'partials/create_post.php';
+include_once 'partials/post_modal.php';
+
+if (!isset($_SESSION['user_id']) || 
+    !isset($_SESSION['user_email'])) {
+    header('Location: index.php');
+    exit();
+}
+?>
+
 <style>
     * {
         padding: 0;
@@ -100,7 +112,7 @@
             </li>
             <!-- Profile Page -->
             <li class="link-wrapper">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../views/profile.php?page=profile&id=<?php echo urlencode($_SESSION['user_id']); ?>">
                     <img src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
                     <h3>Profile</h3>
                 </a>
