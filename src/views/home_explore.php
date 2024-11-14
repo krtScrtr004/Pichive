@@ -84,18 +84,18 @@ if (!isset($_SESSION['user_id']) ||
 </style>
 
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
-<body id="page_type" class="wrapper" data-page="<?$_GET['page']?>">
+<body id="page_type" class="wrapper" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>
         <?php include_once '../component/header.php' ?>
 
         <main>
-            <div id="result_box"></div>
+            <div id="result-box"></div>
             <!-- Note: 'data-content' determine which post content to fetch (home / explore / profile) -->
-            <div class="img_grid" data-content="<?$_GET['page']?>"></div>
+            <div class="img_grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
 
-            <div id="loading">Loading more images...</div>
+            <div class="loading">Loading more images...</div>
         </main>
     </section>
 
