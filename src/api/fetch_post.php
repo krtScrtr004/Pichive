@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$content_type = isset($_GET['content_type']) ? $_GET['content_type'] : 'home';
+$content_type = htmlspecialchars($_GET['content_type']) ?? 'home';
 $limit = 9;
-$offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
+$offset = intval(htmlspecialchars($_GET['offset'])) ?? 0;
 
 try {
     $query = null;
@@ -82,7 +82,7 @@ try {
                                 ORDER BY date_time DESC 
                                 LIMIT $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid($_GET['id'] ?? $_SESSION['user_id'])
+            ':id' => encode_uuid(htmlspecialchars($_GET['id']) ?? $_SESSION['user_id'])
         ));
     }
     
