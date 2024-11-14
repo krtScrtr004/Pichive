@@ -161,7 +161,7 @@ if (
                     </section>
                 </div>
 
-                <div class="img_grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
+                <div class="img_grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"  data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
             </section>
 
             <div class="loading">Loading more images...</div>

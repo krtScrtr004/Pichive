@@ -27,7 +27,7 @@ export async function load_posts() {
 		let response = await get_data(
 			`../api/fetch_post.php?content_type=${img_grid.getAttribute(
 				'data-content'
-			)}&offset=${offset}&limit=${limit}`
+			) ?? 'home'}&id=${img_grid.getAttribute('data-id') ?? null}&offset=${offset}&limit=${limit}`
 		)
 		const test = test_response(response)
 		if (!test) {

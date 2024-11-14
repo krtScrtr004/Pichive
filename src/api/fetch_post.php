@@ -82,7 +82,7 @@ try {
                                 ORDER BY date_time DESC 
                                 LIMIT $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid($_SESSION['user_id'])
+            ':id' => encode_uuid($_GET['id'] ?? $_SESSION['user_id'])
         ));
     }
     
