@@ -20,7 +20,7 @@ $id = htmlspecialchars($_GET['id']) ?? $_SESSION['user_id'];
 try {
     $query = $pdo->prepare('SELECT * FROM user WHERE id = :id');
     $query->execute(array(
-        ':id' => $id,
+        ':id' => encode_uuid($id),
     ));
     $result = $query->fetch();
     if (!$result) {
@@ -31,10 +31,10 @@ try {
         exit();
     }
 
-    $result['id'] = parse_url($result['id']);
+    $result['id'] = parse_uuid($result['id']);
     echo json_encode(array(
         'status' => 'sucess',
-        'message' => 'User details successfully fetched!',
+        'message' => 'Successfully retrieved user data!',
         'data' => $result
     ));
 } catch (PDOException $e) {

@@ -135,29 +135,23 @@ if (
         <?php include_once '../component/header.php' ?>
 
         <main>
-            <div id="result-box"></div>
+            <div class="result-box"></div>
 
             <section class="main-partition">
-                <div class="profile-details">
-                    <img class="circle" src="../assets/img/icons/Dark/Profile.svg" alt="Profile Image" width="250" height="250">
+                <div class="profile-details" data-id="<?php echo htmlspecialchars($_GET['id']); ?>">
+                    <img id="profile_img" class="circle" src="../assets/img/icons/Dark/Profile.svg" alt="Profile Image" width="250" height="250">
 
                     <section class="profile-texts">
                         <span class="user-info">
-                            <h4 class="username">
-                                Galugod_Mafia🔫🔫🔫
-                            </h4>
-                            <h6 class="user-id">
-                                <?php echo urlencode($_SESSION['user_id']); ?>
-                            </h6>
+                            <h4 id="username" class="username"></h4>
+                            <h6 id="user_id" class="user-id"></h6>
                         </span>
                         // TODO: 
                         <span class="buttons">
                             <button id="edit-profile-btn" type="submit">Edit Profile</button>
                             <button id="upload-img-btn" type="submit">Upload</button>
                         </span>
-                        <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nobis vero consectetur in itaque similique at saepe, quae temporibus pariatur dignissimos quia officia impedit odit illo autem molestiae. Suscipit, ex.
-                        Neque quidem pariatur, corporis voluptas explicabo nihil sit nemo quaerat voluptatum, iusto alias ipsam soluta! Delectus, dolor quisquam consequatur harum excepturi, soluta cum architecto dicta sequi molestias, quasi incidunt maxime.
-                        Quibusdam praesentium nam facilis minima necessitatibus eius dignissimos inventore explicabo neque modi, magni voluptates placeat, doloremque quod illum? Architecto cum commodi doloribus error dolore culpa molestias animi aspernatur illo aliquid.</p>
+                        <p id="user_bio" class="bio"></p>
                     </section>
                 </div>
 
@@ -168,6 +162,7 @@ if (
         </main>
     </section>
 
+    <script type="module" src="../assets/js/event/fetch_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
 </body>
 
