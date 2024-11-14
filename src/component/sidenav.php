@@ -9,77 +9,11 @@ if (!isset($_SESSION['user_id']) ||
     exit();
 }
 ?>
+<link rel="stylesheet" href="../assets/style/generic.css">
+<link rel="stylesheet" href="../assets/style/utils.css">
+<link rel="stylesheet" href="../assets/style/nav.css">
 
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    .side-nav {
-        width: 20%;
-        background-color: black;
-        color: white;
-        position: sticky;
-        top: 0;
-        display: flex;
-        flex-direction: column;
-        padding: 1.5em;
-        overflow: auto;
-    }
-
-    .halve-divider {
-        width: 100%;
-        color: white;
-    }
-
-    .upper-halve {
-        height: fit-content;
-        margin-bottom: 1rem;
-    }
-
-    .lower-halve {
-        flex: 1;
-        overflow: auto hidden;
-    }
-
-    .halve-title {
-        padding: 1rem 0;
-    }
-
-    .list-wrapper,
-    .link-wrapper,
-    .nav-link {
-        display: flex;
-        align-items: center;
-        color: white;
-    }
-
-    .list-wrapper {
-        flex-direction: column;
-        align-items: start;
-        gap: 1.5rem;
-    }
-
-    .nav-link>img {
-        height: 2rem;
-        margin-right: 1em;
-    }
-
-    .circle {
-        width: 100%;
-        height: auto;
-        border-radius: 100%;
-        aspect-ratio: 1/1;
-    }
-</style>
-
-<aside class="side-nav" data-content="main">
+<aside data-content="main">
     <section class="upper-halve">
         <ul class="list-wrapper">
             <!-- Home Page -->

@@ -1,0 +1,37 @@
+.halve-divider {
+    width: 100%;
+    color: white;
+}
+
+.upper-halve {
+    height: fit-content;
+    margin-bottom: 1rem;
+}
+
+.lower-halve {
+    flex: 1;
+    overflow: auto hidden;
+}
+
+.halve-title {
+    padding: 1rem 0;
+}
+
+.list-wrapper,
+.link-wrapper,
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.list-wrapper {
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.nav-link>img {
+    height: 2rem;
+    margin-right: 1em;
+}

@@ -1,7 +1,7 @@
 import { get_data, test_response } from './request.js'
 import { has_already_ran, fetch_post_comments } from '../utils/comment.util.js'
 
-const result_box = document.querySelector('#result-box')
+const result_box = document.querySelector('.result')
 
 let offset = 0
 const limit = 9
@@ -23,7 +23,7 @@ export async function load_posts() {
 	loading.style.display = 'block'
 
 	try {
-		const img_grid = document.querySelector('.img_grid')
+		const img_grid = document.querySelector('.img-grid')
 		let response = await get_data(
 			`../api/fetch_post.php?content_type=${img_grid.getAttribute(
 				'data-content'
@@ -55,7 +55,7 @@ export async function load_posts() {
 
 			// Create image container
 			const new_img_cont = document.createElement('div')
-			new_img_cont.classList.add('img_cont')
+			new_img_cont.classList.add('img-cont')
 			new_img_cont.appendChild(img)
 			new_img_cont.onclick = async () => {
 				// Open post modal when img container it clicked
@@ -80,8 +80,8 @@ async function add_post_details(post) {
 	}
 
 	// Open post modal
-	const modal_wrapper = document.querySelector('.modal_wrapper')
-	modal_wrapper.classList.add('show_modal')
+	const modal_wrapper = document.querySelector('.modal-wrapper')
+	modal_wrapper.classList.add('show-modal')
 	display_detail({
 		id: post['id'],
 		img_url: post['img_url'],
@@ -93,7 +93,7 @@ async function add_post_details(post) {
 	})
 
 	// Fetch post comments
-	const img_source = document.querySelector('#img_view>img')
+	const img_source = document.querySelector('.img-view>img')
 	let fetch_comment = null
 	if (!has_already_ran['status']) {
 		fetch_comment = await fetch_post_comments(img_source)
@@ -109,16 +109,16 @@ function display_detail(data) {
 		return
 	}
 
-	const img_view = document.querySelector('#img_view')
+	const img_view = document.querySelector('.img-view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
 	}" alt="Image preview" data-id=${data.id || null}>`
 	img_view.insertAdjacentHTML('afterbegin', img_HTML)
 
-	const post_detail = document.querySelector('.post_detail')
+	const post_detail = document.querySelector('.post-detail')
 	const detail_HTML = `
-                <h3 id="poster_name">${data.username || 'Anonymous'}</h3>
-                <p id="poster_id">${data.poster_id || 'Unknown'}</p>
+                <h3 id="poster-name">${data.username || 'Anonymous'}</h3>
+                <p id="poster-id">${data.poster_id || 'Unknown'}</p>
                 <h1 id="title">${data.title || 'Untitled'}</h1>
                 <h2 id="description">${data.description || 'NA'}</h2>
                 <p id="date">${data.date || 'Unkown Date'}</p>`
@@ -126,6 +126,6 @@ function display_detail(data) {
 }
 
 export function remove_details() {
-	document.querySelector('#img_view').innerHTML = ''
-	document.querySelector('.post_detail').innerHTML = ''
+	document.querySelector('.img-view').innerHTML = ''
+	document.querySelector('.post-detail').innerHTML = ''
 }

@@ -18,9 +18,13 @@ if (!isset($_SESSION['user_id']) ||
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    <link rel="stylesheet" href="../assets/style/generic.css">
+    <link rel="stylesheet" href="../assets/style/utils.css">
+    <link rel="stylesheet" href="../assets/style/img_grid.css">
+    <link rel="stylesheet" href="../assets/style/modal.css">
 </head>
 
-<style>
+<!-- <style>
     * {
         padding: 0;
         margin: 0;
@@ -37,16 +41,6 @@ if (!isset($_SESSION['user_id']) ||
         display: flex;
     }
 
-    .center {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden auto;
-    }
-
-    .center>main {
-        flex: 1;
-    }
 
     .modal {
         width: 80%;
@@ -60,31 +54,11 @@ if (!isset($_SESSION['user_id']) ||
         display: flex !important;
     }
 
-    .img_grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(150px, 1fr));
-        gap: 1rem;
-        padding: 1rem;
-    }
 
-    .img_grid>div {
-        max-width: 1200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: solid 1px black;
-        aspect-ratio: 1 / 1;
-    }
-
-    .img_cont>img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-</style>
+</style> -->
 
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
-<body class="wrapper" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
+<body class="wrapper flex-row" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>
@@ -93,7 +67,7 @@ if (!isset($_SESSION['user_id']) ||
         <main>
             <div id="result-box"></div>
             <!-- Note: 'data-content' determine which post content to fetch (home / explore / profile) -->
-            <div class="img_grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
+            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
 
             <div class="loading">Loading more images...</div>
         </main>

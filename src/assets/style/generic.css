@@ -1,0 +1,39 @@
+:root {
+    --default-white: #E9E9E9;
+    --default-black: #1C1E1F;
+    --default-yellow: #FDD200;
+    --default-dark_yellow: #D5A800;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    border: solid 1px red;
+}
+
+aside {
+    width: 20%;
+    background-color: black;
+    color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
+    overflow: auto;
+}

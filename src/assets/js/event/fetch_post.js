@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 	// Add scroll event listener
 	window.addEventListener('scroll', handle_scroll)
 
-	const modal_wrapper = document.querySelector('.modal_wrapper')
+	const modal_wrapper = document.querySelector('.modal-wrapper')
 	window.onclick = (e) => {
 		if (e.target === modal_wrapper) {
-			modal_wrapper.classList.remove('show_modal')
+			modal_wrapper.classList.remove('show-modal')
 			has_already_ran['status'] = false
 			remove_comment()
 			remove_details()

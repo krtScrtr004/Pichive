@@ -1,0 +1,36 @@
+main-partition {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details {
+    background-color: var(--default-white);;
+    display: flex;
+}
+
+.profile-details>img {
+    width: fit-content;
+    height: clamp(5rem, 13rem, 15rem);
+    margin-right: 2rem;
+}
+
+.profile-texts {
+    flex: 1;
+}
+
+.profile-texts > * {
+    display: block;
+}
+
+.user-info>* {
+    display: inline-block;
+}
+
+.username {
+    font-size: 2rem;
+}
+
+.user-id {
+    font-size: 1.5rem;
+    font-weight: 300;;
+}

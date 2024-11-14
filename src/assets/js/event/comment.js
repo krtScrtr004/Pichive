@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	submit_comment_btn.onclick = async (e) => {
 		e.preventDefault()
 
-		const img_source = document.querySelector('#img_view>img')
+		const img_source = document.querySelector('.img-view>img')
 		const input_comment = document.querySelector('#input_comment')
 		try {
 			const response = await send_data('../api/write_comment.php', {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	setInterval(async () => {
-		const modal_wrapper = document.querySelector('.modal_wrapper')
+		const modal_wrapper = document.querySelector('.modal-wrapper')
 		if (!modal_wrapper.classList.contains('show_modal') || is_loading) {
 			return
 		}

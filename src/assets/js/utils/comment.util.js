@@ -1,27 +1,27 @@
 import { get_data } from '../utils/request.js'
 
 export function display_comment(data) {
-	const comment_list = document.querySelector('.comment_list')
+	const comment_list = document.querySelector('.comment-list')
 
 	// Using a template string to create the comment structure
 	const comment_HTML = `
-        <div class="comment_wrapper">
-            <section class="original_comment comment_box">
-                <div class="commenter_img">
+        <div class="comment-wrapper">
+            <section class="original-comment comment-box">
+                <div class="commenter-img">
                     <img src="${
 											data.img_url || '../assets/img/default_img_prev.png'
 										}" alt="Commenter Image">
                 </div>
-                <div class="comment_detail">
-                    <div class="comment_header">
-                        <h4 class="commenter_name">${
+                <div class="comment-detail">
+                    <div class="comment-header">
+                        <h4 class="commenter-name">${
 													data.commenter_name || 'Anonymous'
 												}</h4>
-                        <p class="comment_date">${
+                        <p class="comment-date">${
 													data.comment_date || 'Unknown Date'
 												}</p>
                     </div>
-                    <p class="comment_content">
+                    <p class="comment-content">
                         ${data.comment_content || 'No content provided'}
                     </p>
                 </div>
@@ -33,7 +33,7 @@ export function display_comment(data) {
 }
 
 export function remove_comment() {
-	document.querySelector('.comment_list').innerHTML = ''
+	document.querySelector('.comment-list').innerHTML = ''
 }
 
 export function display_comments_in_batches(
