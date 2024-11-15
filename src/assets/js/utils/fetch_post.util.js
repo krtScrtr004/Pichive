@@ -81,8 +81,8 @@ async function add_post_details(post) {
 	}
 
 	// Open post modal
-	const modal_wrapper = document.querySelector('.modal-wrapper')
-	modal_wrapper.classList.add('show-modal')
+	const post_modal = document.querySelector('#post_modal')
+	post_modal.classList.add('show-modal')
 	display_detail({
 		id: post['id'],
 		img_url: post['img_url'],

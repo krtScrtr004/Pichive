@@ -8,7 +8,7 @@
    
 </style>
 
-<div class="modal-wrapper">
+<div class="modal-wrapper" id="post_modal">
     <span class="result"></span>
 
     <section class="modal">
