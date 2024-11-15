@@ -2,6 +2,7 @@
 require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
+include_once 'partials/edit_profile_modal.php';
 
 if (
     !isset($_SESSION['user_id']) ||
@@ -47,7 +48,7 @@ if (
                         </span>
                         // TODO: 
                         <span class="buttons">
-                            <button id="edit-profile-btn" type="submit">Edit Profile</button>
+                            <button id="edit_profile_btn" type="submit">Edit Profile</button>
                             <button id="upload-img-btn" type="submit">Upload</button>
                         </span>
                         <p id="user_bio" class="bio"></p>
@@ -63,6 +64,7 @@ if (
 
     <script type="module" src="../assets/js/event/fetch_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
+    <script type="module" src="../assets/js/event/edit_profile.js"></script>
 </body>
 
 </html>
