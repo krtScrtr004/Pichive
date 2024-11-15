@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id']) ||
     exit();
 }
 ?>
+
 <link rel="stylesheet" href="../assets/style/generic.css">
 <link rel="stylesheet" href="../assets/style/utils.css">
 <link rel="stylesheet" href="../assets/style/nav.css">

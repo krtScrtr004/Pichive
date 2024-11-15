@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	await load_posts()
 
 	// Add scroll event listener
-	window.addEventListener('scroll', handle_scroll)
+	document.querySelector('.center').addEventListener('scroll', handle_scroll)
 
 	const modal_wrapper = document.querySelector('.modal-wrapper')
 	window.onclick = (e) => {

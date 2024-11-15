@@ -2,6 +2,7 @@ import { get_data, test_response } from './request.js'
 import { has_already_ran, fetch_post_comments } from '../utils/comment.util.js'
 
 const result_box = document.querySelector('.result')
+const center = document.querySelector('.center')
 
 let offset = 0
 const limit = 9
@@ -32,7 +33,7 @@ export async function load_posts() {
 		const test = test_response(response)
 		if (!test) {
 			result_box.innerHTML = test['message']
-			window.removeEventListener('scroll', handle_scroll)
+			center.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
 			is_loading = false
 			return
@@ -40,7 +41,7 @@ export async function load_posts() {
 
 		const data = response['data']
 		if (data.length === 0) {
-			window.removeEventListener('scroll', handle_scroll)
+			center.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
 			is_loading = false
 			return
@@ -62,12 +63,12 @@ export async function load_posts() {
 				await add_post_details(post)
 			}
 			img_grid.appendChild(new_img_cont)
-
-			// Update offset for the next batch of data
-			offset += limit
-			loading.style.display = 'none'
-			is_loading = false // Reset loading flag
 		})
+
+		// Update offset for the next batch of data
+		offset += limit
+		loading.style.display = 'none'
+		is_loading = false // Reset loading flag
 	} catch (error) {
 		result_box.innerHTML = error['message']
 	}

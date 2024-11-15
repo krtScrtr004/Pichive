@@ -6,6 +6,7 @@ main-partition {
 .profile-details {
     background-color: var(--default-white);;
     display: flex;
+    padding: 1rem;
 }
 
 .profile-details>img {
