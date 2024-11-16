@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	// FIXME
 	post_btn.onclick = async (e) => {
 		e.preventDefault()
 		const image = image_picker.files[0]

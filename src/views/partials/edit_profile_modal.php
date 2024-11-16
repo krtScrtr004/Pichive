@@ -20,13 +20,11 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
             <div class="flex-row">
                 <img class="img-preview circle" src="../assets/img/default_img_prev.png" alt="Profile image" width="100" height="100">
                 <div class="img-button-wrapper">
+                    <!-- Hidden file picker -->
                     <input type="file" name="img_picker" id="img_picker" accept="image/*">
 
+                    <!-- Button that would simulate the file picking through events -->
                     <button id="img_picker_btn" class="dark-background light-text" type="button">Choose Image</button>
-
-                    <!-- <div class="file-input dark-background light-text">
-                        <label for="file">Choose an image</label>
-                    </div> -->
                 </div>
             </div>
 
@@ -61,8 +59,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
                 <!-- Buttons -->
                 <div class="button flex-row">
-                    <button type="button">CANCEL</button>
-                    <button type="submit">SAVE</button>
+                    <button id="cancel_btn" type="button">CANCEL</button>
+                    <button id="save_btn" type="submit">SAVE</button>
                 </div>
             </form>
         </div>

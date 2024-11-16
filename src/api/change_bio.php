@@ -19,6 +19,15 @@ if (!$data) {
     ));
 }
 
+$bio_result = validate_bio($data['bio']);
+if ($bio_result !== true) {
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => $bio_result
+    ));
+    exit();
+}
+
 try {
     $query = $pdo->prepare('UPDATE user SET bio = :bio WHERE id = :id');
     $query->execute(array(

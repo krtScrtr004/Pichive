@@ -1,4 +1,4 @@
-import { get_data } from '../utils/request.js'
+import { get_data, test_response } from '../utils/request.js'
 
 export function display_comment(data) {
 	const comment_list = document.querySelector('.comment-list')
@@ -68,20 +68,15 @@ export function display_comments_in_batches(
 export let has_already_ran = { status: false }
 export async function fetch_post_comments(img_source) {
 	try {
-		const data = await get_data(
+		const response = await get_data(
 			`../api/fetch_comment.php?has_already_ran=${has_already_ran['status']}`
 		)
-		if (!data) {
+		const test = test_response(response)
+		if (!test['status']) {
 			return {
 				status: false,
-				message:
-					'Response was not successfully recieved while fetching comment!',
+				message: test['message']
 			}
-		} else if (data['status'] === 'fail') {
-			return {
-                status: false,
-                message: data['message']
-            }
 		}
 
 		display_comments_in_batches(img_source.getAttribute('data-id'), data['data'])

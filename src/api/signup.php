@@ -72,12 +72,20 @@ try {
             'status' => 'fail',
             'error' => $error
         ));
-     
         exit();
     }
 
     $uuid =  generate_uuid();
-    $query = $pdo->prepare('INSERT INTO user(id, username, email, password) VALUES (:id, :username, :email, :password)');
+    $query = $pdo->prepare('INSERT INTO 
+                                user(id, 
+                                    username, 
+                                    email, 
+                                    password) 
+                            VALUES (
+                                    :id, 
+                                    :username, 
+                                    :email, 
+                                    :password)');
     $query->execute(array(
         ':id' => $uuid,
         ':username' => $data['username'],

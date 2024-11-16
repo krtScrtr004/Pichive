@@ -44,7 +44,7 @@ try {
     ));
     echo json_encode(array(
         'status' => 'success',
-        'message' => 'Password updated successfully!'
+        'message' => 'Username updated successfully!'
     ));
 } catch (PDOException $e) {
     echo json_encode(array(

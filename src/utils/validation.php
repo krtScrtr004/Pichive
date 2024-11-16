@@ -6,6 +6,9 @@ require_once '../config/database.php';
 // Username Validator
 function validate_username($username)
 {
+    if (!$username) {
+        return 'Username is not defined';
+    }
     // Check is username is valid
     if (strlen($username) < 3 || strlen($username) > 15) {
         return 'Username must be between 3 and 15 characters long';
@@ -20,6 +23,9 @@ function validate_username($username)
 // Email Validator 
 function validate_email($email)
 {
+    if (!$email) {
+        return 'Email is not defined';
+    }
     // Check if email address is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return 'Invalid email address!';
@@ -29,6 +35,9 @@ function validate_email($email)
 
 function validate_password($password)
 {
+    if (!$password) {
+        return 'Password is not defined';
+    }
     if (strlen($password) < 8 || strlen($password) > 128) {
         return 'Username must be between 3 and 128 characters long';
     }
@@ -46,3 +55,47 @@ function validate_password($password)
     }
     return true;
 }
+
+function validate_bio($bio) {
+    $max_len = 300;
+    if (!$bio) {
+        return 'Bio is not defined';
+    }
+    if (empty(trim($bio))) {
+        return 'Bio cannot be empty.';
+    }
+    // Check bio length (using mb_strlen to account for multibyte characters like emojis)
+    if (mb_strlen($bio, 'UTF-8') > $max_len) {
+        return "Bio cannot exceed $max_len characters.";
+    }
+
+    return true;
+}
+
+function validate_image($file) {
+    if (!$file) {
+        return 'Image is not defined';
+    }
+
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 32 * 1024 * 1024; // 32 MB
+
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        return ['isValid' => false, 'message' => 'Error uploading the file.'];
+    }
+    // Check file size
+    if ($file['size'] > $max_size) {
+        return 'File size exceeds 32MB limit.';
+    }
+
+    // Check MIME type
+    $f_info = finfo_open(FILEINFO_MIME_TYPE);
+    $mime_type = finfo_file($f_info, $file['tmp_name']);
+    finfo_close($f_info);
+    if (!in_array($mime_type, $allowed_types)) {
+        return 'Invalid file type. Only JPEG, PNG, and GIF are allowed.';
+    }
+
+    return true;
+}
+

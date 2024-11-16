@@ -32,14 +32,6 @@ try {
         }
     }
 
-    if (!empty($error)) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'error' => $error
-        ));
-        exit();
-    }
-
     $password_result = validate_password($data['password']);
     if ($password_result !== true) {
         $error['password'] = $password_result;
