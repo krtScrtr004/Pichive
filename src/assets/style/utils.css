@@ -12,7 +12,6 @@
     flex-direction: column;
 }
 
-
 .center {
     flex: 1;
     display: flex;
@@ -27,4 +26,20 @@
 .circle {
     border-radius: 100%;
     aspect-ratio: 1 / 1;
+}
+
+.light-background {
+    background-color: var(--default-white);
+}
+
+.dark-background {
+    background-color: var(--default-black);
+}
+
+.light-text {
+    color: var(--default-white);
+}
+
+.dark-text {
+    color: var(--default-black);
 }

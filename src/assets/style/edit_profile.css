@@ -1,0 +1,39 @@
+.edit-profile {
+    width: 50% !important;
+    height: 60% !important;
+}
+
+.right-halve {
+    flex: 1;
+}
+
+.left-halve {
+    flex: 1;
+}
+
+.img-preview {
+    margin-right: 1rem
+}
+
+.img-button-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.file-input {
+    height: fit-content;
+    overflow: hidden;
+}
+
+.file-input input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.file-input label {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    overflow: hidden;
+}

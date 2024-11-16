@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         </section>
 
         <section class="form-main">
-            <label class="img_picker">
+            <label class="img-picker">
                 <input type="file" name="file_picker" id="file_picker" accept="image/*" style="display: none;">
                 <img id="img_preview" alt="Click to select image" title="Click to select image">
             </label>
