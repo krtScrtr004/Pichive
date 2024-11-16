@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 }
 ?>
 
-<link rel="stylesheet" href="../assets/style/general.css">
+<link rel="stylesheet" href="../assets/style/generic.css">
 <link rel="stylesheet" href="../assets/style/modal.css">
 <link rel="stylesheet" href="../assets/style/utils.css">
 <link rel="stylesheet" href="../assets/style/edit_profile.css">
@@ -18,12 +18,15 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         <div class="left-halve flex-column">
             <h3>EDIT PROFILE INFORMATION</h3>
             <div class="flex-row">
-                <img class="img-preview circle" src="../../assets/img/default_img_prev.png" alt="Profile image">
+                <img class="img-preview circle" src="../assets/img/default_img_prev.png" alt="Profile image" width="100" height="100">
                 <div class="img-button-wrapper">
-                    <div class="file-input dark-background light-text">
-                        <label for="file">Choose a file</label>
-                        <input type="file" id="file" />
-                    </div>
+                    <input type="file" name="img_picker" id="img_picker" accept="image/*">
+
+                    <button id="img_picker_btn" class="dark-background light-text" type="button">Choose Image</button>
+
+                    <!-- <div class="file-input dark-background light-text">
+                        <label for="file">Choose an image</label>
+                    </div> -->
                 </div>
             </div>
 
@@ -39,28 +42,28 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
                 </div>
 
                 <!-- Email -->
-                 <div class="flex-column">
+                <div class="flex-column">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" placeholder="Email" disabled>
-                 </div>
+                </div>
 
-                 <!-- Password -->
-                  <div class="flex-column">
+                <!-- Password -->
+                <div class="flex-column">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Password" min="8" max="128">
-                  </div>
+                </div>
 
-                  <!-- Bio -->
-                  <div class="flex-column">
+                <!-- Bio -->
+                <div class="flex-column">
                     <label for="bio">Bio</label>
                     <textarea class="bio" name="bio" id="bio" cols="30" rows="10" maxlength="512" placeholder="Short bio about yourself"></textarea>
-                  </div>
+                </div>
 
-                  <!-- Buttons -->
-                  <div class="button flex-row">
+                <!-- Buttons -->
+                <div class="button flex-row">
                     <button type="submit">CANCEL</button>
                     <button type="submit">SAVE</button>
-                  </div>
+                </div>
             </form>
         </div>
     </section>

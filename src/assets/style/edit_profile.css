@@ -1,7 +1,7 @@
 .modal.edit-profile {
     width: 50% !important;
     height: fit-content !important;
-    padding: var(--defaul-padding);
+    padding: var(--default-padding);
 }
 
 .left-halve {
@@ -21,12 +21,22 @@
     place-items: center;
 }
 
-.file-input {
-    height: fit-content;
-    overflow: hidden;
+#img_picker {
+    display: none;
 }
 
-.file-input input[type="file"] {
+#img_picker_btn {
+    padding: 0.5em;
+    border-radius: 5px;
+}
+/*
+.file-input {
+    position: relative;
+    height: fit-content;
+    overflow: hidden;
+} 
+
+/* .file-input input[type="file"] {
     position: absolute;
     opacity: 0;
     z-index: -1;
@@ -36,7 +46,6 @@
     display: inline-block;
     padding: 0.3rem 0.5rem;
     cursor: pointer;
-    overflow: hidden;
 }
 
 .right-halve {
