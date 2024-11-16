@@ -25,7 +25,7 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" autocomplete="on" required>
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" required>
+                <input type="text" name="password" id="password" min="8" max="128" required>
                 <button id="login_btn" type="submit">LOG IN</button>
             </form>
          </section>
@@ -34,13 +34,13 @@
           <section id="signup">
             <form id="signup_form" action="" method="POST">
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" autocomplete="on" required>
+                <input type="text" name="username" id="username" min="3" max="15" autocomplete="on" required>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" autocomplete="on" required>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" min="8" max="128" required>
                 <label for="c_password">Confirm Password</label>
-                <input type="password" name="c_password" id="c_password" required>
+                <input type="password" name="c_password" id="c_password" min="8" max="128" required>
                 <button id="signup_btn" type="submit">SUBMIT</button>
             </form>
           </section>

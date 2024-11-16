@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 }
 ?>
 
+<link rel="stylesheet" href="../assets/style/general.css">
 <link rel="stylesheet" href="../assets/style/modal.css">
 <link rel="stylesheet" href="../assets/style/utils.css">
 <link rel="stylesheet" href="../assets/style/edit_profile.css">
@@ -29,7 +30,39 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         </div>
 
         <!-- Left halve side -->
-        <div class="left-halve"></div>
+        <div class="right-halve flex-column">
+            <form class="flex-column" action="" method="POST">
+                <!-- Username -->
+                <div class="input-wrapper flex-column">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Username" min="8" max="128" autocomplete="on">
+                </div>
+
+                <!-- Email -->
+                 <div class="flex-column">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email" disabled>
+                 </div>
+
+                 <!-- Password -->
+                  <div class="flex-column">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" min="8" max="128">
+                  </div>
+
+                  <!-- Bio -->
+                  <div class="flex-column">
+                    <label for="bio">Bio</label>
+                    <textarea class="bio" name="bio" id="bio" cols="30" rows="10" maxlength="512" placeholder="Short bio about yourself"></textarea>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="button flex-row">
+                    <button type="submit">CANCEL</button>
+                    <button type="submit">SAVE</button>
+                  </div>
+            </form>
+        </div>
     </section>
 </div>
 

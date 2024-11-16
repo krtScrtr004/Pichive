@@ -3,6 +3,8 @@
     --default-black: #1C1E1F;
     --default-yellow: #FDD200;
     --default-dark_yellow: #D5A800;
+
+    --defaul-padding: 1.5em;
 }
 
 * {
@@ -36,4 +38,8 @@ aside {
     flex-direction: column;
     padding: 1.5em;
     overflow: auto;
+}
+
+textarea {
+    resize: none;
 }

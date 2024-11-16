@@ -1,14 +1,15 @@
-.edit-profile {
+.modal.edit-profile {
     width: 50% !important;
-    height: 60% !important;
-}
-
-.right-halve {
-    flex: 1;
+    height: fit-content !important;
+    padding: var(--defaul-padding);
 }
 
 .left-halve {
     flex: 1;
+}
+
+.left-halve>h3 {
+    font-size: 2rem;
 }
 
 .img-preview {
@@ -36,4 +37,21 @@
     padding: 0.3rem 0.5rem;
     cursor: pointer;
     overflow: hidden;
+}
+
+.right-halve {
+    flex: 1;
+}
+
+.right-halve>form {
+    gap: 0.5rem;
+}
+
+.bio {
+    padding: 0.3rem;
+}
+
+.button {
+   justify-content: flex-end; 
+   gap: 1rem;
 }
