@@ -4,7 +4,7 @@
     --default-yellow: #FDD200;
     --default-dark_yellow: #D5A800;
 
-    --defaul-padding: 1.5em;
+    --default-padding: 1.5em;
 }
 
 * {
@@ -16,6 +16,10 @@
 html,
 body {
     width: 100%;
+}
+
+img {
+    object-fit: cover;
 }
 
 a {

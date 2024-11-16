@@ -61,7 +61,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
                 <!-- Buttons -->
                 <div class="button flex-row">
-                    <button type="submit">CANCEL</button>
+                    <button type="button">CANCEL</button>
                     <button type="submit">SAVE</button>
                 </div>
             </form>

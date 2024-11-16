@@ -3,7 +3,8 @@ import { send_data, test_response } from '../utils/request.js'
 const edit_profile_modal = document.querySelector('#edit_profile_modal')
 const edit_profile_btn = document.querySelector('#edit_profile_btn')
 
-const img_preview = document.querySelector('.img_preview.circle')
+const img_preview = document.querySelector('.img-preview.circle')
+const img_picker_btn = document.querySelector('#img_picker_btn')
 const img_picker = document.querySelector('#img_picker')
 
 
@@ -18,8 +19,13 @@ edit_profile_modal.onclick = (e) => {
     }
 }
 
+// Use button element to toggle file pick
+img_picker_btn.onclick = () => {
+    img_picker.click()
+}
+
 img_picker.onchange = () => {
     if (img_picker.files && img_picker.files[0]) {
-        img_preview.src = URL.createObjectURL(img_preview.files[0])
+        img_preview.src = URL.createObjectURL(img_picker.files[0])
     }
 }

@@ -13,7 +13,7 @@
 }
 
 .img-preview {
-    margin-right: 1rem
+    margin-right: 1rem;
 }
 
 .img-button-wrapper {
@@ -29,24 +29,12 @@
     padding: 0.5em;
     border-radius: 5px;
 }
-/*
+
 .file-input {
     position: relative;
     height: fit-content;
     overflow: hidden;
 } 
-
-/* .file-input input[type="file"] {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-}
-
-.file-input label {
-    display: inline-block;
-    padding: 0.3rem 0.5rem;
-    cursor: pointer;
-}
 
 .right-halve {
     flex: 1;
