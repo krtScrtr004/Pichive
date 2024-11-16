@@ -31,32 +31,38 @@ if (!$data) {
     ));
     exit();
 }
-$error = [];
 
 $password_result = validate_password($data['new_password']);
 if ($password_result !== true) {
-    $error['password'] = $password_result;
+    echo json_encode(array(
+        'status' => 'fail',
+        'message' => $password_result
+    ));
 }
 
 if ($data['new_password'] !== $data['c_password']) {
-    $error['c_password'] = 'Passwords do not match';
-}
-
-if (!empty($error)) {
     echo json_encode(array(
         'status' => 'fail',
-        'errors' => $error
+        'message' => 'Passwords do not match!'
     ));
     exit();
 }
 
 try {
+    $id = isset($data['id']) ?? $_SESSION['user-id'] ?? null;
+    if (!$id) {
+        echo json_encode(array(
+            'status' => 'fail',
+            'message' => 'User not found!'
+        ));
+        exit();
+    }
+
     $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
     $query->execute(array(
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
-        ':id' => encode_uuid($data['id'])
+        ':id' => encode_uuid($id)
     ));
-
     echo json_encode(array(
         'status' => 'success',
         'message' => 'Password updated successfully!'
