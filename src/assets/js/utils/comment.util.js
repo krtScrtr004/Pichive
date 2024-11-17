@@ -79,7 +79,7 @@ export async function fetch_post_comments(img_source) {
 			}
 		}
 
-		display_comments_in_batches(img_source.getAttribute('data-id'), data['data'])
+		display_comments_in_batches(img_source.getAttribute('data-id'), response['data'])
         return {
             status: true,
             message: 'Comments fetched successfully!',

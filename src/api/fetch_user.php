@@ -4,11 +4,6 @@ require_once '../config/session.php';
 include_once '../utils/uuid.php';
 include_once '../utils/echo_result.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit();
-}
-
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo_fail('Invalid request!');
 }

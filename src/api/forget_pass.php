@@ -20,7 +20,7 @@ include_once '../utils/authenticate_user.php';
 include_once '../utils/echo_result.php';
 
 $otp = generate_otp();
-
+    
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo_fail('Invalid request!');
 }
