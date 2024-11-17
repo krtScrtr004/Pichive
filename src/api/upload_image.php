@@ -5,29 +5,20 @@ include_once '../utils/request.php';
 include_once '../utils/post.util.php';
 include_once '../utils/uuid.php';
 include_once '../utils/validation.php';
+include_once '../utils/echo_result.php';
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Unauthorized access!'
-    ));
-    exit();
+
+if (!isset($_SESSION['user_id'])) {
+    echo_fail('Unauthorized access!');
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
-$image_result = validate_image($_FILES['image'] ?? null); 
-if ($image_result !== true) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $image_result
-    ));
+$data = json_decode(file_get_contents("php://input"), true);
+if (!$data) {
+    echo_fail('Data cannot be parsed!');
 }
 
 try {
@@ -64,13 +55,7 @@ try {
         'likes' => 0
     ));
 
-    echo json_encode(array(
-        'status' => 'success',
-        'message' => 'Image uploaded successfully!',
-    ));
+    echo_success('Image uploaded successfully!');
 } catch (Exception $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $e->getMessage()
-    ));
+    echo_fail($e->getMessage());
 }

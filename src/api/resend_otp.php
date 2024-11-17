@@ -2,40 +2,26 @@
 
 include_once '../utils/authenticate_user.php';
 include_once '../utils/forget_pass.util.php';
+include_once '../utils/echo_result.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
 
 try {
     $search_user = authenticate_email($data['email']);
     if (!$search_user) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Email not found!'
-        ));
-        exit();
+        echo_fail('Email not found!');
     }
 
     if (!search_existing_record($search_user['id'])) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'User record not found!'
-        ));
-        exit();
+        echo_fail('User record not found!');
     }
 
     $otp = generate_otp();
@@ -51,9 +37,5 @@ try {
         'otp_code' => $otp
     ));
 } catch (PDOException $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $e->getMessage()
-    ));
-    exit();
+    echo_fail($e->getMessage());
 }

@@ -1,17 +1,20 @@
 <?php
 
-function echo_success($message) {
+function echo_success($message, $data = null)
+{
     echo json_encode(array(
-        'success' => 'success',
-        'message' => $message
+        'status' => 'success',
+        'message' => $message,
+        'data' => $data
     ));
-    exit();
-}
+};
 
-function echo_fail($message) {
+function echo_fail($message, $error = null)
+{
     echo json_encode(array(
-        'error' => 'fail',
-       'message' => $message
+        'status' => 'fail',
+        'message' => $message,
+        'error' => $error
     ));
     exit();
 }

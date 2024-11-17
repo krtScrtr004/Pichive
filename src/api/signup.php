@@ -16,25 +16,18 @@ require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/authenticate_user.php';
 include_once '../utils/uuid.php';
+include_once '../utils/echo_result.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
 
 $error = [];
-
 try {
     $username_result = validate_username($data['username']);
     if ($username_result !== true) {
@@ -68,11 +61,7 @@ try {
     }
 
     if (!empty($error)) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'error' => $error
-        ));
-        exit();
+        echo_fail('Signup failed!', $error);
     }
 
     $uuid =  generate_uuid();
@@ -92,16 +81,10 @@ try {
         ':email' => $data['email'],
         ':password' => password_hash($data['password'], PASSWORD_DEFAULT)
     ));
-    echo json_encode(array(
-        'status' => 'success',
-        'message' => 'Account successfully signed up'
-    ));
 
     $_SESSION['user_id'] = parse_uuid($uuid);
     $_SESSION['user_email'] = $data['email'];
+    echo_success('Account successfully signed up');
 } catch (PDOException $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $e->getMessage()
-    ));
+    echo_fail($e->getMessage());
 }

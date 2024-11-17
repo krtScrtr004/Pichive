@@ -2,18 +2,16 @@
 require_once '../config/database.php';
 require_once '../config/session.php';
 include_once '../utils/uuid.php';
+include_once '../utils/echo_result.php';
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
+
+if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $content_type = htmlspecialchars($_GET['content_type']) ?? 'home';
@@ -92,14 +90,7 @@ try {
     }
     unset($value);
 
-    echo json_encode(array(
-        'status' => 'success',
-        'message' => 'Successfully retrieved post data!',
-        'data' => $result
-    ));
+    echo_success('Successfully retrieved post data!', $result);
 } catch (PDOException $e) {
-    echo  json_encode(array(
-        'status' => 'fail',
-        'message' => $e->getMessage()
-    ));
+    echo_fail($e->getMessage());
 }

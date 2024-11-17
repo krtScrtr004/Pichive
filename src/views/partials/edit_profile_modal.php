@@ -14,6 +14,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 <div class="modal-wrapper" id="edit_profile_modal">
     <span class="result"></span>
     <section class="modal edit-profile light-background dark-text">
+        <span class="result"></span>
+
         <!-- Right halve side -->
         <div class="left-halve flex-column">
             <h3>EDIT PROFILE INFORMATION</h3>
@@ -32,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
         <!-- Left halve side -->
         <div class="right-halve flex-column">
-            <form class="flex-column" action="" method="POST">
+            <form id="edit_profile_form" class="flex-column" action="" method="POST">
                 <!-- Username -->
                 <div class="input-wrapper flex-column">
                     <label for="username">Username</label>

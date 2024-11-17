@@ -12,25 +12,18 @@
 
 require_once '../config/load_env.php';
 require '../../vendor/autoload.php';
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
-}
+include_once '../utils/echo_result.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo_fail('Invalid request!');
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
 
 //Create an instance; passing `true` enables exceptions
@@ -61,13 +54,7 @@ try {
     $mail->AltBody = 'One Time Password for password reset';
 
     $mail->send();
-    echo json_encode(array(
-       'status' =>'success',
-       'message' => 'OTP sent successfully!'
-    ));
+    echo_success('OTP sent successfully!');
 } catch (Exception $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Message could not be sent. Mailer Error: ' . $e->getMessage(),
-    ));
+    echo_fail('Message could not be sent. Mailer Error: ' . $e->getMessage());
 }

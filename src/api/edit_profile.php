@@ -1,10 +1,17 @@
 <?php
 
 require_once '../config/database.php';
+require_once '../config/session.php';
+
 include_once '../utils/uuid.php';
 include_once '../utils/request.php';
+include_once '../utils/authenticate_user.php';
 include_once '../utils/validation.php';
 include_once '../utils/echo_result.php';
+
+if (!isset($_SESSION['user_id'])) {
+    echo_fail('Unauthorized user!');
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo_fail('Invalid request!');
@@ -20,15 +27,15 @@ try {
         } else {
             $search_duplicate_username = authenticate_username($_POST['username']);
             if ($search_duplicate_username) {
-                echo_fail('Username already exists!');
                 $pdo->rollBack();
+                echo_fail('Username already exists!');
             }
         }
 
         $username_query = $pdo->prepare('UPDATE user SET username = :username WHERE id = :id');
         $username_query->execute(array(
-            ':username' => htmlspecialchars($_POST['username']),
-            ':id' => $_SESSION['user_id']
+            ':username' => $_POST['username'],
+            ':id' => encode_uuid($_SESSION['user_id'])
         ));
     }
     if (isset($_POST['password'])) {
@@ -40,8 +47,8 @@ try {
 
         $password_query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
         $password_query->execute(array(
-            ':password' => $_POST['password'],
-            ':id' => $_SESSION['user_id']
+            ':password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+            ':id' => encode_uuid($_SESSION['user_id'])
         ));
     }
     if (isset($_POST['bio'])) {
@@ -53,8 +60,8 @@ try {
 
         $bio_query = $pdo->prepare('UPDATE user SET bio = :bio WHERE id = :id');
         $bio_query->execute(array(
-            ':password' => $_POST['bio'],
-            ':id' => $_SESSION['user_id']
+            ':bio' => $_POST['bio'],
+            ':id' => encode_uuid($_SESSION['user_id'])
         ));
     }
     if (isset($_FILES['profile_img'])) {
@@ -83,7 +90,7 @@ try {
         $profile_query = $pdo->prepare('UPDATE user SET profile_url = :profile_url WHERE id = :id');
         $profile_query->execute(array(
             ':profile_url' => $response->data->image->url,
-            ':id' => $_SESSION['user_id']
+            ':id' => encode_uuid($_SESSION['user_id'])
         ));
     }
 

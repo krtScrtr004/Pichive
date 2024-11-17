@@ -14,38 +14,25 @@
 require_once '../config/database.php';
 include_once '../utils/validation.php';
 include_once '../utils/uuid.php';
+include_once '../utils/echo_result.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
+
 
 $password_result = validate_password($data['new_password']);
 if ($password_result !== true) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $password_result
-    ));
+    echo_fail($password_result);
 }
 
 if ($data['new_password'] !== $data['c_password']) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Passwords do not match!'
-    ));
-    exit();
+    echo_fail('Passwords do not match!');
 }
 
 try {
@@ -54,13 +41,7 @@ try {
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
         ':id' => encode_uuid($data['id'] ?? null)
     ));
-    echo json_encode(array(
-        'status' => 'success',
-        'message' => 'Password updated successfully!'
-    ));
+    echo_success('Password updated successfully!');
 } catch (PDOException $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'error' => $e->getMessage()
-    ));
+    echo json_encode($e->getMessage());
 }

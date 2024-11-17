@@ -12,32 +12,21 @@
 require_once '../config/database.php';
 include_once '../utils/uuid.php';
 include_once '../utils/forget_pass.util.php';
+include_once '../utils/echo_result.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
 
 try {
     $existing_record = search_existing_record($data['id'], $data['otp_code']);
     if (!$existing_record) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Invalid OTP and/or user not found!'
-        ));
-        exit();
+        echo_fail('Invalid OTP and/or user not found!');
     }
 
     $current_time = new DateTime();
@@ -45,19 +34,12 @@ try {
     $time_difference = $current_time->getTimestamp() - $record_time->getTimestamp();
     // Check if 5 minutes have passed
     if ($time_difference >= 300) {
-        echo json_encode(array(
-            'status' => 'success',
-            'message' => 'Invalid OTP or already expired!'
-        ));
-        exit();
+        echo_fail('Invalid OTP or already expired!');
     }
 
     // Delete otp after use
     delete_otp_record($data['id'] ?? null, $data['otp_code'] ?? null);
-    echo json_encode(array(
-        'status' => 'success',
-        'message' => 'OTP confirmed!'
-    ));
+    echo_success('OTP confirmed!');
 } catch (PDOException $e) {
     echo json_encode(array(
         'status' => 'fail',

@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 						paragraph.textContent = error
 						result.appendChild(paragraph)
 					})
+				} else {
+					result.textContent = response['message']
 				}
 				return
 			}

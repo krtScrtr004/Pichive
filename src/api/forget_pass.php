@@ -17,52 +17,33 @@ include_once '../utils/uuid.php';
 include_once '../utils/request.php';
 include_once '../utils/forget_pass.util.php';
 include_once '../utils/authenticate_user.php';
+include_once '../utils/echo_result.php';
 
 $otp = generate_otp();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Invalid request!'
-    ));
-    exit();
+    echo_fail('Invalid request!');
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Data cannot be parsed!'
-    ));
-    exit();
+    echo_fail('Data cannot be parsed!');
 }
 
 $email_result = validate_email($data['email']);
 if ($email_result !== true) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $email_result
-    ));
-    exit();
+    echo_fail($email_result);
 }
 
 try {
     $search_user = authenticate_email($data['email']);
     if (!$search_user) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'Email not found!'
-        ));
-        exit();
+        echo_fail('Email not found!');
     }
 
     // Search existing otp in user inbox
     if (search_existing_record($search_user['id'])) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'An OTP has already been sent to this email!'
-        ));
-        exit();
+        echo_fail('An OTP has already been sent to this email!');
     }
 
     // Send OTP to the user via gmail
@@ -76,11 +57,7 @@ try {
         !isset($response->status) ||
         $response->status === 'fail'
     ) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => $response['message'] ?? 'Data cannot be processed!'
-        ));
-        exit();
+        echo_fail($response['message'] ?? 'Data cannot be processed!');
     }
 
     // Insert otp with user_id to db
@@ -96,9 +73,5 @@ try {
         'otp_code' => $otp
     ));
 } catch (PDOException $e) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => $e->getMessage()
-    ));
-    exit();
+    echo_fail($e->getMessage());
 }
