@@ -49,19 +49,10 @@ if ($data['new_password'] !== $data['c_password']) {
 }
 
 try {
-    $id = isset($data['id']) ?? $_SESSION['user-id'] ?? null;
-    if (!$id) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => 'User not found!'
-        ));
-        exit();
-    }
-
     $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
     $query->execute(array(
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
-        ':id' => encode_uuid($id)
+        ':id' => encode_uuid($data['id'] ?? null)
     ));
     echo json_encode(array(
         'status' => 'success',

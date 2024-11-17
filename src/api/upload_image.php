@@ -4,6 +4,7 @@ require_once '../config/session.php';
 include_once '../utils/request.php';
 include_once '../utils/post.util.php';
 include_once '../utils/uuid.php';
+include_once '../utils/validation.php';
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     echo json_encode(array(
@@ -21,29 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-if (!isset($_FILES['image'])) {
+$image_result = validate_image($_FILES['image'] ?? null); 
+if ($image_result !== true) {
     echo json_encode(array(
         'status' => 'fail',
-        'message' => 'No image file provided!'
+        'message' => $image_result
     ));
-    exit();
-}
-
-if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-    echo json_encode(array(
-        'status' => 'fail',
-        'message' => 'Error uploading image: ' . $_FILES['image']['error']
-    ));
-    exit();
 }
 
 try {
     $file_path = $_FILES['image']['tmp_name'];
-
     // Read the binary content of the image and base64 encode it
     $image_encoded = base64_encode(file_get_contents($file_path));
-
-
     $response = send_file('https://api.imgbb.com/1/upload', array(
         'key' => $_ENV['IMGBB_API'],
         'title' => $_POST['title'],

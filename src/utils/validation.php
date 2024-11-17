@@ -38,8 +38,11 @@ function validate_password($password)
     if (!$password) {
         return 'Password is not defined';
     }
-    if (strlen($password) < 8 || strlen($password) > 128) {
-        return 'Username must be between 3 and 128 characters long';
+
+    $min_len = 8;
+    $max_len = 128;
+    if (strlen($password) < $min_len || strlen($password) > $max_len) {
+        return "Username must be between $min_len and $max_len characters long";
     }
     if (!preg_match('/[A-Z]/', $password)) {
         return 'Password must contain at least one uppercase letter';
@@ -53,14 +56,16 @@ function validate_password($password)
     if (!preg_match('/[\W_]/', $password)) { // \W matches any "non-word" character
         return 'Password must contain at least one special character';
     }
+    
     return true;
 }
 
 function validate_bio($bio) {
-    $max_len = 300;
     if (!$bio) {
         return 'Bio is not defined';
     }
+
+    $max_len = 300;
     if (empty(trim($bio))) {
         return 'Bio cannot be empty.';
     }

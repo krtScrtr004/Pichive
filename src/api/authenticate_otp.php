@@ -53,7 +53,7 @@ try {
     }
 
     // Delete otp after use
-    delete_otp_record($data['id'], $data['otp_code']);
+    delete_otp_record($data['id'] ?? null, $data['otp_code'] ?? null);
     echo json_encode(array(
         'status' => 'success',
         'message' => 'OTP confirmed!'
