@@ -49,22 +49,25 @@ if (
 
                         <div class="buttons">
                             <button id="edit_profile_btn" type="submit">Edit Profile</button>
-                            <button id="upload-img-btn" type="submit">Upload</button>
+                            <button id="upload_img_btn" type="submit">Upload</button>
                         </div>
                         <p id="user_bio" class="bio"></p>
                     </section>
                 </div>
 
-                <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"  data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
+                <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>" data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
             </section>
 
             <div class="loading">Loading more images...</div>
         </main>
     </section>
 
+    <script type="module" src="../assets/js/event/create_post.js"></script>
     <script type="module" src="../assets/js/event/fetch_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
+    <script type="module" src="../assets/js/event/comment.js"></script>
+
 </body>
 
 </html>

@@ -69,4 +69,3 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     </section>
 </div>
 
-<script type="module" src="../assets/js/event/edit_profile.js"></script>

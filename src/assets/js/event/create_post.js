@@ -7,6 +7,7 @@ const image_picker = document.querySelector('#file_picker')
 const image_preview = document.querySelector('.img-preview')
 const description = document.querySelector('#description')
 const post_btn = document.querySelector('#post_btn')
+const upload_img_btn = document.querySelector('#upload_img_btn')
 const cancel_btn = document.querySelector('#cancel_btn')
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (image_picker.files && image_picker.files[0]) {
 			image_preview.src = URL.createObjectURL(image_picker.files[0])
 		}
+	}
+
+	// For Profile page
+	upload_img_btn.onclick = () => {
+		form.showPopover()
 	}
 
 	post_btn.onclick = async (e) => {

@@ -71,5 +71,3 @@
     </section>
 </div>
 
-<script type="module" src="../assets/js/event/fetch_post.js"></script>
-<script type="module" src="../assets/js/event/comment.js"></script>

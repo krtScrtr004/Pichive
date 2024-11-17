@@ -3,9 +3,11 @@ require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
 
-if (!isset($_SESSION['user_id']) || 
+if (
+    !isset($_SESSION['user_id']) ||
     !isset($_SESSION['user_email']) ||
-    !isset($_GET['page'])) {
+    !isset($_GET['page'])
+) {
     header('Location: index.php');
     exit();
 }
@@ -58,6 +60,7 @@ if (!isset($_SESSION['user_id']) ||
 </style> -->
 
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
+
 <body class="wrapper flex-row" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 
@@ -73,7 +76,10 @@ if (!isset($_SESSION['user_id']) ||
         </main>
     </section>
 
+    <script type="module" src="../assets/js/event/create_post.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
+    <script type="module" src="../assets/js/event/comment.js"></script>
+
 </body>
 
 </html>
