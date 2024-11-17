@@ -42,15 +42,15 @@ if (
                     <img id="profile_img" class="circle" src="../assets/img/icons/Dark/Profile.svg" alt="Profile Image" width="250" height="250">
 
                     <section class="profile-texts">
-                        <span class="user-info">
+                        <div class="user-info">
                             <h4 id="username" class="username"></h4>
                             <h6 id="user_id" class="user-id"></h6>
-                        </span>
-                        // TODO: 
-                        <span class="buttons">
+                        </div>
+
+                        <div class="buttons">
                             <button id="edit_profile_btn" type="submit">Edit Profile</button>
                             <button id="upload-img-btn" type="submit">Upload</button>
-                        </span>
+                        </div>
                         <p id="user_bio" class="bio"></p>
                     </section>
                 </div>

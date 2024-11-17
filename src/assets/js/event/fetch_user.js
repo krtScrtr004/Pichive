@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const profile_details = document.querySelector('.profile-details');
 
     const profile_img = document.querySelector('#profile_img');
-    const username =  document.querySelector('#username');
-    const user_id = document.querySelector('#user_id');
+    const username =  document.querySelector('.user-info #username');
+    const user_id = document.querySelector('.user-info #user_id');
     const user_bio = document.querySelector('#user_bio');
 
     try {
