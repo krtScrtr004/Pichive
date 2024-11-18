@@ -15,6 +15,10 @@ if (!isset($_SESSION['user_id']) ||
 <link rel="stylesheet" href="../assets/style/nav.css">
 
 <aside data-content="main">
+    <section class="logo">
+        <img src="../assets/img/logo/logo_light.svg" alt="Pichive logo" width="400" height="150">
+    </section>
+
     <section class="upper-halve">
         <ul class="list-wrapper">
             <!-- Home Page -->
@@ -55,7 +59,7 @@ if (!isset($_SESSION['user_id']) ||
         </ul>
     </section>
 
-    <hr class="halve-divider">
+    <hr class="halve-divider light-text">
 
     <section class="lower-halve">
         <h4 class="halve-title">Followed Users</h4>

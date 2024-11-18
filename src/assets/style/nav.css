@@ -1,6 +1,16 @@
+.logo {
+    width: 100%;
+    padding: 0 0 var(--default-padding) 0;
+}
+
+.logo>img {
+    width: fit-content;
+    height: 2rem;
+    object-fit: contain;
+}
+
 .halve-divider {
     width: 100%;
-    color: var(--default-white);
 }
 
 .upper-halve {

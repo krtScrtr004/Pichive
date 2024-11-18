@@ -26,41 +26,7 @@ if (
     <link rel="stylesheet" href="../assets/style/modal.css">
 </head>
 
-<!-- <style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    html,
-    body {
-        width: 100%;
-    }
-
-    .wrapper {
-        width: 100%;
-        display: flex;
-    }
-
-
-    .modal {
-        width: 80%;
-        height: 70%;
-        display: flex;
-        z-index: 100;
-        overflow: hidden auto;
-    }
-
-    .show_modal {
-        display: flex !important;
-    }
-
-
-</style> -->
-
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
-
 <body class="wrapper flex-row" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 

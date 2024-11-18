@@ -8,18 +8,66 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo_fail('Invalid request!');
 }
 
-$id = $_GET['id'] ?? $_SESSION['user_id'];
 try {
-    $query = $pdo->prepare('SELECT * FROM user WHERE id = :id');
-    $query->execute(array(
-        ':id' => encode_uuid($id),
-    ));
-    $result = $query->fetch();
-    if (!$result) {
-       echo_fail('User not found!');
+    $query = $result = null;
+    $id = $_GET['id'] ?? $_SESSION['user_id'];
+
+    if (isset($_GET['relation']) && $_GET['relation']) {
+        // Get all user accord to relation
+        if ($_GET['relation'] === 'followed') {
+            // Get user followed users
+            $query = $pdo->prepare('SELECT
+                                        u.id,
+                                        u.username,
+                                        u.profile_url,
+                                        u.bio
+                                    FROM
+                                        user AS u
+                                    INNER JOIN
+                                        follow AS f
+                                    ON
+                                        u.id = f.their_id
+                                    WHERE 
+                                        f.my_id = :id');
+            $query->execute(array(
+                ':id' => encode_uuid($id),
+            ));
+        } else if ($_GET['relation'] === "follower") {
+            // Get user followers
+            $query = $pdo->prepare('SELECT
+                                        u.id,
+                                        u.username,
+                                        u.profile_url,
+                                        u.bio
+                                    FROM
+                                        user AS u
+                                    INNER JOIN
+                                        follow AS f
+                                    ON
+                                        u.id = f.my_id
+                                    WHERE 
+                                        f.their_id = :id');
+            $query->execute(array(
+                ':id' => encode_uuid($id),
+            ));
+        }
+        $result = $query->fetchAll();
+    } else {
+         // Get sppecific user info
+         $query = $pdo->prepare('SELECT * FROM user WHERE id = :id');
+         $query->execute(array(
+             ':id' => encode_uuid($id),
+         ));
+         $result = $query->fetch();
     }
 
-    $result['id'] = parse_uuid($result['id']);
+    if (!$result) {
+        echo_fail('User not found!');
+    }
+
+    foreach ($result as $key => $value) {
+        $result['id'] = parse_uuid($result['id']);
+    }
     echo_success('Successfully retrieved user data!', $result);
 } catch (PDOException $e) {
     echo_fail($e->getMessage());

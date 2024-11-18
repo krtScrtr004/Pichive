@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const response  = await get_data(`../api/fetch_user.php?id=${profile_details.getAttribute('data-id')}`);
-
         const test = test_response(response)
         if (!test) {
 			result_box.innerHTML = test['message']
