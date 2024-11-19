@@ -17,10 +17,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			return
 		}
 
-        profile_img.src = response['data']['img_url'] ?? '../assets/img/default_img_prev.png'
-        username.textContent = response['data']['username']
-        user_id.textContent = response['data']['id'] ?? '00000'
-        user_bio.textContent = response['data']['bio'] ?? 'No bio available'
+        const data = response['data'][0]
+        profile_img.src = data['profile_url'] ?? '../assets/img/default_img_prev.png'
+        username.textContent = data['username']
+        user_id.textContent = data['id'] ?? '00000'
+        user_bio.textContent = data['bio'] ?? 'No bio available'
     } catch (error) {
         result_box.innerHTML = error['message']
     }

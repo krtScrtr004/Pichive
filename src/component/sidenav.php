@@ -63,12 +63,10 @@ if (!isset($_SESSION['user_id']) ||
 
     <section class="lower-halve">
         <h4 class="halve-title">Followed Users</h4>
-        <ul>
-            <li class="link-wrapper">
-                <a class="nav-link" href="#">
-                    <img class="circle" src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
-                    <h3>Username</h3>
-                </a>
-            </li>
+        <span class="sidenav-result"></span>
+        
+        <ul id="following_user_list">
+            <!-- Followed User List -->
+        </ul>
     </section>
 </aside>

@@ -58,15 +58,15 @@ try {
          $query->execute(array(
              ':id' => encode_uuid($id),
          ));
-         $result = $query->fetch();
+         $result = $query->fetchAll();
     }
 
     if (!$result) {
         echo_fail('User not found!');
     }
 
-    foreach ($result as $key => $value) {
-        $result['id'] = parse_uuid($result['id']);
+    foreach ($result as $key => &$value) {
+        $value['id'] = parse_uuid($value['id']);
     }
     echo_success('Successfully retrieved user data!', $result);
 } catch (PDOException $e) {

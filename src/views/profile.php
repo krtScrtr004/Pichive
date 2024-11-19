@@ -63,6 +63,7 @@ if (
     </section>
 
     <script type="module" src="../assets/js/event/create_post.js"></script>
+    <script type="module" src="../assets/js/event/fetch_sidenav_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
