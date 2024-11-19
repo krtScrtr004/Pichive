@@ -40,7 +40,7 @@ export async function load_posts() {
 		}
 
 		const data = response['data']
-		if (data.length === 0) {
+		if (!data) {
 			center.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
 			is_loading = false

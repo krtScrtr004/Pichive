@@ -1,10 +1,12 @@
-<?php 
+<?php
 require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
 
-if (!isset($_SESSION['user_id']) || 
-    !isset($_SESSION['user_email'])) {
+if (
+    !isset($_SESSION['user_id']) ||
+    !isset($_SESSION['user_email'])
+) {
     header('Location: index.php');
     exit();
 }
@@ -16,7 +18,9 @@ if (!isset($_SESSION['user_id']) ||
 
 <aside data-content="main">
     <section class="logo">
-        <img src="../assets/img/logo/logo_light.svg" alt="Pichive logo" width="400" height="150">
+        <a href="../views/home_explore.php?page=home">
+            <img src="../assets/img/logo/logo_light.svg" alt="Pichive logo" width="400" height="150">
+        </a>
     </section>
 
     <section class="upper-halve">
@@ -64,7 +68,7 @@ if (!isset($_SESSION['user_id']) ||
     <section class="lower-halve">
         <h4 class="halve-title">Followed Users</h4>
         <span class="sidenav-result"></span>
-        
+
         <ul id="following_user_list">
             <!-- Followed User List -->
         </ul>
