@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 					return
 				}
 
+                if (body.getAttribute('data-followed') === '0') {
+                    follow_user_btn.innerHTML = 'Unfollow'
+                } else {
+                    follow_user_btn.innerHTML = 'Follow'
+                }
+
 				result_box.innerHTML = response['message']
 			} catch (error) {
 				result_box.innerHTML = error['message']
@@ -38,6 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 					result_box.innerHTML = test['message']
 					return
 				}
+
+                follow_user_btn.innerHTML = 'Follow'
+                if (body.getAttribute('data-blocked') === '0') {
+                    follow_user_btn.disabled = true 
+                    block_user_btn.innerHTML = 'Unblock'    
+                    body.setAttribute('data-followed', 0)   
+                    body.setAttribute('data-blocked', 1)   
+                } else {
+                    follow_user_btn.disabled = false    
+                    block_user_btn.innerHTML = 'Block'    
+                    body.setAttribute('data-blocked', 0)   
+                }
 
 				result_box.innerHTML = response['message']
 			} catch (error) {
