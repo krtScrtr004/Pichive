@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 
         const data = response['data']
-        if (!data) {
+        if (data.length === 0) {
             sidenav_result.innerHTML = 'You have no followed users.'
             return
         }

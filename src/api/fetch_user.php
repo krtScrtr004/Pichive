@@ -61,10 +61,6 @@ try {
          $result = $query->fetchAll();
     }
 
-    if (!$result) {
-        echo_fail('User not found!');
-    }
-
     foreach ($result as $key => &$value) {
         $value['id'] = parse_uuid($value['id']);
     }
