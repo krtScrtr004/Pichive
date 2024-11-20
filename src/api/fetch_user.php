@@ -27,7 +27,7 @@ try {
                                         follow AS f
                                     ON
                                         u.id = f.their_id
-                                    WHERE 
+                                    WHERE
                                         f.my_id = :id');
             $query->execute(array(
                 ':id' => encode_uuid($id),

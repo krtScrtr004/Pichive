@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 try {
     $query = null;
     if ($_GET['has_already_ran'] === 'false') {
-        $query = $pdo->query('SELECT * FROM p_comment ORDER BY likes DESC, date_time DESC');
+        $query = $pdo->query('SELECT * FROM p_comment ORDER BY likes DESC, date_time ASC');
     } else {
-        $query = $pdo->prepare('SELECT * FROM p_comment WHERE date_time = :date_time ORDER BY likes DESC');
+        $query = $pdo->prepare('SELECT * FROM p_comment WHERE date_time = :date_time ORDER BY likes ASC');
         $query->execute(array(
             ':date_time' => (new DateTime())->format('Y-m-d H:i:s')
         ));

@@ -69,7 +69,7 @@ if (
         <h4 class="halve-title">Followed Users</h4>
         <span class="sidenav-result"></span>
 
-        <ul id="following_user_list">
+        <ul id="following_user_list" class="list-wrapper">
             <!-- Followed User List -->
         </ul>
     </section>

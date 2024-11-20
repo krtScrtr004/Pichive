@@ -1,4 +1,5 @@
 import { send_data, test_response } from '../utils/request.js'
+import { listed_followed_user } from '../utils/fetch_sidenav_user.util.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const result_box = document.querySelector('.result-box')
@@ -25,6 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     follow_user_btn.innerHTML = 'Unfollow'
                 } else {
                     follow_user_btn.innerHTML = 'Follow'
+					if (listed_followed_user.has(body.getAttribute('data-id'))) {
+						listed_followed_user.delete(body.getAttribute('data-id'))
+					}
                 }
 
 				result_box.innerHTML = response['message']
@@ -50,7 +54,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     follow_user_btn.disabled = true 
                     block_user_btn.innerHTML = 'Unblock'    
                     body.setAttribute('data-followed', 0)   
-                    body.setAttribute('data-blocked', 1)   
+                    body.setAttribute('data-blocked', 1) 
+					if (listed_followed_user.has(body.getAttribute('data-id'))) {
+						listed_followed_user.delete(body.getAttribute('data-id'))
+					}  
                 } else {
                     follow_user_btn.disabled = false    
                     block_user_btn.innerHTML = 'Block'    

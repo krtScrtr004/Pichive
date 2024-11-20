@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	try {
         // Fetch followed users for the first time
-		fetch_followed_user()
+		await fetch_followed_user()
+
         // Fetch followed users every 30 seconds
-		setTimeout(() => {
-			fetch_followed_user()
-		}, 30000)
+		setTimeout(async () => {
+			await fetch_followed_user()
+		}, 5000)
 	} catch (error) {
 		sidenav_result.innerHTML = error['message']
 	}
