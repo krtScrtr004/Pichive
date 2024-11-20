@@ -31,11 +31,19 @@ try {
     }
 
     if (!$data['is_blocked']) {
-        $query = $pdo->prepare('INSERT INTO block(my_id, their_id) VALUES(:my_id, :their_id)');
-        $query->execute([
+        $block_query = $pdo->prepare('INSERT INTO block(my_id, their_id) VALUES(:my_id, :their_id)');
+        $block_query->execute([
             ':my_id' => encode_uuid($_SESSION['user_id']),
             ':their_id' => encode_uuid($data['id'])
         ]);
+
+        // Unfollow user if they already followed
+        $delete_query = $pdo->prepare('DELETE FROM follow WHERE my_id = :my_id AND their_id = :their_id');
+        $delete_query->execute([
+            ':my_id' => encode_uuid($_SESSION['user_id']),
+            ':their_id' => encode_uuid($data['id'])
+        ]);
+
         echo_success('User blocked successfully!');    
     } else {
         $query = $pdo->prepare('DELETE FROM block WHERE my_id = :my_id AND their_id = :their_id');
