@@ -9,15 +9,15 @@ include_once '../utils/authenticate_user.php';
 include_once '../utils/validation.php';
 include_once '../utils/echo_result.php';
 
-if (!isset($_SESSION['user_id'])) {
-    echo_fail('Unauthorized user!');
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
 try {
+    if (!isset($_SESSION['user_id'])) {
+        throw new Error('Unauthorized user!');
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Error('Invalid request!');
+    }    
+
     $pdo->beginTransaction();
     if (isset($_POST['username'])) {
         $username_result = validate_username($_POST['username']);
@@ -28,7 +28,7 @@ try {
             $search_duplicate_username = authenticate_username($_POST['username']);
             if ($search_duplicate_username) {
                 $pdo->rollBack();
-                echo_fail('Username already exists!');
+                throw new Error('Username already exists!');
             }
         }
 
@@ -55,7 +55,7 @@ try {
         $bio_result = validate_bio($_POST['bio']);
         if ($bio_result !== true) {
             $pdo->rollBack();
-            echo_fail($bio_result);
+            throw new Error($bio_result);
         }
 
         $bio_query = $pdo->prepare('UPDATE user SET bio = :bio WHERE id = :id');
@@ -68,7 +68,7 @@ try {
         $profile_img_result = validate_image($_FILES['profile_img']);
         if ($profile_img_result !== true) {
             $pdo->rollBack();
-            echo_fail($profile_img_result);
+            throw new Error($profile_img_result);
         }
 
         $file_path = $_FILES['profile_img']['tmp_name'];
@@ -84,7 +84,7 @@ try {
             $response->status === 'fail'
         ) {
             $pdo->rollBack();
-            echo_fail($response['message'] ?? 'Data cannot be processed!');
+            throw new Error($response['message'] ?? 'Data cannot be processed!');
         }
     
         $profile_query = $pdo->prepare('UPDATE user SET profile_url = :profile_url WHERE id = :id');
@@ -96,7 +96,7 @@ try {
 
     $pdo->commit();
     echo_success('Profile information updated successfully!');
-} catch (PDOException $e) {
+} catch (Exception $e) {
     $pdo->rollBack();
     echo_fail($e->getMessage());
 }

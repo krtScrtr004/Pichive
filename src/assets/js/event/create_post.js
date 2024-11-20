@@ -1,16 +1,16 @@
 import { send_file, test_response } from '../utils/request.js'
 
-const form = document.querySelector('#create_post_modal')
-const result_box = document.querySelector('.result_box')
-const title = document.querySelector('#title')
-const image_picker = document.querySelector('#file_picker')
-const image_preview = document.querySelector('.img-preview')
-const description = document.querySelector('#description')
-const post_btn = document.querySelector('#post_btn')
-const upload_img_btn = document.querySelector('#upload_img_btn')
-const cancel_btn = document.querySelector('#cancel_btn')
-
 document.addEventListener('DOMContentLoaded', () => {
+	const form = document.querySelector('#create_post_modal')
+	const result_box = document.querySelector('.result_box')
+	const title = document.querySelector('#title')
+	const image_picker = document.querySelector('#file_picker')
+	const image_preview = document.querySelector('.img-preview')
+	const description = document.querySelector('#description')
+	const post_btn = document.querySelector('#post_btn')
+	const upload_img_btn = document.querySelector('#upload_img_btn')
+	const cancel_btn = document.querySelector('#cancel_btn')
+
 	// Dynamically change image preiew when user select another image
 	image_picker.onchange = () => {
 		if (image_picker.files && image_picker.files[0]) {
@@ -19,8 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// For Profile page
-	upload_img_btn.onclick = () => {
-		form.showPopover()
+	if (upload_img_btn) {
+		upload_img_btn.onclick = () => {
+			form.showPopover()
+		}
 	}
 
 	post_btn.onclick = async (e) => {

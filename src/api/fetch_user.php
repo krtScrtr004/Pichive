@@ -51,16 +51,42 @@ try {
                 ':id' => encode_uuid($id),
             ));
         }
-        $result = $query->fetchAll();
     } else {
-         // Get sppecific user info
-         $query = $pdo->prepare('SELECT * FROM user WHERE id = :id');
-         $query->execute(array(
-             ':id' => encode_uuid($id),
-         ));
-         $result = $query->fetchAll();
+        // Get sppecific user info
+
+        if ($id === $_SESSION['user_id']) {
+            // Get user own information
+            $query = $pdo->prepare('SELECT * FROM user WHERE id = :id');
+            $query->execute(array(
+                ':id' => encode_uuid($id),
+            ));
+        } else {
+            // Get other user information
+            $query = $pdo->prepare('SELECT 
+                                        u.id,
+                                        u.username,
+                                        u.profile_url,
+                                        u.bio,
+                                        CASE 
+                                            WHEN f.my_id IS NOT NULL THEN 1
+                                            ELSE 0
+                                        END AS is_followed
+                                    FROM 
+                                        user u
+                                    LEFT JOIN 
+                                        follow f
+                                    ON 
+                                        u.id = f.their_id AND f.my_id = :my_id
+                                    WHERE 
+                                        u.id = :id');
+            $query->execute(array(
+                ':my_id' => encode_uuid($_SESSION['user_id']),
+                ':id' => encode_uuid($id)
+            ));
+        }
     }
 
+    $result = $query->fetchAll();
     foreach ($result as $key => &$value) {
         $value['id'] = parse_uuid($value['id']);
     }

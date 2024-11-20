@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const save_btn = document.querySelector('#edit_profile_modal  #save_btn')
 	const cancel_btn = document.querySelector('#edit_profile_modal #cancel_btn')
 
-	edit_profile_btn.onclick = (e) => {
-		e.preventDefault()
-		edit_profile_modal.classList.add('show-modal')
+	if (edit_profile_btn) {
+		edit_profile_btn.onclick = (e) => {
+			e.preventDefault()
+			edit_profile_modal.classList.add('show-modal')
+		}
 	}
 
 	edit_profile_modal.onclick = (e) => {

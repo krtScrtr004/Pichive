@@ -35,7 +35,7 @@ if (
         <?php include_once '../component/header.php' ?>
 
         <main>
-            <div class="result-box"></div>
+            <span class="result-box"></span>
 
             <section class="main-partition">
                 <div class="profile-details" data-id="<?php echo htmlspecialchars($_GET['id']); ?>">
@@ -48,8 +48,13 @@ if (
                         </div>
 
                         <div class="buttons">
-                            <button id="edit_profile_btn" type="submit">Edit Profile</button>
-                            <button id="upload_img_btn" type="submit">Upload</button>
+                            <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
+                                <button id="edit_profile_btn" type="submit">Edit Profile</button>
+                                <button id="upload_img_btn" type="submit">Upload</button>
+                            <?php else: ?>
+                                <button id="follow_user_btn" type="submit">Follow</button>
+                                <button id="block_user_btn" type="submit">Block</button>                                
+                            <?php endif; ?>
                         </div>
                         <p id="user_bio" class="bio"></p>
                     </section>
@@ -68,6 +73,7 @@ if (
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
+    <script type="module" src="../assets/js/event/follow_block.js"></script>
 
 </body>
 
