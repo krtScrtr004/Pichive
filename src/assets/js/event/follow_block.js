@@ -26,5 +26,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 				result_box.innerHTML = error['message']
 			}
 		}
+
+        block_user_btn.onclick = async () => {
+			try {
+				const response = await send_data('../api/block_user.php', {
+					id: body.getAttribute('data-id'),
+					is_blocked: body.getAttribute('data-blocked'),
+				})
+				const test = test_response(response)
+				if (!test['status']) {
+					result_box.innerHTML = test['message']
+					return
+				}
+
+				result_box.innerHTML = response['message']
+			} catch (error) {
+				result_box.innerHTML = error['message']
+			}
+		}
 	}
 })

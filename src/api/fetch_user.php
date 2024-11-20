@@ -4,11 +4,11 @@ require_once '../config/session.php';
 include_once '../utils/uuid.php';
 include_once '../utils/echo_result.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo_fail('Invalid request!');
-}
-
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        throw new Exception('Invalid request!');
+    }
+    
     $query = $result = null;
     $id = $_GET['id'] ?? $_SESSION['user_id'];
 
@@ -70,13 +70,21 @@ try {
                                         CASE 
                                             WHEN f.my_id IS NOT NULL THEN 1
                                             ELSE 0
-                                        END AS is_followed
+                                        END AS is_followed,
+                                        CASE 
+                                            WHEN b.my_id IS NOT NULL THEN 1
+                                            ELSE 0
+                                        END AS is_blocked
                                     FROM 
                                         user u
                                     LEFT JOIN 
                                         follow f
                                     ON 
                                         u.id = f.their_id AND f.my_id = :my_id
+                                    LEFT JOIN 
+                                        block b
+                                    ON 
+                                        u.id = b.their_id AND b.my_id = :my_id
                                     WHERE 
                                         u.id = :id');
             $query->execute(array(
@@ -91,6 +99,6 @@ try {
         $value['id'] = parse_uuid($value['id']);
     }
     echo_success('Successfully retrieved user data!', $result);
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

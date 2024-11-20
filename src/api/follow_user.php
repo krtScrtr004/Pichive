@@ -9,25 +9,25 @@ include_once '../utils/echo_result.php';
 
 try {
     if (!isset($_SESSION['user_id'])) {
-        throw new Error('Unauthorized user!');
+        throw new Exception('Unauthorized user!');
     }
     
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        throw new Error('Invalid request!');
+        throw new Exception('Invalid request!');
     }   
     
     $data = json_decode(file_get_contents('php://input'), true);
     if (!$data) {
-        throw new Error('Data cannot be parsed!');
+        throw new Exception('Data cannot be parsed!');
     }
 
     if (!isset($data['is_followed'])) {
-        throw new Error("Missing required parameter:'is_followed'");
+        throw new Exception("Missing required parameter: 'is_followed'");
     }
     
     $authenticate_id = authenticate_id($data['id']);
     if (!$authenticate_id) {
-        throw new Error('Invalid user ID!');
+        throw new Exception('Invalid user ID!');
     }
 
     if (!$data['is_followed']) {
@@ -45,6 +45,6 @@ try {
         ]);
         echo_success('User unfollowed successfully!');    
     }
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

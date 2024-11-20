@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const user_bio = document.querySelector('#user_bio');
 
     const follow_user_btn = document.querySelector('#follow_user_btn')
+    const block_user_btn = document.querySelector('#block_user_btn')
 
     try {
         const response  = await get_data(`../api/fetch_user.php?id=${profile_details.getAttribute('data-id')}`);
@@ -34,6 +35,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 follow_user_btn.innerHTML = 'Follow'
                 body.setAttribute('data-followed', 0)
+            }
+        }
+        if (block_user_btn) {
+            if (data['is_blocked'] === 1) {
+                block_user_btn.innerHTML = 'Unblock'
+                body.setAttribute('data-blocked', 1)
+            } else {
+                block_user_btn.innerHTML = 'Block'
+                body.setAttribute('data-blocked', 0)
             }
         }
     } catch (error) {
