@@ -51,6 +51,7 @@ if (
     <script type="module" src="../assets/js/event/fetch_sidenav_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
+    <script type="module" src="../assets/js/event/icon_action.js"></script>
 
 </body>
 

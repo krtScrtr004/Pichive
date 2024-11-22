@@ -21,11 +21,12 @@ try {
         throw new Exception('Data cannot be parsed!');
     }
 
-    if (!isset($data['is_like'])) {
-        throw new Exception("Missing required parameter: 'is_like'");
+    if (!isset($data['is_liked'])) {
+        throw new Exception("Missing required parameter: 'is_liked'");
     }
     
-    if (!$data['is_like']) {
+    if (!$data['is_liked']) {
+        $pdo->beginTransaction();
         $insert_like_query = $pdo->prepare('INSERT INTO p_like(user_id, post_id) VALUES(:id, :post_id)');
         $insert_like_query->execute([
             ':id' => encode_uuid($_SESSION['user_id']),
@@ -33,24 +34,28 @@ try {
         ]);
 
         // Increment post like count
-        $increment_like_query = $pdo->prepare('UPDATE post likes = likes + 1 WHERE id = :id');
+        $increment_like_query = $pdo->prepare('UPDATE post SET likes = likes + 1 WHERE id = :id');
         $increment_like_query->execute([
             ':id' => $data['id']
         ]);
 
+        $pdo->commit();
         echo_success('Post liked successfully!');    
     } else {
-        $delete_like_query = $pdo->prepare('DELETE p_like(user_id, post_id) VALUES(:id, :post_id)');
+        $pdo->beginTransaction();
+        $delete_like_query = $pdo->prepare('DELETE FROM p_like WHERE user_id = :id AND post_id = :post_id');
         $delete_like_query->execute([
             ':id' => encode_uuid($_SESSION['user_id']),
             ':post_id' => $data['id']
         ]);
 
         // Decrement post like count
-        $decrement_like_query = $pdo->prepare('UPDATE post likes = likes-+ 1 WHERE id = :id');
-        $ecrement_like_query->execute([
+        $decrement_like_query = $pdo->prepare('UPDATE post SET likes = likes - 1 WHERE id = :id');
+        $decrement_like_query->execute([
             ':id' => $data['id']
         ]);
+
+        $pdo->commit();
         echo_success('Post unliked successfully!');    
     }
 } catch (Exception $e) {

@@ -1,4 +1,4 @@
-import { get_data, test_response } from './request.js'
+import { get_data, send_data, test_response } from './request.js'
 import { has_already_ran, fetch_post_comments } from '../utils/comment.util.js'
 
 const result_box = document.querySelector('.result')
@@ -33,7 +33,7 @@ export async function load_posts() {
 			}&offset=${offset}&limit=${limit}`
 		)
 		const test = test_response(response)
-		if (!test) {
+		if (!test['status']) {
 			result_box.innerHTML = test['message']
 			center.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
@@ -90,15 +90,7 @@ async function add_post_details(post) {
 	// Open post modal
 	const post_modal = document.querySelector('#post_modal')
 	post_modal.classList.add('show-modal')
-	display_detail({
-		id: post['id'],
-		img_url: post['img_url'],
-		username: post['username'],
-		poster_id: post['poster_id'],
-		title: post['title'],
-		description: post['description'],
-		date: post['date_time'],
-	})
+	display_detail(post)
 
 	add_modal_event(post)
 
@@ -126,8 +118,8 @@ function display_detail(data) {
 	
 	<div class="img-view-icons flex-column">
 		<div id="like" class="icon-cont">
-			<img src="../assets/img/icons/Light/Like.svg" alt="">
-			<p class="light-text">100</p>
+			<img src="../assets/img/icons/${data.is_liked === 1 ? 'Highlight' : 'Light'}/Like.svg" alt="">
+			<p class="light-text">${data.likes}</p>
 		</div>
 		<div id="copy_link" class="icon-cont">
 			<img src="../assets/img/icons/Light/Link.svg" alt="">
@@ -170,11 +162,33 @@ function add_modal_event(post) {
     const report = document.querySelector('#report')
 
     like.onclick = async () => {
-		const img = document.querySelector('.img-cont>img')
-        const response = await send_data('../api/like_post.php', {
-			id : img.getAttribute('data-id'),
-			is_like : img.getAttribute('data-like'),
-		})
+		try {
+			const img_view = document.querySelector('.img-view>img')
+			const response = await send_data('../api/like_post.php', {
+				id : img_view.getAttribute('data-id'),
+				is_liked : img_view.getAttribute('data-like'),
+			})
+			const test = test_response(response)
+			if (!test['status']) {
+				throw new Error(test['message'])
+				return
+			}		
+
+			if (img_view.getAttribute('data-like') === '0') {
+				img_view.setAttribute('data-like', '1')
+                like.querySelector('img').src = '../assets/img/icons/Highlight/Like.svg'
+                like.querySelector('p').textContent = parseInt(like.querySelector('p').textContent) + 1
+				like.querySelector('p').style.color = 'rgb(253, 210, 0)'
+			} else {
+				img_view.setAttribute('data-like', '0')
+                like.querySelector('img').src = '../assets/img/icons/Light/Like.svg'
+                like.querySelector('p').textContent = parseInt(like.querySelector('p').textContent) - 1
+				like.querySelector('p').style.color = 'rgb(233, 233, 233)'
+			}
+		} catch (error) {
+			result_box.innerHTML = error['message']
+			return
+		}
     }
 
     copy_link.onclick = async () => {
@@ -184,7 +198,7 @@ function add_modal_event(post) {
             // result_box.innerHTML = 'URL copied to clipboard!';
         })
         .catch(error => {
-            // result_box.innerHTML = error;
+            result_box.inner/HTML = error;
         });   
     }
 }
