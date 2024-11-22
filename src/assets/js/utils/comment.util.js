@@ -14,14 +14,14 @@ export function display_comment(data) {
                 </div>
                 <div class="comment-detail">
                     <div class="comment-header">
-                        <h4 class="commenter-name">${
+                        <h4 class="commenter-name dark-text">${
 													data.commenter_name || 'Anonymous'
 												}</h4>
-                        <p class="comment-date">${
+                        <p class="comment-date dark-text">${
 													data.comment_date || 'Unknown Date'
 												}</p>
                     </div>
-                    <p class="comment-content">
+                    <p class="comment-content dark-text">
                         ${data.comment_content || 'No content provided'}
                     </p>
                 </div>

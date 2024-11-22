@@ -1,6 +1,8 @@
 .img-view {
     flex: 1;
+    width: fit-content;
     height: 100%;
+    position: relative;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -10,10 +12,42 @@
     object-fit: contain;
 }
 
+.img-view-icons {
+    height: 100%;
+    display: none;
+    padding: 0.5rem;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    gap: 3em;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+.icon-cont {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    gap: 0.5rem;
+}
+
+.icon-cont>img {
+    height: 2rem;
+    filter: drop-shadow(1px, 1px, 1px var(--default-black));
+}
+
+.icon-cont>p {
+    text-align: center;
+    text-shadow: 1px, 1px, 1px var(--default-black);
+    font-size: 1rem;
+}
+
 .detail {
     width: 40%;
     height: 100%;
-    border: solid 1px blue;
     display: flex;
     flex-direction: column;
 }
@@ -29,7 +63,7 @@
 .comment {
     width: 100%;
     height: 100%;
-    background-color: pink;
+    background-color: var(--default-white);
     color: white;
     overflow-y: auto;
     display: flex;

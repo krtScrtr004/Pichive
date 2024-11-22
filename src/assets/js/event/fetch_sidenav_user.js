@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Fetch followed users every 30 seconds
 		setTimeout(async () => {
 			await fetch_followed_user()
-		}, 5000)
+		}, 30000)
 	} catch (error) {
 		sidenav_result.innerHTML = error['message']
 	}

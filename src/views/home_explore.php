@@ -27,7 +27,8 @@ if (
 </head>
 
 <!-- Note: 'data-page' determine which page to render (home / explore) -->
-<body class="wrapper flex-row" data-page="<?php echo htmlspecialchars($_GET['page']); ?>">
+
+<body class="wrapper flex-row" data-page="<?php echo ($_GET['page']); ?>">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>
@@ -36,7 +37,11 @@ if (
         <main>
             <div id="result-box"></div>
             <!-- Note: 'data-content' determine which post content to fetch (home / explore / profile) -->
-            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
+            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>">
+                <div id="hal" class="img-cont">
+                    <img src="../assets/img/default_img_prev.png" alt="">
+                </div>
+            </div>
 
             <div class="loading">Loading more images...</div>
         </main>

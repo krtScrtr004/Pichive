@@ -26,9 +26,11 @@ export async function load_posts() {
 	try {
 		const img_grid = document.querySelector('.img-grid')
 		let response = await get_data(
-			`../api/fetch_post.php?content_type=${img_grid.getAttribute(
-				'data-content'
-			) ?? 'home'}&id=${img_grid.getAttribute('data-id') ?? null}&offset=${offset}&limit=${limit}`
+			`../api/fetch_post.php?content_type=${
+				img_grid.getAttribute('data-content') ?? 'home'
+			}&id=${
+				img_grid.getAttribute('data-id') ?? null
+			}&offset=${offset}&limit=${limit}`
 		)
 		const test = test_response(response)
 		if (!test) {
@@ -62,8 +64,13 @@ export async function load_posts() {
 				// Open post modal when img container it clicked
 				await add_post_details(post)
 			}
+
 			img_grid.appendChild(new_img_cont)
 		})
+
+		document.querySelector('#hal').onclick = () => {
+			add_post_details({})
+		}
 
 		// Update offset for the next batch of data
 		offset += limit
@@ -113,8 +120,38 @@ function display_detail(data) {
 	const img_view = document.querySelector('.img-view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
-	}" alt="Image preview" data-id=${data.id || null}>`
+	}" alt="Image preview" data-id=${data.id || null}>
+	
+	<div class="img-view-icons flex-column">
+		<div class="icon-cont">
+			<img src="../assets/img/icons/Light/Like.svg" alt="">
+			<p class="light-text">100</p>
+		</div>
+		<div class="icon-cont">
+			<img src="../assets/img/icons/Light/Link.svg" alt="">
+			<p class="light-text">Copy<br>Link</p>
+		</div>
+		<div class="icon-cont">
+			<img src="../assets/img/icons/Light/Block.svg" alt="">
+			<p class="light-text">Report</p>
+		</div>
+	</div>`
 	img_view.insertAdjacentHTML('afterbegin', img_HTML)
+
+	const modal = document.querySelector('#post_modal>.modal')
+	modal.onmouseover = () => {
+		const img_view_icons = document.querySelector('.img-view-icons')
+		img_view_icons.classList.add('flex-column')
+		img_view_icons.style.backgroundColor =
+			'rgba(28, 30, 31, 0.5)'
+	}
+
+	modal.onmouseout = () => {
+		const img_view_icons = document.querySelector('.img-view-icons')
+		img_view_icons.classList.remove('flex-column')
+		img_view_icons.style.backgroundColor = ''	
+	}
+
 
 	const post_detail = document.querySelector('.post-detail')
 	const detail_HTML = `

@@ -18,4 +18,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 			remove_details()
 		}
 	}
+
 })

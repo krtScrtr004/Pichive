@@ -1,18 +1,33 @@
 <?php
+require_once '../config/session.php';
+include_once 'partials/create_post.php';
+include_once 'partials/post_modal.php';
+
+if (
+    !isset($_SESSION['user_id']) ||
+    !isset($_SESSION['user_email']) ||
+    !isset($_GET['page'])
+) {
+    header('Location: index.php');
+    exit();
+}
 ?>
 
+<link rel="stylesheet" href="../assets/style/generic.css">
 <link rel="stylesheet" href="../assets/style/modal.css">
 <link rel="stylesheet" href="../assets/style/post_modal.css">
 
 <style>
-   
+
 </style>
 
 <div class="modal-wrapper" id="post_modal">
     <span class="result"></span>
 
     <section class="modal">
-        <section class="img-view"></section>
+        <section class="img-view">
+           
+        </section>
 
         <section class="detail">
             <section class="post-detail">
@@ -25,7 +40,7 @@
                         <!-- Original comment -->
                         <!-- <section class="original_comment comment-box">
                             <div class="commenter-img">
-                                
+
                                 <img src="../assets/img/default_img_prev.png" alt="">
                             </div>
                             <div class="comment-detail">
@@ -70,4 +85,3 @@
         </section>
     </section>
 </div>
-

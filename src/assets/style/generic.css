@@ -1,10 +1,14 @@
 :root {
-    --default-white: #E9E9E9;
-    --default-black: #1C1E1F;
-    --default-yellow: #FDD200;
-    --default-dark_yellow: #D5A800;
+    --default-white: rgb(233, 233, 233);
+    --default-black: rgb(28, 30, 31);
+    --default-yellow: rgb(253, 210, 0);
+    --default-dark_yellow: rgb(213, 168, 0);
+
+    --default-light-opacity-bg: rgba(233, 233, 233, 0.5);
+    --default-dark-opacity-bg: rgba(28, 30, 31, 0.5);
 
     --default-padding: 1.5em;
+    --default-drop: 1px;
 }
 
 * {
