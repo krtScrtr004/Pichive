@@ -1,0 +1,32 @@
+#report_modal {
+    z-index: 2000;
+}
+
+.modal.report {
+    width: 50%;
+    height: 50%;
+    padding: var(--default-padding);
+}
+
+.modal.report>form {
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.modal-header {
+    font-size: 2rem;
+}
+
+.description {
+    flex: 1;
+}
+
+.button {
+    height: 10%;
+}
+
+#cancel_btn,
+#report_btn {
+    flex: 1;
+}

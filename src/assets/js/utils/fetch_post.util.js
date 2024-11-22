@@ -68,10 +68,6 @@ export async function load_posts() {
 			img_grid.appendChild(new_img_cont)
 		})
 
-		document.querySelector('#hal').onclick = () => {
-			add_post_details({})
-		}
-
 		// Update offset for the next batch of data
 		offset += limit
 		loading.style.display = 'none'
@@ -114,11 +110,15 @@ function display_detail(data) {
 	const img_view = document.querySelector('.img-view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
-	}" alt="Image preview" data-id=${data.id || null} data-like="${data.is_liked || 0}">
+	}" alt="Image preview" data-id=${data.id || null} data-like="${
+		data.is_liked || 0
+	}">
 	
 	<div class="img-view-icons flex-column">
 		<div id="like" class="icon-cont">
-			<img src="../assets/img/icons/${data.is_liked === 1 ? 'Highlight' : 'Light'}/Like.svg" alt="">
+			<img src="../assets/img/icons/${
+				data.is_liked === 1 ? 'Highlight' : 'Light'
+			}/Like.svg" alt="">
 			<p class="light-text">${data.likes}</p>
 		</div>
 		<div id="copy_link" class="icon-cont">
@@ -147,60 +147,100 @@ function add_modal_event(post) {
 	modal.onmouseover = () => {
 		const img_view_icons = document.querySelector('.img-view-icons')
 		img_view_icons.classList.add('flex-column')
-		img_view_icons.style.backgroundColor =
-			'rgba(28, 30, 31, 0.5)'
+		img_view_icons.style.backgroundColor = 'rgba(28, 30, 31, 0.5)'
 	}
 
 	modal.onmouseout = () => {
 		const img_view_icons = document.querySelector('.img-view-icons')
 		img_view_icons.classList.remove('flex-column')
-		img_view_icons.style.backgroundColor = ''	
+		img_view_icons.style.backgroundColor = ''
 	}
 
-	const like = document.querySelector('#like')
-    const copy_link = document.querySelector('#copy_link')
-    const report = document.querySelector('#report')
+	add_icon_event(post)
+}
 
-    like.onclick = async () => {
+function add_icon_event(post) {
+	const like = document.querySelector('#like')
+	const copy_link = document.querySelector('#copy_link')
+	const report = document.querySelector('#report')
+
+	like.onclick = async () => {
 		try {
 			const img_view = document.querySelector('.img-view>img')
 			const response = await send_data('../api/like_post.php', {
-				id : img_view.getAttribute('data-id'),
-				is_liked : img_view.getAttribute('data-like'),
+				id: img_view.getAttribute('data-id'),
+				is_liked: img_view.getAttribute('data-like'),
 			})
 			const test = test_response(response)
 			if (!test['status']) {
 				throw new Error(test['message'])
-				return
-			}		
+			}
 
 			if (img_view.getAttribute('data-like') === '0') {
 				img_view.setAttribute('data-like', '1')
-                like.querySelector('img').src = '../assets/img/icons/Highlight/Like.svg'
-                like.querySelector('p').textContent = parseInt(like.querySelector('p').textContent) + 1
+				like.querySelector('img').src = '../assets/img/icons/Highlight/Like.svg'
+				like.querySelector('p').textContent =
+					parseInt(like.querySelector('p').textContent) + 1
 				like.querySelector('p').style.color = 'rgb(253, 210, 0)'
 			} else {
 				img_view.setAttribute('data-like', '0')
-                like.querySelector('img').src = '../assets/img/icons/Light/Like.svg'
-                like.querySelector('p').textContent = parseInt(like.querySelector('p').textContent) - 1
+				like.querySelector('img').src = '../assets/img/icons/Light/Like.svg'
+				like.querySelector('p').textContent =
+					parseInt(like.querySelector('p').textContent) - 1
 				like.querySelector('p').style.color = 'rgb(233, 233, 233)'
 			}
 		} catch (error) {
 			result_box.innerHTML = error['message']
 			return
 		}
-    }
+	}
 
-    copy_link.onclick = async () => {
-        navigator.clipboard.writeText(post['img_url'])
-        .then(() => {
-			// TODO:
-            // result_box.innerHTML = 'URL copied to clipboard!';
-        })
-        .catch(error => {
-            result_box.inner/HTML = error;
-        });   
-    }
+	copy_link.onclick = async () => {
+		navigator.clipboard
+			.writeText(post['img_url'])
+			.then(() => {
+				// TODO:
+				// result_box.innerHTML = 'URL copied to clipboard!';
+			})
+			.catch((error) => {
+				result_box.innerHTML = error
+			})
+	}
+
+	report.onclick = async () => {
+		const report_modal = document.querySelector('#report_modal')
+		report_modal.classList.add('show-modal')
+
+		report_modal.onclick = (e) => {
+			if (e.target === report_modal) {
+				report_modal.classList.remove('show-modal')
+			}
+		}
+
+		document.querySelector('#report_modal #cancel_btn').onclick = () => {
+			report_modal.classList.remove('show-modal')
+		}
+
+		document.querySelector('#report_btn').onclick = async () => {
+			try {
+				const description = document.querySelector('#report_modal form #description')
+				const response = await send_data('../api/report_post.php', {
+					id : post['id'],
+					description : description.value
+				})
+				const test = test_response(response)
+				if (!test['status']) {
+					throw new Error(test['message'])
+				}
+					
+				// TODO:
+			} catch (error) {
+				result_box.innerHTML = error['message']		
+				return		
+			}
+		}
+
+	}
 }
 
 export function remove_details() {

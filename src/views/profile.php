@@ -74,7 +74,6 @@ if (
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
     <script type="module" src="../assets/js/event/follow_block.js"></script>
-    <script type="module" src="../assets/js/event/icon_action.js"></script>
 
 </body>
 

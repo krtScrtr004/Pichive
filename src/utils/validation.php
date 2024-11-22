@@ -9,9 +9,12 @@ function validate_username($username)
     if (!$username) {
         return 'Username is not defined';
     }
+
+    $min_len = 3;
+    $max_len = 15;
     // Check is username is valid
-    if (strlen($username) < 3 || strlen($username) > 15) {
-        return 'Username must be between 3 and 15 characters long';
+    if (strlen($username) < $min_len || strlen($username) > $max_len) {
+        return "Username must be between $min_len and $max_len characters long";
     }
     if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
         return 'Username can only contain letters, numbers, and underscores';
@@ -65,11 +68,11 @@ function validate_bio($bio) {
         return 'Bio is not defined';
     }
 
-    $max_len = 300;
     if (empty(trim($bio))) {
         return 'Bio cannot be empty.';
     }
     // Check bio length (using mb_strlen to account for multibyte characters like emojis)
+    $max_len = 300;
     if (mb_strlen($bio, 'UTF-8') > $max_len) {
         return "Bio cannot exceed $max_len characters.";
     }
@@ -104,3 +107,20 @@ function validate_image($file) {
     return true;
 }
 
+function validate_description($description) {
+    if (!$description) {
+        return 'Description is not defined!';
+    }
+
+    if (empty(trim($description))) {
+        return 'Description cannot be empty.';
+    }
+
+    $min_len = 10;
+    $max_len = 300;
+    if (strlen($description) < $min_len || strlen($description) > $max_len) {
+        return 'Description must be between 10 and 300 characters long!';
+    }
+
+    return true;
+}

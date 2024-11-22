@@ -50,4 +50,5 @@ aside {
 
 textarea {
     resize: none;
+    padding: 0.3rem;
 }

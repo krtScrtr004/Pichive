@@ -25,6 +25,10 @@ try {
         throw new Exception("Missing required parameter: 'is_liked'");
     }
     
+    if (!authenticate_post($data['id'])) {
+        throw new Exception('Invalid post ID!');
+    }
+    
     if (!$data['is_liked']) {
         $pdo->beginTransaction();
         $insert_like_query = $pdo->prepare('INSERT INTO p_like(user_id, post_id) VALUES(:id, :post_id)');

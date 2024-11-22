@@ -37,11 +37,7 @@ if (
         <main>
             <div id="result-box"></div>
             <!-- Note: 'data-content' determine which post content to fetch (home / explore / profile) -->
-            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>">
-                <div id="hal" class="img-cont">
-                    <img src="../assets/img/default_img_prev.png" alt="">
-                </div>
-            </div>
+            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
 
             <div class="loading">Loading more images...</div>
         </main>
@@ -51,7 +47,6 @@ if (
     <script type="module" src="../assets/js/event/fetch_sidenav_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
-    <script type="module" src="../assets/js/event/icon_action.js"></script>
 
 </body>
 

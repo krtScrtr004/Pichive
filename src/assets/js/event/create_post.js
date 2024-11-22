@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const description = document.querySelector('#description')
 	const post_btn = document.querySelector('#post_btn')
 	const upload_img_btn = document.querySelector('#upload_img_btn')
-	const cancel_btn = document.querySelector('#cancel_btn')
+	const cancel_btn = document.querySelector('#create_post_modal #cancel_btn')
 
 	// Dynamically change image preiew when user select another image
 	image_picker.onchange = () => {

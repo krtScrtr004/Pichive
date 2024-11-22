@@ -2,6 +2,7 @@
 require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
+include_once 'partials/report_modal.php';
 
 if (
     !isset($_SESSION['user_id']) ||
@@ -16,10 +17,6 @@ if (
 <link rel="stylesheet" href="../assets/style/generic.css">
 <link rel="stylesheet" href="../assets/style/modal.css">
 <link rel="stylesheet" href="../assets/style/post_modal.css">
-
-<style>
-
-</style>
 
 <div class="modal-wrapper" id="post_modal">
     <span class="result"></span>
