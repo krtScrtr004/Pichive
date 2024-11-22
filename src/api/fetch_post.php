@@ -30,7 +30,11 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username 
+                                    u.username,
+                                    CASE 
+                                        WHEN pl.user_id IS NOT NULL THEN 1
+                                        ELSE 0
+                                    END AS is_liked
                                 FROM 
                                     post AS p
                                 INNER JOIN 
@@ -41,6 +45,10 @@ try {
                                     follow AS f
                                 ON 
                                     p.poster_id = f.their_id AND f.my_id = :id
+                                LEFT JOIN 
+                                    p_like AS pl
+                                ON 
+                                    p.id = pl.post_id AND pl.user_id = :id
                                 WHERE 
                                     f.my_id = :id OR p.poster_id = :id
                                 ORDER BY 
@@ -48,7 +56,7 @@ try {
                                 LIMIT 
                                     $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid($_SESSION['user_id'])
+            ':id' => encode_uuid($_SESSION['user_id']),
         ));
     } else if ($content_type === 'explore') {
         // Include all users' posts excluding blocked users
@@ -60,7 +68,11 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username 
+                                    u.username,
+                                    CASE 
+                                        WHEN pl.user_id IS NOT NULL THEN 1
+                                        ELSE 0
+                                    END AS is_liked
                                 FROM 
                                     post AS p
                                 INNER JOIN 
@@ -71,6 +83,10 @@ try {
                                     block AS b 
                                 ON 
                                     b.my_id = :id AND b.their_id = u.id
+                                LEFT JOIN 
+                                    p_like AS pl
+                                ON 
+                                    pl.post_id = p.id AND pl.user_id = :id
                                 WHERE 
                                     b.their_id IS NULL
                                 ORDER BY 
@@ -78,7 +94,7 @@ try {
                                 LIMIT 
                                     $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid($_SESSION['user_id'])
+            ':id' => encode_uuid($_SESSION['user_id']),
         ));
     } else if ($content_type === 'profile') {
         $query = $pdo->prepare("SELECT 
@@ -89,19 +105,33 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username 
+                                    u.username,
+                                    CASE 
+                                        WHEN pl.user_id IS NOT NULL THEN 1
+                                        ELSE 0
+                                    END AS is_liked
                                 FROM 
-                                    post as p 
+                                    post AS p
                                 INNER JOIN 
-                                    user as u 
+                                    user AS u 
                                 ON 
                                     p.poster_id = u.id 
+                                LEFT JOIN 
+                                    block AS b 
+                                ON 
+                                    b.my_id = :id AND b.their_id = u.id
+                                LEFT JOIN 
+                                    p_like AS pl
+                                ON 
+                                    pl.post_id = p.id AND pl.user_id = :id
                                 WHERE 
-                                    p.poster_id = :id
-                                ORDER BY date_time DESC 
-                                LIMIT $limit OFFSET $offset");
+                                    b.their_id IS NULL
+                                ORDER BY 
+                                    p.date_time DESC 
+                                LIMIT 
+                                    $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid(htmlspecialchars($_GET['id']) ?? $_SESSION['user_id'])
+            ':id' => encode_uuid(htmlspecialchars($_GET['id']) ?? $_SESSION['user_id']),
         ));
     }
 

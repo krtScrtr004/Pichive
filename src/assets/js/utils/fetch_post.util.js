@@ -100,6 +100,8 @@ async function add_post_details(post) {
 		date: post['date_time'],
 	})
 
+	add_modal_event(post)
+
 	// Fetch post comments
 	const img_source = document.querySelector('.img-view>img')
 	let fetch_comment = null
@@ -120,24 +122,35 @@ function display_detail(data) {
 	const img_view = document.querySelector('.img-view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
-	}" alt="Image preview" data-id=${data.id || null}>
+	}" alt="Image preview" data-id=${data.id || null} data-like="${data.is_liked || 0}">
 	
 	<div class="img-view-icons flex-column">
-		<div class="icon-cont">
+		<div id="like" class="icon-cont">
 			<img src="../assets/img/icons/Light/Like.svg" alt="">
 			<p class="light-text">100</p>
 		</div>
-		<div class="icon-cont">
+		<div id="copy_link" class="icon-cont">
 			<img src="../assets/img/icons/Light/Link.svg" alt="">
 			<p class="light-text">Copy<br>Link</p>
 		</div>
-		<div class="icon-cont">
+		<div id="report" class="icon-cont">
 			<img src="../assets/img/icons/Light/Block.svg" alt="">
 			<p class="light-text">Report</p>
 		</div>
 	</div>`
 	img_view.insertAdjacentHTML('afterbegin', img_HTML)
 
+	const post_detail = document.querySelector('.post-detail')
+	const detail_HTML = `
+                <h3 id="poster-name">${data.username || 'Anonymous'}</h3>
+                <p id="poster-id">${data.poster_id || 'Unknown'}</p>
+                <h1 id="title">${data.title || 'Untitled'}</h1>
+                <h2 id="description">${data.description || 'NA'}</h2>
+                <p id="date">${data.date || 'Unkown Date'}</p>`
+	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
+}
+
+function add_modal_event(post) {
 	const modal = document.querySelector('#post_modal>.modal')
 	modal.onmouseover = () => {
 		const img_view_icons = document.querySelector('.img-view-icons')
@@ -152,15 +165,28 @@ function display_detail(data) {
 		img_view_icons.style.backgroundColor = ''	
 	}
 
+	const like = document.querySelector('#like')
+    const copy_link = document.querySelector('#copy_link')
+    const report = document.querySelector('#report')
 
-	const post_detail = document.querySelector('.post-detail')
-	const detail_HTML = `
-                <h3 id="poster-name">${data.username || 'Anonymous'}</h3>
-                <p id="poster-id">${data.poster_id || 'Unknown'}</p>
-                <h1 id="title">${data.title || 'Untitled'}</h1>
-                <h2 id="description">${data.description || 'NA'}</h2>
-                <p id="date">${data.date || 'Unkown Date'}</p>`
-	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
+    like.onclick = async () => {
+		const img = document.querySelector('.img-cont>img')
+        const response = await send_data('../api/like_post.php', {
+			id : img.getAttribute('data-id'),
+			is_like : img.getAttribute('data-like'),
+		})
+    }
+
+    copy_link.onclick = async () => {
+        navigator.clipboard.writeText(post['img_url'])
+        .then(() => {
+			// TODO:
+            // result_box.innerHTML = 'URL copied to clipboard!';
+        })
+        .catch(error => {
+            // result_box.innerHTML = error;
+        });   
+    }
 }
 
 export function remove_details() {
