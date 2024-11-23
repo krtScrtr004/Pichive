@@ -22,6 +22,7 @@ try {
     $query = null;
     if ($content_type === 'home') {
         // Only include own, follower, and followed users' posts
+        // TODO:
         $query = $pdo->prepare("SELECT 
                                     p.id,
                                     p.title, 
@@ -44,18 +45,23 @@ try {
                                 LEFT JOIN 
                                     follow AS f
                                 ON 
-                                    p.poster_id = f.their_id AND f.my_id = :id
+                                    p.poster_id = f.their_id AND f.my_id = :id  -- Include followed users posts
                                 LEFT JOIN 
                                     p_like AS pl
                                 ON 
-                                    p.id = pl.post_id AND pl.user_id = :id
+                                    p.id = pl.post_id AND pl.user_id = :id  
+                                LEFT JOIN 
+                                    report AS r
+                                ON 
+                                    p.id = r.post_id AND r.user_id = :id
                                 WHERE 
-                                    f.my_id = :id OR p.poster_id = :id
+                                    (f.my_id = :id OR p.poster_id = :id)
+                                    AND r.post_id IS NULL                      -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
                                 LIMIT 
                                     $limit OFFSET $offset");
-        $query->execute(array(
+            $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
     } else if ($content_type === 'explore') {
@@ -87,8 +93,13 @@ try {
                                     p_like AS pl
                                 ON 
                                     pl.post_id = p.id AND pl.user_id = :id
+                                LEFT JOIN 
+                                    report AS r
+                                ON 
+                                    r.post_id = p.id AND r.user_id = :id
                                 WHERE 
                                     b.their_id IS NULL
+                                    AND r.post_id IS NULL -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
                                 LIMIT 
@@ -125,6 +136,7 @@ try {
                                 ON 
                                     pl.post_id = p.id AND pl.user_id = :id
                                 WHERE 
+                                    p.id = :id AND
                                     b.their_id IS NULL
                                 ORDER BY 
                                     p.date_time DESC 

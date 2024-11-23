@@ -18,17 +18,18 @@ include_once '../utils/authenticate_user.php';
 include_once '../utils/uuid.php';
 include_once '../utils/echo_result.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-if (!$data) {
-    echo_fail('Data cannot be parsed!');
-}
-
-$error = [];
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request!');
+    }
+    
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        throw new Exception('Data cannot be parsed!');
+    }
+
+    $error = [];
+
     $username_result = validate_username($data['username']);
     if ($username_result !== true) {
         $error['username'] = $username_result;
@@ -85,6 +86,6 @@ try {
     $_SESSION['user_id'] = parse_uuid($uuid);
     $_SESSION['user_email'] = $data['email'];
     echo_success('Account successfully signed up');
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

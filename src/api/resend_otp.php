@@ -4,24 +4,23 @@ include_once '../utils/authenticate_user.php';
 include_once '../utils/forget_pass.util.php';
 include_once '../utils/echo_result.php';
 
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-if (!$data) {
-    echo_fail('Data cannot be parsed!');
-}
-
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request!');
+    }
+    
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        throw new Exception('Data cannot be parsed!');
+    }
+    
     $search_user = authenticate_email($data['email']);
     if (!$search_user) {
-        echo_fail('Email not found!');
+        throw new Exception('Email not found!');
     }
 
     if (!search_existing_record($search_user['id'])) {
-        echo_fail('User record not found!');
+        throw new Exception('User record not found!');
     }
 
     $otp = generate_otp();
@@ -36,6 +35,6 @@ try {
         ),
         'otp_code' => $otp
     ));
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

@@ -19,33 +19,32 @@ include_once '../utils/forget_pass.util.php';
 include_once '../utils/authenticate_user.php';
 include_once '../utils/echo_result.php';
 
-$otp = generate_otp();
-    
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-if (!$data) {
-    echo_fail('Data cannot be parsed!');
-}
-
-$email_result = validate_email($data['email']);
-if ($email_result !== true) {
-    echo_fail($email_result);
-}
-
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request!');
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        throw new Exception('Data cannot be parsed!');
+    }
+
+    $email_result = validate_email($data['email']);
+    if ($email_result !== true) {
+        throw new Exception($email_result);
+    }
+
     $search_user = authenticate_email($data['email']);
     if (!$search_user) {
-        echo_fail('Email not found!');
+        throw new Exception('Email not found!');
     }
 
     // Search existing otp in user inbox
     if (search_existing_record($search_user['id'])) {
-        echo_fail('An OTP has already been sent to this email!');
+        throw new Exception('An OTP has already been sent to this email!');
     }
 
+    $otp = generate_otp();
     // Send OTP to the user via gmail
     $response = send_data('http://localhost/Pichive/src/api/send_otp.php', [
         'email' => $data['email'],
@@ -57,7 +56,7 @@ try {
         !isset($response->status) ||
         $response->status === 'fail'
     ) {
-        echo_fail($response['message'] ?? 'Data cannot be processed!');
+        throw new Exception($response['message'] ?? 'Data cannot be processed!');
     }
 
     // Insert otp with user_id to db
@@ -72,6 +71,6 @@ try {
         ),
         'otp_code' => $otp
     ));
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

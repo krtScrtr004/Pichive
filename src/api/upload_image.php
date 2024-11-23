@@ -7,21 +7,20 @@ include_once '../utils/uuid.php';
 include_once '../utils/validation.php';
 include_once '../utils/echo_result.php';
 
-
-if (!isset($_SESSION['user_id'])) {
-    echo_fail('Unauthorized access!');
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-if (!$data) {
-    echo_fail('Data cannot be parsed!');
-}
-
 try {
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception('Unauthorized user!');
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request!');
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        throw new Exception('Data cannot be parsed!');
+    }
+
     $file_path = $_FILES['image']['tmp_name'];
     // Read the binary content of the image and base64 encode it
     $image_encoded = base64_encode(file_get_contents($file_path));
@@ -37,11 +36,7 @@ try {
         !isset($response->status) ||
         $response->status === 'fail'
     ) {
-        echo json_encode(array(
-            'status' => 'fail',
-            'message' => $response['message'] ?? 'Data cannot be processed!'
-        ));
-        exit();
+        throw new Exception($response['message'] ?? 'Data cannot be processed!');
     }
 
     // Insert to db

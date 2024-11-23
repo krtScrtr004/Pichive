@@ -6,16 +6,15 @@ include_once '../utils/uuid.php';
 include_once '../utils/authenticate_user.php';
 include_once '../utils/echo_result.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo_fail('Invalid request!');
-}
-
 try {
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception('Unauthorized user!');
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        throw new Exception('Invalid request!');
+    }
+    
     $query = null;
     if ($_GET['has_already_ran'] === 'false') {
         $query = $pdo->query('SELECT * FROM p_comment ORDER BY likes DESC, date_time ASC');
@@ -39,6 +38,6 @@ try {
     unset($value);
 
     echo_success('Successfully fetched comments!', $result);
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo_fail($e->getMessage());
 }

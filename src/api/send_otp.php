@@ -17,18 +17,19 @@ include_once '../utils/echo_result.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo_fail('Invalid request!');
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-if (!$data) {
-    echo_fail('Data cannot be parsed!');
-}
-
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request!');
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) {
+        throw new Exception('Data cannot be parsed!');
+    }
+
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
     // Server settings
     // $mail->SMTPDebug  = SMTP::DEBUG_SERVER;                  // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP

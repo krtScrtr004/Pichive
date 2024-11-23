@@ -23,7 +23,7 @@ try {
         $username_result = validate_username($_POST['username']);
         if ($username_result !== true) {
             $pdo->rollBack();
-            echo_fail($username_result);
+            throw new Exception($username_result);
         } else {
             $search_duplicate_username = authenticate_username($_POST['username']);
             if ($search_duplicate_username) {
@@ -42,7 +42,7 @@ try {
         $password_result = validate_password($_POST['password']);
         if ($password_result !== true) {
             $pdo->rollBack();
-            echo_fail($password_result);
+            throw new Exception($password_result);
         }
 
         $password_query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
