@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const test = test_response(response)
 			if (!test['status']) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			result.innserHTML = response['message']
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				comment_date: response['data']['comment_date'],
 			})
 		} catch (error) {
-			result.innserHTML = error['message']
+			result.innserHTML = error
 		}
 	}
 
@@ -48,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		try {
 			const result = await fetch_post_comments(img_source)
 			if (!result['status']) {
-				result.innerHTML = result['message']
 				is_loading = false
+				throw new Error(result['message'])
 			}
 
 			has_already_ran['status'] = true // Set to true to prevent fetching comments again in the next interval

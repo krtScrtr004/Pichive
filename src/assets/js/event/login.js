@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// TODO: Change this if possible
 			if (!response) {
-				result.innerHTML = 'Data cannot be processed!'
-				return
+				throw new Error('Data cannot be processed!')
 			} else if (response['status'] === 'fail') {
 				// TODO: Handle fauilure
 				if (response.hasOwnProperty('error')) {
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			result.innerHTML = response['message']
 			window.location.href = '../views/home_explore.php?page=home'
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 })

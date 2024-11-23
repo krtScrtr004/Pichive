@@ -1,5 +1,7 @@
 .env
 
+dumps/
+
 node_modules/ 
 
 vendor/

@@ -40,6 +40,6 @@ export async function fetch_followed_user() {
         })
 
     } catch (error) {
-        sidenav_result.innerHTML = error['message']
+        sidenav_result.innerHTML = error
     }
 }

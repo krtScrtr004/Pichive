@@ -5,6 +5,7 @@ require_once '../config/session.php';
 
 include_once '../utils/uuid.php';
 include_once '../utils/authenticate_user.php';
+include_once '../utils/authenticate_post.php';
 include_once '../utils/echo_result.php';
 
 try {

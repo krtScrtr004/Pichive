@@ -27,23 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	post_btn.onclick = async (e) => {
 		e.preventDefault()
-		const image = image_picker.files[0]
-		if (!image) {
-			result_box.innerHTML = 'Image not found!'
-			return
-		}
-
-		const form_data = new FormData()
-		form_data.append('title', title.value)
-		form_data.append('image', image)
-		form_data.append('description', description.value)
 
 		try {
+			const image = image_picker.files[0]
+			if (!image) {
+				throw new Error('Image not found!')
+			}
+
+			const form_data = new FormData()
+			form_data.append('title', title.value)
+			form_data.append('image', image)
+			form_data.append('description', description.value)
+
 			const response = await send_file('../api/upload_image.php', form_data)
 			const test = test_response(response)
 			if (!test) {
-				result_box.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			setTimeout(() => {
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			result_box.innerHTML = ''
 			location.reload()
 		} catch (error) {
-			result_box.innerHTML = error['message']
+			result_box.innerHTML = error
 		}
 	}
 

@@ -12,6 +12,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 			await fetch_followed_user()
 		}, 30000)
 	} catch (error) {
-		sidenav_result.innerHTML = error['message']
+		sidenav_result.innerHTML = error
 	}
 })

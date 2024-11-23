@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 
 			if (!response) {
-				result.innerHTML = 'Data cannot be processed!'
-				return
+				throw new Error('Data cannot be processed!')
 			} else if (response['status'] === 'fail') {
 				// TODO: Handle fauilure
 				if (response.hasOwnProperty('error')) {
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			// TODO: Handle success
 			result.innerHTML = response['message']
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 })

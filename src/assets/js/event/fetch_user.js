@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response  = await get_data(`../api/fetch_user.php?id=${profile_details.getAttribute('data-id')}`);
         const test = test_response(response)
         if (!test) {
-			result_box.innerHTML = test['message']
-			return
+			throw new Error(test['message'])
 		}
 
         const data = response['data'][0]
@@ -47,6 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     } catch (error) {
-        result_box.innerHTML = error['message']
+        result_box.innerHTML = error
     }
 })

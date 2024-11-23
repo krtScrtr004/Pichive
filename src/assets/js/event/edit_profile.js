@@ -55,8 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			const response = await send_file('../api/edit_profile.php', form_data)
 			const test = test_response(response)
 			if (!test['status']) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			img_preview.src = ''
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			result.innerHTML = ''
 			location.reload()
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 

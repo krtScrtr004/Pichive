@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				})
 				const test = test_response(response)
 				if (!test['status']) {
-					result_box.innerHTML = test['message']
-					return
+					throw new Error(test['message'])
 				}
 
                 if (body.getAttribute('data-followed') === '0') {
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 				result_box.innerHTML = response['message']
 			} catch (error) {
-				result_box.innerHTML = error['message']
+				result_box.innerHTML = error
 			}
 		}
 
@@ -45,8 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				})
 				const test = test_response(response)
 				if (!test['status']) {
-					result_box.innerHTML = test['message']
-					return
+					throw new Error(test['message'])
 				}
 
                 follow_user_btn.innerHTML = 'Follow'
@@ -66,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 				result_box.innerHTML = response['message']
 			} catch (error) {
-				result_box.innerHTML = error['message']
+				result_box.innerHTML = error
 			}
 		}
 	}

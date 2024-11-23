@@ -34,11 +34,10 @@ export async function load_posts() {
 		)
 		const test = test_response(response)
 		if (!test['status']) {
-			result_box.innerHTML = test['message']
 			center.removeEventListener('scroll', handle_scroll)
 			loading.style.display = 'none'
 			is_loading = false
-			return
+			throw new Error(test['message'])
 		}
 
 		const data = response['data']
@@ -73,14 +72,13 @@ export async function load_posts() {
 		loading.style.display = 'none'
 		is_loading = false // Reset loading flag
 	} catch (error) {
-		result_box.innerHTML = error['message']
+		result_box.innerHTML = error
 	}
 }
 
 async function add_post_details(post) {
 	if (!post) {
-		result_box.innerHTML = 'Failed to fetch post details!'
-		return
+		throw new Error('Failed to fetch post details!')
 	}
 
 	// Open post modal
@@ -97,7 +95,7 @@ async function add_post_details(post) {
 		fetch_comment = await fetch_post_comments(img_source)
 	}
 	if (!fetch_comment['status']) {
-		result_box.innerHTML = 'Failed to fetch comments!'
+		throw new Error('Failed to fetch comments!')
 	}
 	has_already_ran['status'] = true
 }
@@ -190,8 +188,7 @@ function add_icon_event(post) {
 				like.querySelector('p').style.color = 'rgb(233, 233, 233)'
 			}
 		} catch (error) {
-			result_box.innerHTML = error['message']
-			return
+			result_box.innerHTML = error
 		}
 	}
 
@@ -223,23 +220,23 @@ function add_icon_event(post) {
 
 		document.querySelector('#report_btn').onclick = async () => {
 			try {
-				const description = document.querySelector('#report_modal form #description')
+				const description = document.querySelector(
+					'#report_modal form #description'
+				)
 				const response = await send_data('../api/report_post.php', {
-					id : post['id'],
-					description : description.value
+					id: post['id'],
+					description: description.value,
 				})
 				const test = test_response(response)
 				if (!test['status']) {
 					throw new Error(test['message'])
 				}
-					
+
 				// TODO:
 			} catch (error) {
-				result_box.innerHTML = error['message']		
-				return		
+				result_box.innerHTML = error
 			}
 		}
-
 	}
 }
 

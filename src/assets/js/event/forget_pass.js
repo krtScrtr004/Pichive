@@ -31,14 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			const test = test_response(response)
 			if (!test) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			result.innerHTML = response['message']
 			data = response
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 
 		/*
@@ -57,14 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			const test = test_response(response)
 			if (!test) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			// TODO: Handle success
 			result.innerHTML = response['message']
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 
@@ -78,13 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			const test = test_response(response)
 			if (!test) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			result.innerHTML = data['message']
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 
@@ -95,14 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			const test = test_response(response)
 			if (!test) {
-				result.innerHTML = test['message']
-				return
+				throw new Error(test['message'])
 			}
 
 			result.innerHTML = response['message']
 			data = response
 		} catch (error) {
-			result.innerHTML = error['message']
+			result.innerHTML = error
 		}
 	}
 })
