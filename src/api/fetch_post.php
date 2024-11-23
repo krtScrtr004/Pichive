@@ -33,6 +33,10 @@ try {
                                     p.poster_id, 
                                     u.username,
                                     CASE 
+                                        WHEN p.poster_id = :id THEN 1 
+                                        ELSE 0 
+                                    END AS is_own,
+                                    CASE 
                                         WHEN pl.user_id IS NOT NULL THEN 1
                                         ELSE 0
                                     END AS is_liked
@@ -61,7 +65,7 @@ try {
                                     p.date_time DESC 
                                 LIMIT 
                                     $limit OFFSET $offset");
-            $query->execute(array(
+        $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
     } else if ($content_type === 'explore') {
@@ -76,13 +80,17 @@ try {
                                     p.poster_id, 
                                     u.username,
                                     CASE 
+                                        WHEN p.poster_id = :id THEN 1 
+                                        ELSE 0 
+                                    END AS is_own,
+                                    CASE 
                                         WHEN pl.user_id IS NOT NULL THEN 1
                                         ELSE 0
                                     END AS is_liked
                                 FROM 
                                     post AS p
                                 INNER JOIN 
-                                    user AS u 
+                                    user AS u   
                                 ON 
                                     p.poster_id = u.id 
                                 LEFT JOIN 
@@ -116,7 +124,10 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username,
+                                    u.username,                                                               CASE 
+                                        WHEN p.poster_id = :id THEN 1 
+                                        ELSE 0 
+                                    END AS is_own,
                                     CASE 
                                         WHEN pl.user_id IS NOT NULL THEN 1
                                         ELSE 0

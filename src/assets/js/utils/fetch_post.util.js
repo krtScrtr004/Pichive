@@ -123,10 +123,17 @@ function display_detail(data) {
 			<img src="../assets/img/icons/Light/Link.svg" alt="">
 			<p class="light-text">Copy<br>Link</p>
 		</div>
-		<div id="report" class="icon-cont">
-			<img src="../assets/img/icons/Light/Block.svg" alt="">
-			<p class="light-text">Report</p>
-		</div>
+		${data.is_own === 1 ? `
+            <div id="edit_post" class="icon-cont">
+                <img src="../assets/img/icons/Light/Edit.svg" alt="">
+                <p class="light-text">Edit</p>
+            </div>
+        ` : `
+            <div id="report" class="icon-cont">
+                <img src="../assets/img/icons/Light/Block.svg" alt="">
+                <p class="light-text">Report</p>
+            </div>
+        `}
 	</div>`
 	img_view.insertAdjacentHTML('afterbegin', img_HTML)
 
@@ -136,7 +143,7 @@ function display_detail(data) {
                 <p id="poster-id">${data.poster_id || 'Unknown'}</p>
                 <h1 id="title">${data.title || 'Untitled'}</h1>
                 <h2 id="description">${data.description || 'NA'}</h2>
-                <p id="date">${data.date || 'Unkown Date'}</p>`
+                <p id="date">${data.date || 'Unkown Date'}</p>`	
 	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
 }
 
