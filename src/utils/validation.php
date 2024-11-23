@@ -107,6 +107,24 @@ function validate_image($file) {
     return true;
 }
 
+function validate_title($title) {
+    if (!$title) {
+        return 'Title is not defined!';
+    }
+
+    if (empty(trim($title))) {
+        return 'Title cannot be empty.';
+    }
+
+    $min_len = 5;
+    $max_len = 30;
+    if (strlen($title) < $min_len || strlen($title) > $max_len) {
+        return "Title must be between $min_len and $max_len characters long!";
+    }
+
+    return true;
+}
+
 function validate_description($description) {
     if (!$description) {
         return 'Description is not defined!';
@@ -119,7 +137,7 @@ function validate_description($description) {
     $min_len = 10;
     $max_len = 300;
     if (strlen($description) < $min_len || strlen($description) > $max_len) {
-        return 'Description must be between 10 and 300 characters long!';
+        return "Description must be between $min_len and $max_len characters long!";
     }
 
     return true;

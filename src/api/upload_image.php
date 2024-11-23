@@ -44,7 +44,6 @@ try {
         'title' => $_POST['title'],
         'description' => $_POST['description'],
         'img_url' => $response->data->image->url,
-        'description' => $_POST['description'],
         'poster_id' => encode_uuid($_SESSION['user_id']),
         'date_time' => (new DateTime())->format('Y-m-d H:i:s'),
         'likes' => 0
