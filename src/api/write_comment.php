@@ -4,6 +4,7 @@ require_once '../config/database.php';
 require_once '../config/session.php';
 include_once '../utils/uuid.php';
 include_once '../utils/authenticate_user.php';
+include_once '../utils/echo_result.php';
 
 try {
     if (!isset($_SESSION['user_id'])) {
@@ -36,7 +37,7 @@ try {
     $search_user = authenticate_id($_SESSION['user_id']);
     echo_success('Comment added successfully!', array(
         'commenter_name' => $search_user['username'],
-        'img_url' => $search_user['img_url'],
+        'img_url' => $search_user['profile_url'],
         'comment_date' => $date
     ));
 } catch (Exception $e) {

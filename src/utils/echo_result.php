@@ -1,6 +1,6 @@
 <?php
 
-function echo_success($message, $data = null)
+function echo_success($message, $data = [])
 {
     echo json_encode(array(
         'status' => 'success',
@@ -9,7 +9,7 @@ function echo_success($message, $data = null)
     ));
 };
 
-function echo_fail($message, $error = null)
+function echo_fail($message, $error = [])
 {
     echo json_encode(array(
         'status' => 'fail',
