@@ -23,10 +23,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         </section>
 
         <section class="form-main flex-row">
-            <img class="img-preview" src="../assets/img/default_img_prev.png" alt="Image Post" title="Image Post">
+            <img id="post_img" src="../assets/img/default_img_prev.png" alt="Image Post" title="Image Post">
             <div class="flex-column">
                 <label for="description" class="post-description dark-text">Description</label>
-                <input type="text" name="description" id="description" min="1" max="300">
+                <textarea name="description" id="description" id="description" cols="30" rows="10" maxlength="300"></textarea>
             </div>
         </section>
 

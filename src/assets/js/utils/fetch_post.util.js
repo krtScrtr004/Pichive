@@ -105,7 +105,7 @@ function display_detail(data) {
 		return
 	}
 
-	const img_view = document.querySelector('.img-view')
+	const img_view = document.querySelector('#post_modal .img-view')
 	const img_HTML = `<img src="${
 		data.img_url || '../assets/img/default_img_prev.png'
 	}" alt="Image preview" data-id=${data.id || null} data-like="${
@@ -143,11 +143,11 @@ function display_detail(data) {
 
 	const post_detail = document.querySelector('.post-detail')
 	const detail_HTML = `
-                <h3 id="poster-name">${data.username || 'Anonymous'}</h3>
-                <p id="poster-id">${data.poster_id || 'Unknown'}</p>
-                <h1 id="title">${data.title || 'Untitled'}</h1>
-                <h2 id="description">${data.description || 'NA'}</h2>
-                <p id="date">${data.date || 'Unkown Date'}</p>`
+                <h3 id="poster-name" class="dark-text">${data.username || 'Anonymous'}</h3>
+                <p id="poster-id" class="dark-text">${data.poster_id || 'Unknown'}</p>
+                <h1 id="title" class="dark-text">${data.title || 'Untitled'}</h1>
+                <h2 id="description" class="dark-text">${data.description || 'NA'}</h2>
+                <p id="date" class="dark-text">${data.date_time || 'Unkown Date'}</p>`
 	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
 }
 
@@ -219,8 +219,49 @@ function add_icon_event(post) {
 	if (edit) {
 		edit.onclick = async () => {
 			const edit_post_modal = document.querySelector('#edit_post_modal')
-			
 			edit_post_modal.classList.add('show-modal')
+
+			const img = document.querySelector('#post_img')
+			const title = document.querySelector(
+				'#edit_post_modal #title'
+			)
+			const description = document.querySelector(
+				'#edit_post_modal #description'
+			)
+
+			img.src = post['img_url']
+			title.value = post['title']
+			description.value = post['description']
+
+			edit_post_modal.onclick = (e) => {
+				if (e.target === edit_post_modal) {
+					edit_post_modal.classList.remove('show-modal')
+				}
+			}
+
+
+			document.querySelector('#edit_post_modal #cancel_btn').onclick = () => {
+				edit_post_modal.classList.remove('show-modal')
+			}
+
+			document.querySelector('#edit_post_modal #edit_btn').onclick =
+				async () => {
+					try {
+                        const response = await send_data('../api/edit_post.php', {
+                            id: post['id'],
+                            title: title.value,
+                            description: description.value,
+                        })
+                        const test = test_response(response)
+                        if (!test['status']) {
+                            throw new Error(test['message'])
+                        }
+
+                        // TODO:
+                    } catch (error) {
+                        result_box.innerHTML = error
+                    }
+				}
 		}
 	}
 
@@ -254,6 +295,7 @@ function add_icon_event(post) {
 					}
 
 					// TODO:
+					location.reload()
 				} catch (error) {
 					result_box.innerHTML = error
 				}

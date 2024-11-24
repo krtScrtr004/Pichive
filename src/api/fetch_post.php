@@ -115,7 +115,7 @@ try {
         $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
-    } else if ($content_type === 'profile') { // TODO:
+    } else if ($content_type === 'profile') { 
         $query = $pdo->prepare("SELECT 
                                     p.id,
                                     p.title, 

@@ -4,7 +4,7 @@
 
 .modal.edit_post {
     width: 50%;
-    height: fit-content;
+    height: 60%;
     padding: var(--default-padding);
 }
 
@@ -18,13 +18,16 @@
     flex: 1
 }
 
-#description {
+.form-main.flex-row,
+#edit_post_modal #description {
     width: 100%;
     height: 100%;
 }
 
-#edit_post_modal .img-preview {
+#post_img {
     width: 60%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* .form-buttons {
