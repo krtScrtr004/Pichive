@@ -49,8 +49,8 @@ export function display_comments_in_batches(
 		batch.forEach((record) => {
 			if (parseInt(img_id) === record['post_id']) {
 				display_comment({
-					img_url: record['img_url'],
-					commenter_name: record['commenter_name'],
+					img_url: record['profile_url'],
+					commenter_name: record['username'],
 					comment_content: record['comment'],
 					comment_date: record['date_time'],
 				})
