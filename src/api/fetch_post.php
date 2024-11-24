@@ -147,7 +147,7 @@ try {
                                 ON 
                                     pl.post_id = p.id AND pl.user_id = :id
                                 WHERE 
-                                    p.id = :id AND
+                                    p.poster_id = :id AND
                                     b.their_id IS NULL
                                 ORDER BY 
                                     p.date_time DESC 
