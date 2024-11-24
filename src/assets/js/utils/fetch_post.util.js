@@ -123,17 +123,21 @@ function display_detail(data) {
 			<img src="../assets/img/icons/Light/Link.svg" alt="">
 			<p class="light-text">Copy<br>Link</p>
 		</div>
-		${data.is_own === 1 ? `
+		${
+			data.is_own === 1
+				? `
             <div id="edit_post" class="icon-cont">
                 <img src="../assets/img/icons/Light/Edit.svg" alt="">
                 <p class="light-text">Edit</p>
             </div>
-        ` : `
+        `
+				: `
             <div id="report" class="icon-cont">
                 <img src="../assets/img/icons/Light/Block.svg" alt="">
                 <p class="light-text">Report</p>
             </div>
-        `}
+        `
+		}
 	</div>`
 	img_view.insertAdjacentHTML('afterbegin', img_HTML)
 
@@ -143,7 +147,7 @@ function display_detail(data) {
                 <p id="poster-id">${data.poster_id || 'Unknown'}</p>
                 <h1 id="title">${data.title || 'Untitled'}</h1>
                 <h2 id="description">${data.description || 'NA'}</h2>
-                <p id="date">${data.date || 'Unkown Date'}</p>`	
+                <p id="date">${data.date || 'Unkown Date'}</p>`
 	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
 }
 
@@ -167,6 +171,7 @@ function add_modal_event(post) {
 function add_icon_event(post) {
 	const like = document.querySelector('#like')
 	const copy_link = document.querySelector('#copy_link')
+	const edit = document.querySelector('#edit_post')
 	const report = document.querySelector('#report')
 
 	like.onclick = async () => {
@@ -211,37 +216,47 @@ function add_icon_event(post) {
 			})
 	}
 
-	report.onclick = async () => {
-		const report_modal = document.querySelector('#report_modal')
-		report_modal.classList.add('show-modal')
+	if (edit) {
+		edit.onclick = async () => {
+			const edit_post_modal = document.querySelector('#edit_post_modal')
+			
+			edit_post_modal.classList.add('show-modal')
+		}
+	}
 
-		report_modal.onclick = (e) => {
-			if (e.target === report_modal) {
+	if (report) {
+		report.onclick = async () => {
+			const report_modal = document.querySelector('#report_modal')
+			report_modal.classList.add('show-modal')
+
+			report_modal.onclick = (e) => {
+				if (e.target === report_modal) {
+					report_modal.classList.remove('show-modal')
+				}
+			}
+
+			document.querySelector('#report_modal #cancel_btn').onclick = () => {
 				report_modal.classList.remove('show-modal')
 			}
-		}
 
-		document.querySelector('#report_modal #cancel_btn').onclick = () => {
-			report_modal.classList.remove('show-modal')
-		}
+			document.querySelector('#report_btn').onclick = async () => {
+				try {
+					const description = document.querySelector(
+						'#report_modal form #description'
+					)
+					const response = await send_data('../api/report_post.php', {
+						id: post['id'],
+						description: description.value,
+					})
+					const test = test_response(response)
+					if (!test['status']) {
+						throw new Error(test['message'])
+					}
 
-		document.querySelector('#report_btn').onclick = async () => {
-			try {
-				const description = document.querySelector(
-					'#report_modal form #description'
-				)
-				const response = await send_data('../api/report_post.php', {
-					id: post['id'],
-					description: description.value,
-				})
-				const test = test_response(response)
-				if (!test['status']) {
-					throw new Error(test['message'])
+					// TODO:
+				} catch (error) {
+					result_box.innerHTML = error
 				}
-
-				// TODO:
-			} catch (error) {
-				result_box.innerHTML = error
 			}
 		}
 	}

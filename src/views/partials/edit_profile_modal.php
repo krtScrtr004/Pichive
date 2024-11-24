@@ -11,11 +11,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 <link rel="stylesheet" href="../assets/style/utils.css">
 <link rel="stylesheet" href="../assets/style/edit_profile.css">
 
-<div class="modal-wrapper" id="edit_profile_modal">
+<section class="modal-wrapper" id="edit_profile_modal">
     <span class="result"></span>
+    
     <section class="modal edit-profile light-background dark-text">
-        <span class="result"></span>
-
         <!-- Right halve side -->
         <div class="left-halve flex-column">
             <h3>EDIT PROFILE INFORMATION</h3>
@@ -67,5 +66,5 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
             </form>
         </div>
     </section>
-</div>
+</section>
 

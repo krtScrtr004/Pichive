@@ -2,6 +2,7 @@
 require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
+include_once 'partials/edit_post_modal.php';
 include_once 'partials/report_modal.php';
 
 if (
