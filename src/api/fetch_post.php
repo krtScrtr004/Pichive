@@ -123,7 +123,8 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username,                                                               CASE 
+                                    u.username,                                                               
+                                    CASE 
                                         WHEN p.poster_id = :id THEN 1 
                                         ELSE 0 
                                     END AS is_own,
@@ -154,6 +155,57 @@ try {
                                     $limit OFFSET $offset");
         $query->execute(array(
             ':id' => encode_uuid($_GET['id'] ?? $_SESSION['user_id']),
+        ));
+    } else if ($content_type === 'like') {
+        $query = $pdo->prepare("SELECT 
+                                    p.id,
+                                    p.title, 
+                                    p.img_url, 
+                                    p.description, 
+                                    p.date_time, 
+                                    p.likes,
+                                    p.poster_id, 
+                                    u.username,
+                                    CASE 
+                                        WHEN p.poster_id = :id THEN 1 
+                                        ELSE 0 
+                                    END AS is_own,
+                                    CASE 
+                                        WHEN pl.user_id IS NOT NULL THEN 1
+                                        ELSE 0
+                                    END AS is_liked
+                                FROM 
+                                    post AS p
+                                INNER JOIN 
+                                    user AS u   
+                                ON 
+                                    p.poster_id = u.id
+                                LEFT JOIN 
+                                    p_like AS l
+                                ON 
+                                    u.id = l.user_id 
+                                LEFT JOIN 
+                                    block AS b 
+                                ON 
+                                    b.my_id = :id AND b.their_id = u.id
+                                LEFT JOIN 
+                                    p_like AS pl
+                                ON 
+                                    pl.post_id = p.id AND pl.user_id = :id
+                                LEFT JOIN 
+                                    report AS r
+                                ON 
+                                    r.post_id = p.id AND r.user_id = :id
+                                WHERE 
+                                    l.user_id IS NOT NULL
+                                    AND b.their_id IS NULL
+                                    AND r.post_id IS NULL -- Exclude reported posts
+                                ORDER BY 
+                                    p.date_time DESC 
+                                LIMIT 
+                                    $limit OFFSET $offset");
+        $query->execute(array(
+            ':id' => encode_uuid($_SESSION['user_id']),
         ));
     }
 
