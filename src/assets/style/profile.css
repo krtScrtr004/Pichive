@@ -35,3 +35,15 @@ main-partition {
     font-size: 1.5rem;
     font-weight: 300;;
 }
+
+.post-tabs {
+    justify-content: center;
+    align-items: center;
+}
+
+.post-tabs button {
+    background-color: transparent;
+    border: none;
+    padding: var(--default-padding);
+    font-weight: 600;
+}

@@ -53,14 +53,24 @@ if (
                                 <button id="upload_img_btn" type="submit">Upload</button>
                             <?php else: ?>
                                 <button id="follow_user_btn" type="submit">Follow</button>
-                                <button id="block_user_btn" type="submit">Block</button>                                
+                                <button id="block_user_btn" type="submit">Block</button>
                             <?php endif; ?>
                         </div>
                         <p id="user_bio" class="bio"></p>
                     </section>
                 </div>
 
-                <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>" data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
+                <section class="profile-posts flex-column">
+                    <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
+                        <div class="post-tabs flex-row">
+                            <button class="dark-text">Posts</button>
+                            <button class="dark-text">Liked</button>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>" data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
+                </section>
+
             </section>
 
             <div class="loading">Loading more images...</div>

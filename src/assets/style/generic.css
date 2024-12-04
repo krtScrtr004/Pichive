@@ -7,7 +7,7 @@
     --default-light-opacity-bg: rgba(233, 233, 233, 0.5);
     --default-dark-opacity-bg: rgba(28, 30, 31, 0.5);
 
-    --default-padding: 1.5em;
+    --default-padding: 1em;
     --default-drop: 1px;
 }
 
@@ -51,4 +51,8 @@ aside {
 textarea {
     resize: none;
     padding: 0.3rem;
+}
+
+button {
+    cursor: pointer;
 }
