@@ -22,7 +22,6 @@ try {
     $query = null;
     if ($content_type === 'home') {
         // Only include own, follower, and followed users' posts
-        // TODO:
         $query = $pdo->prepare("SELECT 
                                     p.id,
                                     p.title, 
@@ -49,18 +48,18 @@ try {
                                 LEFT JOIN 
                                     follow AS f
                                 ON 
-                                    p.poster_id = f.their_id AND f.my_id = :id  -- Include followed users posts
+                                    (p.poster_id = f.their_id OR p.poster_id = f.my_id)
+                                    AND f.my_id = :id
                                 LEFT JOIN 
                                     p_like AS pl
                                 ON 
-                                    p.id = pl.post_id AND pl.user_id = :id  
+                                    p.id = pl.post_id AND pl.user_id = :id
                                 LEFT JOIN 
                                     report AS r
                                 ON 
                                     p.id = r.post_id AND r.user_id = :id
                                 WHERE 
-                                    (f.my_id = :id OR p.poster_id = :id)
-                                    AND r.post_id IS NULL                      -- Exclude reported posts
+                                    r.post_id IS NULL  -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
                                 LIMIT 
@@ -115,7 +114,7 @@ try {
         $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
-    } else if ($content_type === 'profile') { 
+    } else if ($content_type === 'profile') {
         $query = $pdo->prepare("SELECT 
                                     p.id,
                                     p.title, 
@@ -154,7 +153,7 @@ try {
                                 LIMIT 
                                     $limit OFFSET $offset");
         $query->execute(array(
-            ':id' => encode_uuid(htmlspecialchars($_GET['id']) ?? $_SESSION['user_id']),
+            ':id' => encode_uuid($_GET['id'] ?? $_SESSION['user_id']),
         ));
     }
 
