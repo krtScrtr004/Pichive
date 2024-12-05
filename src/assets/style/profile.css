@@ -47,3 +47,11 @@ main-partition {
     padding: var(--default-padding);
     font-weight: 600;
 }
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: grid;
+}

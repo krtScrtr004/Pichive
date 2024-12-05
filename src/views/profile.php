@@ -63,12 +63,12 @@ if (
                 <section class="profile-posts flex-column">
                     <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
                         <div class="post-tabs flex-row">
-                            <button class="dark-text">Posts</button>
-                            <button class="dark-text">Liked</button>
+                            <form action="" method="POST">
+                                <button id="own_post_tab" class="dark-text" type="button">Posts</button>
+                                <button id="liked_post_tab" class="dark-text" type="button">Liked</button>
+                            </form>
                         </div>
                     <?php endif; ?>
-
-                    <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>" data-id="<?php echo htmlspecialchars($_GET['id']); ?>"></div>
                 </section>
 
             </section>
@@ -80,8 +80,9 @@ if (
     <script type="module" src="../assets/js/event/create_post.js"></script>
     <script type="module" src="../assets/js/event/fetch_sidenav_user.js"></script>
     <script type="module" src="../assets/js/event/fetch_user.js"></script>
-    <script type="module" src="../assets/js/event/fetch_post.js"></script>
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
+    <script type="module" src="../assets/js/event/fetch_post.js"></script>
+    <script type="module" src="../assets/js/event/profile_post_tab.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
     <script type="module" src="../assets/js/event/follow_block.js"></script>
 

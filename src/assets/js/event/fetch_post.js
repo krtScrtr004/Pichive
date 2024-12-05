@@ -3,11 +3,11 @@ import { add_post_details } from '../utils/fetch_post.util.js'
 import { remove_comment, has_already_ran } from '../utils/comment.util.js'
 import { remove_details } from '../utils/fetch_post.util.js'
 
-let offset = 0
+export let offset = { current_count : 0}
 const limit = 9
 let is_loading = false // Flag to prevent multiple calls
 
-document.addEventListener('DOMContentLoaded', async () => {
+// document.addEventListener('DOMContentLoaded', async () => {
 	const post_modal = document.querySelector('#post_modal')
 	const result_box = document.querySelector('.result')
 	const center = document.querySelector('.center')
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 	}
 
-	async function load_posts() {
+	export async function load_posts() {
 		if (is_loading) {
 			return
 		}
@@ -46,12 +46,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 		try {
 			const img_grid = document.querySelector('.img-grid')
+			if (!img_grid) {
+				is_loading = false
+				return
+			}
+
 			let response = await get_data(
 				`../api/fetch_post.php?content_type=${
 					img_grid.getAttribute('data-content') ?? 'home'
 				}&id=${
 					img_grid.getAttribute('data-id') ?? null
-				}&offset=${offset}&limit=${limit}`
+				}&offset=${offset['current_count']}&limit=${limit}`
 			)
 			const test = test_response(response)
 			if (!test['status']) {
@@ -85,15 +90,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 					await add_post_details(post)
 				}
 
+				// const content_type = img_grid.getAttribute('data-content')
+
 				img_grid.appendChild(new_img_cont)
 			})
 
 			// Update offset for the next batch of data
-			offset += limit
+			offset['current_count'] += limit
 			loading.style.display = 'none'
 			is_loading = false // Reset loading flag
 		} catch (error) {
 			result_box.innerHTML = error
 		}
 	}
-})
+// })

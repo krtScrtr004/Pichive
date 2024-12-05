@@ -17,8 +17,6 @@ try {
     $limit = 9;
     $offset = intval(htmlspecialchars($_GET['offset'])) ?? 0;
 
-
-
     $query = null;
     if ($content_type === 'home') {
         // Only include own, follower, and followed users' posts
@@ -180,10 +178,10 @@ try {
                                     user AS u   
                                 ON 
                                     p.poster_id = u.id
-                                LEFT JOIN 
+                                INNER JOIN 
                                     p_like AS l
                                 ON 
-                                    u.id = l.user_id 
+                                    p.id = l.post_id AND l.user_id = :id -- Fetch posts liked by the user
                                 LEFT JOIN 
                                     block AS b 
                                 ON 
@@ -197,8 +195,7 @@ try {
                                 ON 
                                     r.post_id = p.id AND r.user_id = :id
                                 WHERE 
-                                    l.user_id IS NOT NULL
-                                    AND b.their_id IS NULL
+                                    b.their_id IS NULL
                                     AND r.post_id IS NULL -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
