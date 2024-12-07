@@ -142,3 +142,21 @@ function validate_description($description) {
 
     return true;
 }
+
+function validate_search_term($search_term) {
+    if (!$search_term) {
+        return 'Search term is not defined!';
+    }
+
+    if (empty(trim($search_term))) {
+        return 'Search term cannot be empty.';
+    }
+
+    $min_len = 1;
+    $max_len = 300;
+    if (strlen($search_term) < $min_len || strlen($search_term) > $max_len) {
+        return "Search term must be between $min_len and $max_len characters long!";
+    }
+
+    return true;
+}
