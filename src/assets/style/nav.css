@@ -30,8 +30,8 @@
 .list-wrapper,
 .link-wrapper,
 .nav-link {
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
     color: white;
 }
 

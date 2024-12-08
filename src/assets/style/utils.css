@@ -43,3 +43,8 @@
 .dark-text {
     color: var(--default-black);
 }
+
+.list {
+    display: flex;
+    align-items: center;
+}

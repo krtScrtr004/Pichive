@@ -1,12 +1,6 @@
 <?php
 require_once '../config/session.php';
-include_once 'partials/create_post.php';
-include_once 'partials/post_modal.php';
-
-if (
-    !isset($_SESSION['user_id']) ||
-    !isset($_SESSION['user_email'])
-) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
@@ -24,38 +18,38 @@ if (
     </section>
 
     <section class="upper-halve">
-        <ul class="list-wrapper">
+        <ul class="list-wrapper list">
             <!-- Home Page -->
-            <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php?page=home">
+            <li class="link-wrapper list">
+                <a class="nav-link list" href="../views/home_explore.php?page=home">
                     <img src="../assets/img/icons/Light/Home.svg" alt="" width="32" height="32">
                     <h3>Home</h3>
                 </a>
             </li>
             <!-- Explore Page -->
-            <li class="link-wrapper">
-                <a class="nav-link" href="../views/home_explore.php?page=explore">
+            <li class="link-wrapper list">
+                <a class="nav-link list" href="../views/home_explore.php?page=explore">
                     <img src="../assets/img/icons/Light/Explore.svg" alt="" width="32" height="32">
                     <h3>Explore</h3>
                 </a>
             </li>
             <!-- Followed Users Page -->
-            <li class="link-wrapper">
-                <a class="nav-link" href="#">
+            <li class="link-wrapper list">
+                <a class="nav-link list" href="#">
                     <img src="../assets/img/icons/Light/User.svg" alt="" width="32" height="32">
                     <h3>Followed User</h3>
                 </a>
             </li>
             <!-- Chat Page -->
-            <li class="link-wrapper">
-                <a class="nav-link" href="#">
+            <li class="link-wrapper list">
+                <a class="nav-link list" href="#">
                     <img src="../assets/img/icons/Light/Chat.svg" alt="" width="32" height="32">
                     <h3>Chat</h3>
                 </a>
             </li>
             <!-- Profile Page -->
-            <li class="link-wrapper">
-                <a class="nav-link" href="../views/profile.php?page=profile&id=<?php echo urlencode($_SESSION['user_id']); ?>">
+            <li class="link-wrapper list">
+                <a class="nav-link list" href="../views/profile.php?page=profile&id=<?php echo urlencode($_SESSION['user_id']); ?>">
                     <img src="../assets/img/icons/Light/Profile.svg" alt="" width="32" height="32">
                     <h3>Profile</h3>
                 </a>
@@ -69,7 +63,7 @@ if (
         <h4 class="halve-title">Followed Users</h4>
         <span class="sidenav-result"></span>
 
-        <ul id="following_user_list" class="list-wrapper">
+        <ul id="following_user_list" class="list-wrapper list">
             <!-- Followed User List -->
         </ul>
     </section>

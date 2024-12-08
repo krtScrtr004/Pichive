@@ -3,11 +3,7 @@ require_once '../config/session.php';
 include_once 'partials/create_post.php';
 include_once 'partials/post_modal.php';
 
-if (
-    !isset($_SESSION['user_id']) ||
-    !isset($_SESSION['user_email']) ||
-    !isset($_GET['page'])
-) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
@@ -19,15 +15,15 @@ if (
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Search Result</title>
     <link rel="stylesheet" href="../assets/style/generic.css">
     <link rel="stylesheet" href="../assets/style/utils.css">
     <link rel="stylesheet" href="../assets/style/img_grid.css">
     <link rel="stylesheet" href="../assets/style/modal.css">
+    <link rel="stylesheet" href="../assets/style/search_result.css">
 </head>
 
-<!-- Note: 'data-page' determine which page to render (home / explore) -->
-<body class="wrapper flex-row" data-page="<?php echo ($_GET['page']); ?>">
+<body class="wrapper flex-row">
     <?php include_once '../component/sidenav.php' ?>
 
     <section class=center>
@@ -35,8 +31,22 @@ if (
 
         <main>
             <div id="result-box"></div>
-            <!-- Note: 'data-content' determine which post content to fetch (home / explore / profile) -->
-            <div class="img-grid" data-content="<?php echo  htmlspecialchars($_GET['page']); ?>"></div>
+
+            <div class="search-result flex-row">
+                <div class="img-grid"></div>
+                <div class="user-list">
+                    <div class="user-wrapper list">
+                        <a class="flex-row" href="">
+                            <img class="circle" src="../assets/img/default_img_prev.png" alt="User Profile" title="User Profile" width="36" height="36">
+                            
+                            <span class="user-details flex-column">
+                                <h4>Username</h4>
+                                <p>USER ID</p>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <div class="loading">Loading more images...</div>
         </main>

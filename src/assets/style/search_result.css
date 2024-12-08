@@ -1,0 +1,31 @@
+.search-result {
+    padding: var(--default-padding) 0;
+}
+
+.search-result>.img-grid {
+    flex: 1;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.user-list {
+    width: 30%;
+}
+
+.user-list * {
+    color: var(--default-black);
+}
+
+.user-wrapper>.flex-row>img {
+    margin-right: 0.5rem;
+}
+
+.user-details>h4 {
+    font-size: 1.2rem
+}
+
+.user-details>p {
+    color: var(--default-dark-opacity-bg);
+    font-size: 0.8rem;
+}
