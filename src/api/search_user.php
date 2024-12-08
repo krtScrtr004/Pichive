@@ -31,7 +31,7 @@ try {
     }
 
     $search_term = preg_replace('/[+\-><()~*\"@]+/', '', $data['search_term']);
-    $limit = 9;
+    $limit = 15;
     $offset = intval(htmlspecialchars($data['offset'])) ?? 0;
 
     $query = $pdo->prepare("SELECT 
@@ -50,17 +50,15 @@ try {
                             AND
                                 b.their_id IS NULL
                             LIMIT
-                                :limit OFFSET :offset");
+                                $limit OFFSET $offset");
     $query->execute(array(
         ':my_id' => encode_uuid($_SESSION['user_id']),
         ':search_term' => $search_term . '*',
-        ':limit' => $limit,
-        ':offset' => $offset
     ));
 
     $result = $query->fetchAll();
     foreach ($result as $key => &$value) {
-        $value['poster_id'] = parse_uuid($value['poster_id']);
+        $value['id'] = parse_uuid($value['id']);
     }
     unset($value);
 

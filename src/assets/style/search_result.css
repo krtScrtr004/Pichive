@@ -11,6 +11,7 @@
 
 .user-list {
     width: 30%;
+    gap: 0.5rem;
 }
 
 .user-list * {

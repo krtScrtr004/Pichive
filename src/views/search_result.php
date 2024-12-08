@@ -34,18 +34,8 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="search-result flex-row">
                 <div class="img-grid" data-content="search"></div>
-                <div class="user-list">
-                    <div class="user-wrapper list">
-                        <a class="flex-row" href="">
-                            <img class="circle" src="../assets/img/default_img_prev.png" alt="User Profile" title="User Profile" width="36" height="36">
 
-                            <span class="user-details flex-column">
-                                <h4>Username</h4>
-                                <p>USER ID</p>
-                            </span>
-                        </a>
-                    </div>
-                </div>
+                <div id="search_user_list" class="user-list flex-column"></div>
             </div>
 
             <div class="loading">Loading more images...</div>

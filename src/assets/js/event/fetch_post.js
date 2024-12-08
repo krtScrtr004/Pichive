@@ -26,9 +26,9 @@ post_modal.onclick = (e) => {
 	}
 }
 
-function handle_scroll() {
+async function handle_scroll() {
 	if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-		load_posts()
+		await load_posts()
 	}
 }
 
