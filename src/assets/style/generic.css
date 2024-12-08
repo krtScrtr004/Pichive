@@ -33,7 +33,7 @@ a {
 header {
     position: sticky;
     top: 0;
-    border: solid 1px red;
+    box-shadow: 0 0 1px 1px var(--default-dark-opacity-bg);
 }
 
 aside {
