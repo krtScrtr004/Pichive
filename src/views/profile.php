@@ -83,6 +83,7 @@ if (
     <script type="module" src="../assets/js/event/fetch_user.js"></script>
     <script type="module" src="../assets/js/event/edit_profile.js"></script>
     <script type="module" src="../assets/js/event/fetch_post.js"></script>
+    <script type="module" src="../assets/js/event/search.js"></script>
     <script type="module" src="../assets/js/event/profile_post_tab.js"></script>
     <script type="module" src="../assets/js/event/comment.js"></script>
     <script type="module" src="../assets/js/event/follow_block.js"></script>

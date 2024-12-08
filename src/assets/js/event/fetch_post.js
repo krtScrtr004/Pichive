@@ -32,7 +32,7 @@ function handle_scroll() {
 	}
 }
 
-async function load_posts() {
+export async function load_posts() {
 	if (is_loading) {
 		return
 	}
@@ -98,8 +98,6 @@ async function load_posts() {
 				// Open post modal when img container it clicked
 				await add_post_details(post)
 			}
-
-			// const content_type = img_grid.getAttribute('data-content')
 
 			img_grid.appendChild(new_img_cont)
 		})

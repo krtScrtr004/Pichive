@@ -198,7 +198,7 @@ try {
                                     b.their_id IS NULL
                                     AND r.post_id IS NULL -- Exclude reported posts
                                 ORDER BY 
-                                    p.date_time DESC 
+                                    pl.date_time DESC 
                                 LIMIT 
                                     $limit OFFSET $offset");
         $query->execute(array(

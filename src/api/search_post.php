@@ -30,28 +30,41 @@ try {
         throw new Exception($search_term_result);
     }
 
-    $search_term = preg_replace('/[+\-><()~*\"@]+/', '', $data['search_term'] );
+    $search_term = preg_replace('/[+\-><()~*\"@]+/', '', $data['search_term']);
     $limit = 9;
     $offset = intval(htmlspecialchars($data['offset'])) ?? 0;
 
     $query = $pdo->prepare("SELECT 
-                                id,
-                                title,
-                                img_url,
-                                description,
-                                date_time,
-                                likes,
-                                poster_id
+                                p.id,
+                                p.title,
+                                p.img_url,
+                                p.description,
+                                p.date_time,
+                                p.likes,
+                                p.poster_id,
+                                CASE 
+                                    WHEN pl.user_id IS NOT NULL THEN 1
+                                    ELSE 0
+                                END AS is_liked
                             FROM
-                                post
+                                post AS p
+                            LEFT JOIN
+                                p_like AS pl
+                            ON
+                                p.id = pl.post_id AND pl.user_id = :user_id
+                            LEFT JOIN
+                                block AS b
+                            ON
+                                b.my_id = :user_id AND b.their_id = p.poster_id -- Check for blocked users
                             WHERE 
-                                MATCH(title, description)
-                                AGAINST(:search_term IN BOOLEAN MODE)
+                                MATCH(p.title, p.description) AGAINST(:search_term IN BOOLEAN MODE)
+                                AND b.their_id IS NULL -- Exclude posts from blocked users
                             ORDER BY
-                                date_time DESC
+                                p.date_time DESC
                             LIMIT
                                 $limit OFFSET $offset");
     $query->execute(array(
+        ':user_id' => encode_uuid($_SESSION['user_id']),
         ':search_term' => $search_term . '*'
     ));
 
@@ -60,8 +73,8 @@ try {
         $value['poster_id'] = parse_uuid($value['poster_id']);
     }
     unset($value);
-  
-    echo_success('Successully retrieved search results!', $result);
+
+    echo_success('Successully retrieved post search results!', $result);
 } catch (Exception $e) {
     echo_fail($e->getMessage());
 }
