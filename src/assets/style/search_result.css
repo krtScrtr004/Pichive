@@ -1,16 +1,28 @@
 .search-result {
-    padding: var(--default-padding) 0;
+    min-height: 100%;
+}
+
+.search-result > * {
+    padding: var(--default-padding) var(--default-padding);
+
 }
 
 .search-result>.img-grid {
     flex: 1;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
-    padding-top: 0;
-    padding-bottom: 0;
 }
 
-.user-list {
-    width: 30%;
+.search-result>.img-grid > * {
+    width: 100%;
+    height: fit-content;
+    object-fit: cover;
+}
+
+.search-result>.user-list {
+    background-color: var(--default-white);
+    /* border-left: 1px solid var(--default-black); */
+    min-width: 30%;
     gap: 0.5rem;
 }
 
