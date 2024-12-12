@@ -50,7 +50,7 @@ if (
                         <div class="buttons">
                             <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
                                 <button id="edit_profile_btn" type="submit">Edit Profile</button>
-                                <button id="upload_img_btn" type="submit">Upload</button>
+                                <button id="create_post_btn" type="submit">Upload</button>
                             <?php else: ?>
                                 <button id="follow_user_btn" type="submit">Follow</button>
                                 <button id="block_user_btn" type="submit">Block</button>

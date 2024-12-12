@@ -6,33 +6,34 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 }
 ?>
 
-<style>
-    #img_preview {
-        width: 400px;
-        height: 400px;
-    }
-</style>
+<link rel="stylesheet" href="../assets/style/create_post.css">
+<link rel="stylesheet" href="../assets/style/modal.css">
 
-<section id="create_post_modal" popover>
-    <section class="result_box"></section>
-    <!-- Create Post Form -->
-    <form action="" method="POST">
-        <section class="form-head">
-            <input type="text" name="title" id="title" placeholder="Title here..." min="1" max="50">
-        </section>
+<section id="create_post_modal" class="modal-wrapper">
+    <span class="result_box"></span>
 
-        <section class="form-main">
-            <label class="img-picker">
-                <input type="file" name="file_picker" id="file_picker" accept="image/*" style="display: none;">
-                <img id="img_preview" alt="Click to select image" title="Click to select image">
-            </label>
-            <input type="text" name="description" id="description" min="1" max="300">
-        </section>
+    <section class="modal create_post flex-column">
+        <h3 class="heading-title">Create New Post</h3>
+        <!-- Create Post Form -->
+        <form action="" method="POST" class="flex-column">
+            <section class="form-head">
+                <input type="text" name="title" id="title" placeholder="Title here..." min="1" max="50">
+            </section>
 
-        <section class="form-buttons">
-            <button id="post_btn">POST</button>
-            <button id="cancel_btn">CANCEL</button>
-        </section>
-    </form>
+            <section class="form-main flex-row">
+                <label class="img-picker">
+                    <input type="file" name="file_picker" id="file_picker" accept="image/*">
+                    <img id="img_preview" src="../assets/img/default_img_prev.png" alt="Click to select image" title="Click to select image" width="400" height="400">
+                </label>
+
+                <textarea name="description" id="description" cols="30" rows="10" maxlength="300" placeholder="Description..."></textarea>
+            </section>
+
+            <section class="form-buttons flex-row">
+                <button id="cancel_btn">CANCEL</button>
+                <button id="post_btn">POST</button> 
+            </section>
+        </form>
+    </section>
+
 </section>
-

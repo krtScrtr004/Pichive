@@ -48,3 +48,8 @@
     display: flex;
     align-items: center;
 }
+
+.heading-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}

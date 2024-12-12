@@ -1,0 +1,54 @@
+#create_post_modal {
+    z-index: 5000;
+}
+
+.create_post.modal {
+    height:fit-content;
+    width: 50%;
+    background-color: var(--default-white);
+    padding: var(--default-padding);
+}
+
+.create_post.modal>form {
+    gap: 1rem;
+}
+
+#title {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.img-picker,
+#description {
+    flex: 1;
+}
+
+#file_picker {
+    display: none;
+}
+
+#img_preview {
+    width: 400px;
+    height: 400px;
+}
+
+.form-buttons {
+    gap: 0.5rem;
+}
+
+.form-buttons * {
+    padding: 0.5rem;
+}
+
+.form-buttons>#post_btn {
+    width: 70%;
+    background-color: var(--default-black);
+    color: var(--default-white);
+}
+
+.form-buttons>#cancel_btn {
+    flex: 1;
+    border: 0.5px solid var(--default-black);
+    color: var(--default-black);
+}
+
