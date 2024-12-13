@@ -46,9 +46,11 @@
 .profile-icon-menu>img {
     border: 1px solid var(--default-black);
     position: relative;
+    cursor: pointer;
 }
 
 .drop-down {
+    display: none;
     width: 15vw;
     background-color: var(--default-black);
     color: var(--default-white);

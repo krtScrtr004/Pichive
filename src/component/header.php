@@ -19,7 +19,7 @@
         <span class="profile-icon-menu flex-row">
             <img class="circle" src="../assets/img/default_img_prev.png" alt="Profile Icon Menu" title="Profile Icon Menu" width="36" height="36">
 
-            <div class="drop-down flex-row">
+            <div class="drop-down">
                 <ul class="flex-column">
                     <li>
                         <a class="link-wrapper list" href="">
