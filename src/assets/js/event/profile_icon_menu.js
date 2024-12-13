@@ -1,11 +1,18 @@
 const profile_icon_menu = document.querySelector('.profile-icon-menu');
+const drop_down = document.querySelector('.profile-icon-menu > .drop-down');
 
-profile_icon_menu.onclick = () => {
-    const drop_down = document.querySelector('.profile-icon-menu>.drop-down')
-
-    if (drop_down.style.display === 'none') {
-        drop_down.style.display = 'flex'
+// Toggle visibility of dropdown menu
+profile_icon_menu.onclick = (e) => {
+    e.stopPropagation();
+    if (drop_down.style.display === 'flex') {
+        drop_down.style.display = 'none';
     } else {
-        drop_down.style.display = 'none'
+        drop_down.style.display = 'flex';
     }
-}
+};
+
+window.onclick = () => {
+    if (drop_down.style.display === 'flex') {
+        drop_down.style.display = 'none';
+    }
+};
