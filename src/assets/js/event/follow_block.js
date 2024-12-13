@@ -1,5 +1,5 @@
 import { send_data, test_response } from '../utils/request.js'
-import { listed_followed_user } from '../utils/fetch_sidenav_user.util.js'
+import { listed_followed_user } from '../utils/fetch_user_list.util.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const result_box = document.querySelector('.result-box')

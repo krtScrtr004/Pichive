@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../assets/style/generic.css">
+<link rel="stylesheet" href="../assets/style/utils.css">
 <link rel="stylesheet" href="../assets/style/header.css">
 
 <header class="header flex-row">
@@ -17,7 +18,38 @@
 
         <span class="profile-icon-menu flex-row">
             <img class="circle" src="../assets/img/default_img_prev.png" alt="Profile Icon Menu" title="Profile Icon Menu" width="36" height="36">
-        </span>
 
+            <div class="drop-down flex-row">
+                <ul class="flex-column">
+                    <li>
+                        <a class="link-wrapper list" href="">
+                            <img src="../assets/img/icons/Light/DarkMode.svg" alt="Dark Mode Icon" width="24" height="24">
+                            <h3>Dark Mode</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link-wrapper list" href="">
+                            <img src="../assets/img/icons/Light/AboutUs.svg" alt="About Us Icon" width="24" height="24">
+                            <h3>About Us</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link-wrapper list" href="">
+                            <img src="../assets/img/icons/Light/Block.svg" alt="Report Icon" width="24" height="24">
+                            <h3>Report Bug</h3>
+                        </a>
+                    </li>
+
+                    <hr class="halve-divider light-text">
+
+                    <li>
+                        <a class="link-wrapper list" href="">
+                            <img src="../assets/img/icons/Light/Logout.svg" alt="Logout Icon" width="24" height="24">
+                            <h3>Logout</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </span>
     </div>
 </header>

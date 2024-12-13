@@ -45,4 +45,35 @@
 
 .profile-icon-menu>img {
     border: 1px solid var(--default-black);
+    position: relative;
+}
+
+.drop-down {
+    width: 15vw;
+    background-color: var(--default-black);
+    color: var(--default-white);
+    padding: 2rem;
+    position: absolute;
+    top: 4.5rem;
+    right: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.drop-down>ul {
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.drop-down li {
+    list-style-type: none;
+}
+
+
+.drop-down li>a>img {
+    margin-right: 1rem;
+}
+
+.drop-down li>a>h3 {
+    font-size: 1rem;
+    color: var(--default-white);
 }
