@@ -12,9 +12,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 <link rel="stylesheet" href="../assets/style/edit_post.css">
 
 <section id="edit_post_modal" class="modal-wrapper">
-    <span class="result"></span>
 
     <section class="modal edit_post flex-column light-background dark-text">
+        <span class="result"></span>
+
         <section class="form-head flex-column">
             <h3 class="dark-text heading-title">Edit Post</h3>
             <label for="title" class="dark-text">Title</label>

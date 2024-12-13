@@ -71,3 +71,8 @@
     font-size: 2rem;
     margin-bottom: 10px;
 }
+
+.result,
+.result-box {
+    display: none;
+}
