@@ -29,6 +29,7 @@ try {
                                     p.likes,
                                     p.poster_id, 
                                     u.username,
+                                    u.profile_url,
                                     CASE 
                                         WHEN p.poster_id = :id THEN 1 
                                         ELSE 0 
@@ -76,6 +77,7 @@ try {
                                     p.likes,
                                     p.poster_id, 
                                     u.username,
+                                    u.profile_url,
                                     CASE 
                                         WHEN p.poster_id = :id THEN 1 
                                         ELSE 0 
@@ -121,7 +123,8 @@ try {
                                     p.date_time, 
                                     p.likes,
                                     p.poster_id, 
-                                    u.username,                                                               
+                                    u.username,  
+                                    u.profile_url,                                                             
                                     CASE 
                                         WHEN p.poster_id = :id THEN 1 
                                         ELSE 0 

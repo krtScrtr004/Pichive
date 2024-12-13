@@ -68,11 +68,29 @@ function display_detail(data) {
 
 	const post_detail = document.querySelector('.post-detail')
 	const detail_HTML = `
-                <h3 id="poster-name" class="dark-text">${data.username || 'Anonymous'}</h3>
-                <p id="poster-id" class="dark-text">${data.poster_id || 'Unknown'}</p>
-                <h1 id="title" class="dark-text">${data.title || 'Untitled'}</h1>
-                <h2 id="description" class="dark-text">${data.description || 'NA'}</h2>
-                <p id="date" class="dark-text">${data.date_time || 'Unkown Date'}</p>`
+				<div class="poster-info flex-row">
+                    <a class="flex-row" href="../views/profile.php?page=profile&id=${
+							data.poster_id ?? null
+						}">
+                        <img class="circle" src="${data.profile_url || '../assets/img/default_img_prev.png'}" alt="Poster Profile Icon" title="Poster Profile Icon" witdh="50" height="50">
+                    
+
+						<div class="flex-column">
+							<h3 id="poster_name" class="light-text">${data.username || 'Anonymous'}</h3>
+							<p id="poster_id" class="light-text">${data.poster_id || 'Unknown'}</p>
+						</div>
+					</a>
+
+                    <div class="flex-row">
+                        <p id="post_date" class="light-text">${data.date_time || 'Unkown Date'}</p>
+                    </div>
+                </div>
+
+				<div class="post-info flex-column">
+					<h1 id="post_title" class="light-text heading-title">${data.title || 'Untitled'}</h1>
+					<p id="post_description" class="light-text">${data.description || 'No description...'}</p>
+				</div>
+            </div>`
 	post_detail.insertAdjacentHTML('afterbegin', detail_HTML)
 }
 

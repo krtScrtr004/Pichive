@@ -21,7 +21,26 @@ if (
 
     <section class="modal">
         <section class="img-view">
-           
+            <!-- <div style="background-color:white;color:black;"> -->
+
+                <!-- <div class="poster-info flex-row">
+                    <a href="">
+                        <img class="circle" src="" alt="Poster Profile Icon" title="Poster Profile Icon" witdh="36" height="36">
+                    </a>
+
+                    <div class="flex-column">
+                        <h3 id="poster-name" class="dark-text">Anonymous</h3>
+                        <p id="poster-id" class="dark-text">Unknown</p>
+                    </div>
+
+                    <div class="flex-row">
+                        <p id="date" class="dark-text">Unkown Date</p>
+                    </div>
+                </div>
+
+                <h1 id="title" class="dark-text">Untitled</h1>
+                <p id="description" class="dark-text">NA</p>
+            </div> -->
         </section>
 
         <section class="detail">
@@ -80,4 +99,3 @@ if (
         </section>
     </section>
 </div>
-
