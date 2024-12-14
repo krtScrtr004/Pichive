@@ -41,7 +41,7 @@ try {
 
     // Search existing otp in user inbox
     if (search_existing_record($search_user['id'])) {
-        delete_otp_record($search_user['id'], $search_user['otp']);
+        delete_otp_record($search_user['id']);
     }
 
     $otp = generate_otp();

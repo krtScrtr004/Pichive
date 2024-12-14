@@ -70,14 +70,13 @@ function update_otp_record($id, $otp)
     }
 }
 
-function delete_otp_record($id, $otp)
+function delete_otp_record($id)
 {
     global $pdo;
     try {
-        $query = $pdo->prepare('DELETE FROM otp WHERE otp_code = :otp_code AND user_id = :id');
+        $query = $pdo->prepare('DELETE FROM otp WHERE user_id = :id');
         $query->execute([
-            ':otp_code' => $otp,
-            ':id' => encode_uuid($id)
+            ':id' => $id
         ]);
     } catch (PDOException $e) {
         throw new PDOException('Database error: ' . $e->getMessage());
