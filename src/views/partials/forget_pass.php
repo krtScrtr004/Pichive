@@ -1,31 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forget Password</title>
-</head>
-<body>
-    <section id="result"></section>
+<link rel="stylesheet" href="../assets/style/generic.css">
+<link rel="stylesheet" href="../assets/style/utils.css">
+<link rel="stylesheet" href="../assets/style/modal.css">
+<link rel="stylesheet" href="../assets/style/forget_pass.css">
+<link rel="stylesheet" href="../assets/style/index.css">
 
-    <section id="forget_password">
-        <form id="forget_password_form" action="" method="POST">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" autocomplete="on" require>
-            <button id="send_otp_btn" type="submit">Send OTP</button>
-        </form>
+<section id="result"></section>
+
+<section id="forget_password_modal" class="modal-wrapper">
+    <section id="forget_password" class="modal flex-column">
+        <div>
+            <span class="close-btn">&times;</span>
+        </div>
+
+        <div class="form-container">
+            <h1 class="heading-title">FORGET PASSWORD</h1>
+            <p>Enter your email and we'll send you an OTP to reset your password.</p>
+
+            <form id="forget_password_form" class="form-container" action="" method="POST">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" autocomplete="on" require>
+                <button id="send_otp_btn" class="button" type="submit">Send OTP</button>
+            </form>
+        </div>
     </section>
+</section>
 
-    <!-- TODO: Create a js script for this  -->
+<!-- TODO: Create a js script for this  -->
+<section id="otp_modal" class="modal-wrapper">
     <section id="otp">
-        <form id="otp_form" action="" method="POST">
+        <form id="otp_form" class="wrapper" action="" method="POST">
             <label for="otp_code">OTP</label>
             <input type="number" name="otp_code" id="otp_code" require>
             <button id="reset_password_btn" type="submit">RESET PASSWORD</button>
         </form>
     </section>
+</section>
 
-    <section id="change_password">
+<section id="change_password_modal" class="modal-wrapper">
+    <section id="change_password" class="modal">
         <form id="change_password_form" action="" method="POST">
             <label for="new_password">New Password</label>
             <input type="password" name="new_password" id="new_password" require>
@@ -37,7 +49,6 @@
 
     <span>Didn't get otp? <a href="#" id="resend_otp"> Resend OTP</a>
     </span>
+</section>
 
-    <script type="module" src="../../assets/js/event/forget_pass.js"></script>
-</body>
-</html>
+<script type="module" src="../../assets/js/event/forget_pass.js"></script>

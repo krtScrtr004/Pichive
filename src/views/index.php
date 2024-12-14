@@ -1,3 +1,6 @@
+<?php include 'partials/forget_pass.php' ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +49,7 @@
             <div class="form-container flex-column">
                 <h1>LOG IN</h1>
                 <p>Hey! Enter your details to login your account</p>
+                
                 <form id="login_form" action="" method="POST">
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" autocomplete="on" required>
@@ -89,7 +93,6 @@
 
     <script type="module" src="../assets/js/event/login.js"></script>
     <script type="module" src="../assets/js/event/signup.js"></script>
-
 </body>
 
 </html>
