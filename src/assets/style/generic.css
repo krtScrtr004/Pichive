@@ -11,10 +11,25 @@
     --default-drop: 1px;
 }
 
+@font-face {
+    font-family: 'REM'; /* Font family name */
+    src: url('../fonts/REM-VariableFont_wght.ttf') format('truetype'); /* Path to font */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'REM';
+    src: url('../fonts/REM-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'REM', Arial, sans-serif;
 }
 
 html,
