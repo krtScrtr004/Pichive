@@ -126,12 +126,11 @@
 .post-info>#post_description::-webkit-scrollbar {
     width: 1px;
     height: 1px;
-    background-color: transparent;
 }
 
-.post-info>#post_description::-webkit-scrollbar-thumb {
+/* .post-info>#post_description::-webkit-scrollbar-thumb {
     background-color: var(--default-white);
-}
+} */
 
 .comment {
     width: 100%;

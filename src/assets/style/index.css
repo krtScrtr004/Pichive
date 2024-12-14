@@ -1,0 +1,58 @@
+.banner,
+#login,
+#signup {
+    height: 100vh;
+    width: calc(100vw - 2px);
+}
+
+.banner {
+    background-color: var(--default-white);
+}
+
+.banner-text,
+.banner-logo {
+    flex: 1;
+}
+
+.banner-text {
+    width: fit-content;
+    justify-content: center;
+    padding: 3rem 0 3rem 6rem;
+}
+
+.banner-text-header {
+    width: fit-content;
+    gap: 1rem;
+}
+
+.banner-text-header>img {
+    height: 10rem;
+    width: fit-content
+}
+
+.banner-text-header>h1 {
+    width: 25ch;
+    font-size: 2.5rem;
+    font-style: italic;
+}
+
+.banner-text>p {
+    width: 60ch;
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+
+.focus-button {
+    margin-top: 1.5rem;
+}
+
+.banner-logo {
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.banner-logo>img {
+    height: 100%;
+    width: fit-content;
+}

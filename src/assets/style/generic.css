@@ -13,16 +13,26 @@
 
 @font-face {
     font-family: 'REM'; /* Font family name */
-    src: url('../fonts/REM-VariableFont_wght.ttf') format('truetype'); /* Path to font */
+    src: url('../font/REM/REM-VariableFont_wght.ttf') format('truetype'); /* Path to font */
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'REM';
-    src: url('../fonts/REM-Italic-VariableFont_wght.ttf') format('truetype');
+    src: url('../font/REM/REM-Italic-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 5px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--default-white);
 }
 
 * {
@@ -35,6 +45,7 @@
 html,
 body {
     width: 100%;
+    scroll-behavior: smooth;
 }
 
 img {
