@@ -13,6 +13,7 @@
 */
 
 require_once '../config/database.php';
+require_once '../config/session.php';
 include_once '../utils/validation.php';
 include_once '../utils/authenticate_user.php';
 include_once '../utils/uuid.php';

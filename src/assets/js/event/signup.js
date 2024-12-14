@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// TODO: Handle success
 			result.innerHTML = response['message']
+			window.location.href = '../views/home_explore.php?page=home'
 		} catch (error) {
 			result.innerHTML = error
 		}
