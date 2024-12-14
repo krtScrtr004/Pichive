@@ -41,6 +41,9 @@
                 <button id="reset_password_btn" class="button" type="submit">RESET PASSWORD</button>
             </form>
         </div>
+
+        <span class="resend-otp-link">Didn't get otp? <a href="#" id="resend_otp"> Resend OTP</a>
+        </span>
     </section>
 </section>
 
@@ -62,12 +65,8 @@
                 <button id="change_password_btn" class="button" type="submit">CHANGE PASSWORD</button>
             </form>
         </div>
-
-        <span class="resend-otp-link">Didn't get otp? <a href="#" id="resend_otp"> Resend OTP</a>
-        </span>
-
     </section>
 
 </section>
 
-<script type="module" src="../../assets/js/event/forget_pass.js"></script>
+<script type="module" src="../assets/js/event/forget_pass.js"></script>

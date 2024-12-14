@@ -38,7 +38,6 @@ try {
     }
 
     // Delete otp after use
-    delete_otp_record($data['id'] ?? null, $data['otp_code'] ?? null);
     echo_success('OTP confirmed!');
 } catch (Exception $e) {
     echo_fail($e->getMessage());

@@ -60,7 +60,7 @@
                 </form>
 
                 <div class="redirect-text flex-column">
-                    <a href="">Forget Password?</a>
+                    <a id="forget_password_link" href="#">Forget Password?</a>
                     <a href="#signup">Create an Account?</a>
                 </div>
             </div>
@@ -93,6 +93,7 @@
 
     <script type="module" src="../assets/js/event/login.js"></script>
     <script type="module" src="../assets/js/event/signup.js"></script>
+    <script type="module" src="../assets/js/event/forget_pass.js"></script>
 </body>
 
 </html>

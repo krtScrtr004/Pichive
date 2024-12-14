@@ -2,6 +2,7 @@
 
 include_once '../utils/authenticate_user.php';
 include_once '../utils/forget_pass.util.php';
+include_once '../utils/request.php';
 include_once '../utils/echo_result.php';
 
 try {
@@ -24,6 +25,18 @@ try {
     }
 
     $otp = generate_otp();
+    $response = send_data('http://localhost/Pichive/src/api/send_otp.php', [
+        'email' => $search_user['email'],
+        'username' => $search_user['username'],
+        'otp_code' => $otp
+    ]);
+    if (
+        !$response ||
+        !isset($response->status) ||
+        $response->status === 'fail'
+    ) {
+        throw new Exception($response['message'] ?? 'Data cannot be processed!');
+    }
     update_otp_record($search_user['id'], $otp);
     echo json_encode(array(
         'status' => 'success',

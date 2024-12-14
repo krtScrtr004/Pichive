@@ -41,7 +41,7 @@ try {
 
     // Search existing otp in user inbox
     if (search_existing_record($search_user['id'])) {
-        throw new Exception('An OTP has already been sent to this email!');
+        delete_otp_record($search_user['id'], $search_user['otp']);
     }
 
     $otp = generate_otp();

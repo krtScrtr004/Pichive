@@ -35,6 +35,7 @@ try {
         throw new Exception('Passwords do not match!');
     }
     
+    delete_otp_record($data['id'] ?? null, $data['otp_code'] ?? null);
     $query = $pdo->prepare('UPDATE user SET password = :password WHERE id = :id');
     $query->execute(array(
         ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
