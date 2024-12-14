@@ -25,14 +25,22 @@
     </section>
 </section>
 
-<!-- TODO: Create a js script for this  -->
 <section id="otp_modal" class="modal-wrapper">
-    <section id="otp">
-        <form id="otp_form" class="wrapper" action="" method="POST">
-            <label for="otp_code">OTP</label>
-            <input type="number" name="otp_code" id="otp_code" require>
-            <button id="reset_password_btn" type="submit">RESET PASSWORD</button>
-        </form>
+    <section id="otp" class="modal flex-column">
+        <div>
+            <span class="close-btn">&times;</span>
+        </div>
+
+        <div class="form-container">
+            <h1 class="heading-title">ONE TIME PASSWORD</h1>
+            <p>We've sent a 6-digit OTP in your email. Kindly check your inbox.</p>
+
+            <form id="otp_form" class="wrapper" action="" method="POST">
+                <label for="otp_code">6-digit OTP</label>
+                <input type="number" name="otp_code" id="otp_code" require>
+                <button id="reset_password_btn" class="button" type="submit">RESET PASSWORD</button>
+            </form>
+        </div>
     </section>
 </section>
 
