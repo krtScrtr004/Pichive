@@ -42,18 +42,27 @@
         </section>
 
         <!-- Login Section -->
-        <section id="login">
-            <form id="login_form" action="" method="POST">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" autocomplete="on" required>
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password" min="8" max="128" required>
-                <button id="login_btn" type="submit">LOG IN</button>
-            </form>
+        <section id="login" class="flex-row">
+            <div class="form-container flex-column">
+                <h1>LOG IN</h1>
+                <p>Hey! Enter your details to login your account</p>
+                <form id="login_form" action="" method="POST">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" autocomplete="on" required>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" min="8" max="128" required>
+                    <button id="login_btn" class="form-button button" type="submit">LOG IN</button>
+                </form>
+
+                <div class="redirect-text flex-column">
+                    <a href="">Forget Password?</a>
+                    <a href="#signup">Create an Account?</a>
+                </div>
+            </div>
         </section>
 
         <!-- Signup Section -->
-        <section id="signup">
+        <section id="signup" class="flex-column">
             <form id="signup_form" action="" method="POST">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" min="3" max="15" autocomplete="on" required>

@@ -14,14 +14,14 @@
 @font-face {
     font-family: 'REM'; /* Font family name */
     src: url('../font/REM/REM-VariableFont_wght.ttf') format('truetype'); /* Path to font */
-    font-weight: normal;
+    font-weight: 100 900;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'REM';
     src: url('../font/REM/REM-Italic-VariableFont_wght.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 100 900;
     font-style: italic;
 }
 
