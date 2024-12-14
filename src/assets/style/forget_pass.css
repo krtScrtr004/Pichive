@@ -1,6 +1,7 @@
 #forget_password,
 #otp,
 #change_password {
+    height: fit-content;
     background-color: var(--default-white);
     padding: 0.5rem 
              var(--default-padding) 
@@ -19,7 +20,7 @@
 }
 
 .close-btn:hover {
-    color: red;
+    color: rgb(194, 18, 18);
     cursor: pointer;
 }
 
@@ -27,6 +28,7 @@
     font-size: 2rem;
 }
 
+.modal>.form-container>h1,
 .modal>.form-container>p {
     text-align: left;
 }
@@ -34,4 +36,13 @@
 .modal>.form-container input {
     background-color: transparent;
     border: 1px solid var(--default-black);
+}
+
+#change_password {
+    padding: 0.5rem 1.5rem 1rem 1.5rem;
+}
+
+.resend-otp-link {
+    margin-top: 2rem;
+    text-align: center;
 }
