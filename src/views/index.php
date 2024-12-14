@@ -50,7 +50,8 @@
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" autocomplete="on" required>
                     <label for="password">Password</label>
-                    <input type="text" name="password" id="password" min="8" max="128" required>
+                    <input type="password" name="password" id="password" min="8" max="128" required>
+
                     <button id="login_btn" class="form-button button" type="submit">LOG IN</button>
                 </form>
 
@@ -63,17 +64,26 @@
 
         <!-- Signup Section -->
         <section id="signup" class="flex-column">
-            <form id="signup_form" action="" method="POST">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" min="3" max="15" autocomplete="on" required>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" autocomplete="on" required>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" min="8" max="128" required>
-                <label for="c_password">Confirm Password</label>
-                <input type="password" name="c_password" id="c_password" min="8" max="128" required>
-                <button id="signup_btn" type="submit">SUBMIT</button>
-            </form>
+            <div class="form-container flex-column">
+                <h1>SIGN UP</h1>
+                <p>Fill out the form to create an account.<br>It's quick and easy!</p>
+
+                <form id="signup_form" action="" method="POST">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" min="3" max="15" autocomplete="on" required>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" autocomplete="on" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" min="8" max="128" required>
+                    <label for="c_password">Confirm Password</label>
+                    <input type="password" name="c_password" id="c_password" min="8" max="128" required>
+                    <button id="signup_btn" class="form-button button"  type="submit">SUBMIT</button>
+                </form>
+
+                <div class="redirect-text flex-column">
+                    <a href="#login">Already have an Account?</a>
+                </div>
+            </div>
         </section>
     </main>
 

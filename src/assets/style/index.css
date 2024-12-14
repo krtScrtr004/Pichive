@@ -67,15 +67,17 @@
 .form-container {
     height: 100%;
     width: fit-content;
+    background-color: transparent;
 }
 
 .form-container>h1 {
     font-size: 5rem;
     font-weight: 900;
+    text-align: center;
 }
 
 .form-container>p {
-    max-width: 25ch;
+    max-width: 30ch;
     text-align: center;
 }
 
@@ -91,6 +93,30 @@
     text-align: center;
 }
 
+.form-container * {
+    width: 100%;
+}
+
+.form-container>form {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.form-container>form>label {
+    margin-bottom: 0.5rem;
+}
+
+.form-container>form>input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-button {
+    border: none;
+}
+
 #login {
     background-color: var(--default-black);
 }
@@ -99,26 +125,18 @@
     color: var(--default-white);
 }
 
-#login_form {
-    width: 100%;;
-    margin-top: 2rem;
-}
-
-#login_form * {
-    width: 100%;;
-}
-
-#login_form>label {
-    margin-bottom: 0.5rem;
-}
-
-#login_form>input {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-}
-
 #login_btn {
     background-color: var(--default-yellow);
+}
+
+#signup {
+    background-color: var(--default-yellow);
+}
+
+#signup * {
+    color: var(--default-black);
+}
+
+#signup_btn {
+    color: var(--default-white);
 }
