@@ -43,7 +43,7 @@
     height: 100%;
 }
 
-#create_post_btn {
+header #create_post_btn {
     height: 100%;
     background-color: transparent !important;
     border: 1px solid var(--default-black);

@@ -90,3 +90,13 @@
     font-size: 1rem;
     font-weight: 800;
 }
+
+.button:hover {
+    background-color: var(--default-yellow) !important;
+    color: var(--default-black);
+}
+
+#user_bio {
+    font-size: 0.8rem;
+    font-weight: 300;
+}

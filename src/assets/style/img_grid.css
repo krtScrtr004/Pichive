@@ -3,6 +3,7 @@
     grid-template-columns: repeat(3, minmax(150px, 1fr));
     gap: 1rem;
     padding: 1rem;
+    background-color: var(--default-white);
 }
 
 .img-grid>div {

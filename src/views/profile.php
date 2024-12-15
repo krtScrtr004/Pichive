@@ -38,19 +38,19 @@ if (
             <span class="result-box"></span>
 
             <section class="main-partition">
-                <div class="profile-details" data-id="<?php echo htmlspecialchars($_GET['id']); ?>">
+                <div class="profile-details flex-row" data-id="<?php echo htmlspecialchars($_GET['id']); ?>">
                     <img id="profile_img" class="circle" src="../assets/img/icons/Dark/Profile.svg" alt="Profile Image" width="250" height="250">
 
-                    <section class="profile-texts">
+                    <section class="profile-texts flex-column">
                         <div class="user-info">
                             <h4 id="username" class="username"></h4>
                             <h6 id="user_id" class="user-id"></h6>
                         </div>
 
-                        <div class="buttons">
+                        <div class="button-wrapper">
                             <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
-                                <button id="edit_profile_btn" type="submit">Edit Profile</button>
-                                <button id="create_post_btn" type="submit">Upload</button>
+                                <button id="edit_profile_btn" class="button" type="submit">Edit Profile</button>
+                                <button id="create_post_btn" class="button" type="submit">Upload</button>
                             <?php else: ?>
                                 <button id="follow_user_btn" type="submit">Follow</button>
                                 <button id="block_user_btn" type="submit">Block</button>
@@ -63,9 +63,9 @@ if (
                 <section class="profile-posts flex-column">
                     <?php if ($_GET['id'] === $_SESSION['user_id']): ?>
                         <div class="post-tabs flex-row">
-                            <form action="" method="POST">
-                                <button id="own_post_tab" class="dark-text" type="button">Posts</button>
-                                <button id="liked_post_tab" class="dark-text" type="button">Liked</button>
+                            <form class="flex-row" action="" method="POST">
+                                <button id="own_post_tab" class="dark-text flex-row" type="button"><img src="../assets/img/icons/Dark/Image.svg" alt="Image Icon" title="Image Icon" width="24" height="24">Posts</button>
+                                <button id="liked_post_tab" class="dark-text flex-row" type="button"><img src="../assets/img/icons/Dark/Like.svg" alt="Like Icon" title="Like Icon" width="24" height="24">Liked</button>
                             </form>
                         </div>
                     <?php endif; ?>

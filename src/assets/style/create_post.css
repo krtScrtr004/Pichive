@@ -77,11 +77,6 @@
     color: var(--default-white);
 }
 
-.success-btn:hover {
-    background-color: var(--default-dark-opacity-bg) !important;
-    border: 0.5px solid var(--default-dark-opacity-bg);
-}
-
 .form-buttons>#cancel_btn {
     flex: 1;
     background-color: var(--default-white);
@@ -89,7 +84,7 @@
 }
 
 .form-buttons>#cancel_btn:hover {
-    background-color: var(--default-red);
+    background-color: var(--default-red) !important;
     border: 0.5px solid var(--default-red);
     color: var(--default-white);
 }
