@@ -1,5 +1,6 @@
-<?php include 'partials/forget_pass.php' ?>
+<!-- NOTE: Read README.md filr for more information about this project's current phase -->
 
+<?php include 'partials/forget_pass.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">

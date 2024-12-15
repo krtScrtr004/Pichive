@@ -2,6 +2,7 @@
     width: 50% !important;
     height: fit-content !important;
     padding: var(--default-padding);
+    gap: 1rem;
 }
 
 .left-halve {
