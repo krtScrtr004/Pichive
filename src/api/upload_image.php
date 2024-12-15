@@ -16,11 +16,6 @@ try {
         throw new Exception('Invalid request!');
     }
 
-    $data = json_decode(file_get_contents("php://input"), true);
-    if (!$data) {
-        throw new Exception('Data cannot be parsed!');
-    }
-
     $file_path = $_FILES['image']['tmp_name'];
     // Read the binary content of the image and base64 encode it
     $image_encoded = base64_encode(file_get_contents($file_path));
