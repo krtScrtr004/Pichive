@@ -1,4 +1,5 @@
 import { send_data, test_response } from '../utils/request.js'
+import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Forget Password Modal Activator on Login Page
@@ -14,13 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		forget_password_modal.onclick = (e) => {
 			if (e.target === forget_password_modal) {
 				forget_password_modal.classList.remove('show-modal')
-				document.querySelector('#forget_password_form').reset()
+				form_reset(document.querySelector('#forget_password_form'))
 			}
 		}
 	}
 
 	let data = null
-	const result = document.querySelector('#result')
+	// const result = document.querySelector('#result')
 
 	// Send OTP
 	const email = document.querySelector('#forget_password_form>#email')
@@ -30,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Authenticate email
 		try {
+			alert('Wait for a few seconds. We\'re sending an OTP to your email address!')
+
 			const response = await send_data('../api/forget_pass.php', {
 				email: email.value,
 			})
@@ -54,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 
@@ -89,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 
@@ -116,15 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				throw new Error(test['message'])
 			}
 
+			alert('Passwords updated successfully!')
 			document.querySelector('#change_password_form').reset()
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 
 	// Resend OTP
 	resend_otp.onclick = async (e) => {
 		try {
+			alert('Wait for a few seconds. OTP will be resent.')
+			
 			const response = await send_data('../api/resend_otp.php', {
 				email: data['user']['email'],
 			})
@@ -138,7 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			const change_password_modal = document.querySelector('#change_password_modal')
 			change_password_modal.classList.remove('show-modal')
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 
