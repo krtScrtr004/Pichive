@@ -20,8 +20,7 @@
 }
 
 .search-result>.user-list {
-    background-color: var(--default-white);
-    /* border-left: 1px solid var(--default-black); */
+    box-shadow: -1px 0 3px var(--default-dark-opacity-bg);
     min-width: 30%;
     gap: 0.5rem;
 }
@@ -30,8 +29,17 @@
     color: var(--default-black);
 }
 
+.user-wrapper {
+    padding: 0.5rem;
+    border-radius: var(--default-border-radius);
+}
+
 .user-wrapper>.flex-row>img {
     margin-right: 0.5rem;
+}
+
+.user-wrapper:hover {
+    background-color: rgb(215, 213, 213);
 }
 
 .user-details>h4 {
