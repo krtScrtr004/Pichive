@@ -96,7 +96,13 @@
     color: var(--default-black);
 }
 
-#user_bio {
-    font-size: 0.8rem;
-    font-weight: 300;
+#cancel_btn {
+    background-color: var(--default-white);
+    color: var(--default-black);
+}
+
+#cancel_btn:hover {
+    background-color: var(--default-red) !important;
+    border: 0.5px solid var(--default-red);
+    color: var(--default-white);
 }

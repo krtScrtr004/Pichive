@@ -48,9 +48,11 @@ main-partition {
 }
 
 #user_bio {
+    font-size: 0.8rem;
+    font-weight: 300;
     max-height: 50rem;
     overflow-y: auto;
-}
+} 
 
 .post-tabs {
     background-color: var(--default-white);

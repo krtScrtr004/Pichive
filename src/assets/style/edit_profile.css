@@ -26,15 +26,23 @@
 }
 
 #img_picker_btn {
+    height: fit-content;
     padding: 0.5em;
     border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.img-reminder {
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: italic;
 }
 
 .file-input {
     position: relative;
     height: fit-content;
     overflow: hidden;
-} 
+}
 
 .right-halve {
     flex: 1;
@@ -44,7 +52,16 @@
     gap: 0.5rem;
 }
 
-.button {
-   justify-content: flex-end; 
-   gap: 1rem;
+#edit_profile_form input,
+#edit_profile_form #bio {
+    background-color: var(--default-white);
+}
+
+#edit_profile_form #email {
+    font-weight: 100;
+}
+
+#edit_profile_form>.button-wrapper {
+    justify-content: flex-end;
+    gap: 1rem;
 }
