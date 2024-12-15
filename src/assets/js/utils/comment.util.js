@@ -13,7 +13,7 @@ export function display_comment(data) {
 										}" alt="Commenter Image">
                 </div>
                 <div class="comment-detail">
-                    <div class="comment-header">
+                    <div class="comment-header flex-row">
                         <h4 class="commenter-name dark-text">${
 													data.commenter_name || 'Anonymous'
 												}</h4>
@@ -51,7 +51,7 @@ export function display_comments_in_batches(
 				display_comment({
 					img_url: record['profile_url'],
 					commenter_name: record['username'],
-					comment_content: record['comment'],
+					comment_content: record['cmment'],
 					comment_date: record['date_time'],
 				})
 			}

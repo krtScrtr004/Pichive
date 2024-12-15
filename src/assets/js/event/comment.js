@@ -1,10 +1,24 @@
 import { send_data, test_response } from '../utils/request.js'
 import { display_comment, fetch_post_comments } from '../utils/comment.util.js'
 import { has_already_ran } from '../utils/comment.util.js'
+import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const result = document.querySelector('.result')
 	const submit_comment_btn = document.querySelector('#submit_comment_btn')
+
+	const input_comment = document.querySelector('#input_comment')
+	input_comment.oninput = () => {
+		const char_count = input_comment.value.length;
+		const max_char = 50;
+
+		const write_comment_form = document.querySelector('.write-comment-form')
+		if (char_count >= max_char) {
+			write_comment_form.style.height = '25%'; // Increase height of comment input box
+		} else {
+			input_comment.style.height = '100%'; 
+		}
+	};
 
 	let is_loading = false
 
@@ -12,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		e.preventDefault()
 
 		const img_source = document.querySelector('.img-view>img')
-		const input_comment = document.querySelector('#input_comment')
 		try {
 			const response = await send_data('../api/write_comment.php', {
 				post_id: img_source.getAttribute('data-id'),
@@ -32,20 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				comment_content: input_comment.value,
 				comment_date: response['data']['comment_date'],
 			})
+			form_reset(write_comment_form)
 		} catch (error) {
 			result.innserHTML = error
 		}
 	}
 
 	setInterval(async () => {
-		const modal_wrapper = document.querySelector('.modal-wrapper')
-		if (!modal_wrapper.classList.contains('show_modal') || is_loading) {
+		const post_modal = document.querySelector('#post_modal')
+		if (!post_modal.classList.contains('show-modal') || is_loading) {
 			return
 		}
 		is_loading = true
 
 		try {
-			const result = await fetch_post_comments(img_source)
+			const result = await fetch_post_comments(document.querySelector('.img-view>img'))
 			if (!result['status']) {
 				is_loading = false
 				throw new Error(result['message'])

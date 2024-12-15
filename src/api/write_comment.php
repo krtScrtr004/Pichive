@@ -25,7 +25,7 @@ try {
         throw new Exception('Comment length should be between 1 and 300 characters!');
     }
     $date = (new DateTime())->format('Y-m-d H:i:s');
-    $query = $pdo->prepare('INSERT INTO p_comment(commenter_id, post_id, comment, date_time, likes) VALUES (:commenter_id, :post_id, :comment, :date_time, :likes)');
+    $query = $pdo->prepare('INSERT INTO p_comment(commenter_id, post_id, cmment, date_time, likes) VALUES (:commenter_id, :post_id, :comment, :date_time, :likes)');
     $query->execute(array(
         ':commenter_id' => encode_uuid($_SESSION['user_id']),
         ':post_id' => $data['post_id'],

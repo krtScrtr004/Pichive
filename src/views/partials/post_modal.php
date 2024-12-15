@@ -23,7 +23,7 @@ if (
         <section class="img-view">
             <!-- <div style="background-color:white;color:black;"> -->
 
-                <!-- <div class="poster-info flex-row">
+            <!-- <div class="poster-info flex-row">
                     <a href="">
                         <img class="circle" src="" alt="Poster Profile Icon" title="Poster Profile Icon" witdh="36" height="36">
                     </a>
@@ -58,9 +58,9 @@ if (
                                 <img src="../assets/img/default_img_prev.png" alt="">
                             </div>
                             <div class="comment-detail">
-                                <div class="comment-header">
-                                    <h4 class="commenter_name">Julius Caesar</h4>
-                                    <p class="comment_date">123123</p>
+                                <div class="comment-header flex-row">
+                                    <h4 class="commenter-name">Julius Caesar</h4>
+                                    <p class="comment-date">123123</p>
                                 </div>
                                 <p class="comment-content">
                                     asdfbdasbflkdabfajdsbflakjsbdflkjadsbfljaskdbfljkasdbfljkasbfabdsflkjasbfljasbdfjkladsbfljkasdbfkjlasbdflkjasbfjlkadsbfalsbjdfadsjlbfasjlkdbflaskdbfljksdbfaldsjbfbkjlb
@@ -89,9 +89,9 @@ if (
                 </section>
 
                 <section class="write-comment-form">
-                    <form action="" method="POST">
-                        <input type="text" name="write_comment" id="input_comment" min="1" max="300" required>
-                        <button type="submit" id="submit_comment_btn">Send</button>
+                    <form id="comment_form" class="flex-row" action="" method="POST">
+                        <textarea name="input_comment" id="input_comment" cols="30" rows="10" maxlength="300" placeholder="Write comment here..."></textarea>
+                        <button type="submit" id="submit_comment_btn" class="button">Send</button>
                     </form>
                 </section>
 

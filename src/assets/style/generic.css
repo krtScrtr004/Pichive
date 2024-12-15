@@ -92,6 +92,7 @@ input {
     border: 1px solid var(--default-black);
     border-radius: var(--default-border-radius);
     color: var(--default-black) !important;
+    padding: 0.5rem;
 }
 
 textarea:focus,
