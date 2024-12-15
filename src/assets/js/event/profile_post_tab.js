@@ -1,6 +1,6 @@
 import { load_posts, offset } from './fetch_post.js'
 
-const tabs = document.querySelectorAll('.post-tabs button')
+const tabs = document.querySelectorAll('.post-tabs>form>button')
 const result_box = document.querySelector('.post-result-box')
 
 function remove_active_tab() {
