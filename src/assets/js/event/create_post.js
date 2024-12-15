@@ -1,8 +1,11 @@
 import { send_file, test_response } from '../utils/request.js'
+import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const create_post_btn = document.querySelectorAll('#create_post_btn')
 	const create_post_modal = document.querySelector('#create_post_modal')
+	const create_post_form = document.querySelector('#create_post_form')
+
 	create_post_btn.forEach((btn) => {
 		btn.onclick = (e) => {
 			e.preventDefault()
@@ -13,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	create_post_modal.onclick = (e) => {
 		if (e.target === create_post_modal) {
 			create_post_modal.classList.remove('show-modal')
+			form_reset(create_post_form)
 		}
 	}
 
 	if (create_post_modal.classList.contains('show-modal')) {
-		const form = document.querySelector('#create_post_modal')
 		const result_box = document.querySelector('.result_box')
 		
 		// Dynamically change image preiew when user select another image
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const upload_img_btn = document.querySelector('#upload_img_btn')
 		if (upload_img_btn) {
 			upload_img_btn.onclick = () => {
-				form.showPopover()
+				create_post_form.classList.add('show-modal')
 			}
 		}
 
@@ -66,21 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				setTimeout(() => {
 					result_box.innerHTML = response['message']
-					title.value = ''
-					image_preview.src = ''
-					description.value = ''
-					image_picker.value = ''
+					form_reset(create_post_form)
 				}, '1000')
 				result_box.innerHTML = ''
 				location.reload()
 			} catch (error) {
 				result_box.innerHTML = error
+				create_post_form.reset()
 			}
 		}
 
 		cancel_btn.onclick = (e) => {
 			e.preventDefault()
 			create_post_modal.classList.remove('show-modal')
+			form_reset(create_post_form)
 		}
 	}
 })

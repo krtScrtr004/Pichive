@@ -9,13 +9,14 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 <link rel="stylesheet" href="../assets/style/create_post.css">
 <link rel="stylesheet" href="../assets/style/modal.css">
 
-<section id="create_post_modal" class="modal-wrapper show-modal">
+<section id="create_post_modal" class="modal-wrapper">
     <span class="result_box"></span>
 
     <section class="modal create_post flex-column">
         <h3 class="heading-title">Create New Post</h3>
+        
         <!-- Create Post Form -->
-        <form action="" method="POST" class="flex-column">
+        <form id="create_post_form" action="" method="POST" class="flex-column">
             <section class="form-head">
                 <input type="text" name="title" id="title" placeholder="Title here..." min="1" max="50">
             </section>

@@ -59,6 +59,7 @@
 
 #description {
     flex: 1;
+    font-weight: 300;
 }
 
 .form-buttons {
