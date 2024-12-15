@@ -6,6 +6,7 @@ main-partition {
 .profile-details {
     background-color: var(--default-white);;
     padding: var(--default-padding);
+    box-shadow: 0px 4px 6px var(--default-black);
 }
 
 .profile-details>img {
@@ -45,6 +46,17 @@ main-partition {
 .profile-texts #create_post_btn {
     background-color: var(--default-white);
     color: var(--default-black);
+}
+
+#block_user_btn {
+    background-color: var(--default-white);
+    color: var(--default-black);
+}
+
+#block_user_btn:hover {
+    background-color: var(--default-red) !important;
+    color: var(--default-white);
+    border: 0.5px solid var(--default-red);
 }
 
 #user_bio {

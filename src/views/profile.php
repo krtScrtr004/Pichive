@@ -52,10 +52,11 @@ if (
                                 <button id="edit_profile_btn" class="button" type="submit">Edit Profile</button>
                                 <button id="create_post_btn" class="button" type="submit">Upload</button>
                             <?php else: ?>
-                                <button id="follow_user_btn" type="submit">Follow</button>
-                                <button id="block_user_btn" type="submit">Block</button>
+                                <button id="follow_user_btn" class="button" type="submit">Follow</button>
+                                <button id="block_user_btn" class="button" type="submit">Block</button>
                             <?php endif; ?>
                         </div>
+                        
                         <p id="user_bio" class="bio"></p>
                     </section>
                 </div>

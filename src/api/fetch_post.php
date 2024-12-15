@@ -47,8 +47,9 @@ try {
                                 LEFT JOIN 
                                     follow AS f
                                 ON 
-                                    (p.poster_id = f.their_id OR p.poster_id = f.my_id)
-                                    AND f.my_id = :id
+                                    (f.their_id = p.poster_id AND f.my_id = :id)  -- Current user follows poster
+                                    OR 
+                                    (f.my_id = p.poster_id AND f.their_id = :id) -- Poster follows current user
                                 LEFT JOIN 
                                     p_like AS pl
                                 ON 
@@ -58,11 +59,12 @@ try {
                                 ON 
                                     p.id = r.post_id AND r.user_id = :id
                                 WHERE 
-                                    r.post_id IS NULL  -- Exclude reported posts
+                                    (p.poster_id = :id OR f.id IS NOT NULL) -- Own posts or valid follow relationship
+                                    AND r.post_id IS NULL  -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
                                 LIMIT 
-                                    $limit OFFSET $offset");
+                                    $limit OFFSET $offset;");
         $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
