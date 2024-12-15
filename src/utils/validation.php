@@ -117,7 +117,7 @@ function validate_title($title) {
     }
 
     $min_len = 5;
-    $max_len = 30;
+    $max_len = 50;
     if (strlen($title) < $min_len || strlen($title) > $max_len) {
         return "Title must be between $min_len and $max_len characters long!";
     }

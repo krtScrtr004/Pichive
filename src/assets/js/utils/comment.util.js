@@ -7,20 +7,24 @@ export function display_comment(data) {
 	const comment_HTML = `
         <div class="comment-wrapper">
             <section class="original-comment comment-box flex-row">
-                <div class="commenter-img">
-                    <img src="${
-											data.img_url || '../assets/img/default_img_prev.png'
-										}" alt="Commenter Image">
-                </div>
-                <div class="comment-detail">
-                    <div class="comment-header flex-row">
-                        <h4 class="commenter-name dark-text">${
-													data.commenter_name || 'Anonymous'
-												}</h4>
-                        <p class="comment-date dark-text">${
-													data.comment_date || 'Unknown Date'
-												}</p>
-                    </div>
+				<a href="../views/profile.php?page=profile&id=${
+							data.commenter_id ?? null
+						}">
+					<div class="commenter-img">
+						<img src="${
+												data.img_url || '../assets/img/default_img_prev.png'
+											}" alt="Commenter Image">
+					</div>
+					<div class="comment-detail">
+						<div class="comment-header flex-row">
+							<h4 class="commenter-name dark-text">${
+														data.commenter_name || 'Anonymous'
+													}</h4>
+							<p class="comment-date dark-text">${
+														data.comment_date || 'Unknown Date'
+													}</p>
+						</div>
+					</a>
                     <p class="comment-content dark-text">
                         ${data.comment_content || 'No content provided'}
                     </p>
@@ -50,6 +54,7 @@ export function display_comments_in_batches(
 			if (parseInt(img_id) === record['post_id']) {
 				display_comment({
 					img_url: record['profile_url'],
+					commenter_id: record['commenter_id'],
 					commenter_name: record['username'],
 					comment_content: record['cmment'],
 					comment_date: record['date_time'],

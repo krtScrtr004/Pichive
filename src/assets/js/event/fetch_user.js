@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const body = document.querySelector('body')
         if (follow_user_btn) {
-            if (data['is_followed'] === '1') {
+            if (data['is_followed'] === 1) {
                 follow_user_btn.innerHTML = 'Unfollow'
                 body.setAttribute('data-followed', 1)
             } else {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
         if (block_user_btn) {
-            if (data['is_blocked'] === '1') {
+            if (data['is_blocked'] === 1) {
                 block_user_btn.innerHTML = 'Unblock'
                 body.setAttribute('data-blocked', 1)
             } else {

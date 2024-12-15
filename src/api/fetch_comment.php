@@ -53,7 +53,7 @@ try {
 
     $result = $query->fetchAll();
     foreach ($result as $key => &$value) {
-        unset($value['commenter_id']); // Remove commenter_id before returning the response
+        $value['commenter_id'] = parse_uuid($value['commenter_id']);
     }
     unset($value);
 

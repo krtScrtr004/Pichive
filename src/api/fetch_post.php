@@ -59,12 +59,12 @@ try {
                                 ON 
                                     p.id = r.post_id AND r.user_id = :id
                                 WHERE 
-                                    (p.poster_id = :id OR f.id IS NOT NULL) -- Own posts or valid follow relationship
+                                    (p.poster_id = :id OR f.their_id IS NOT NULL) -- Own posts OR valid follow relationship
                                     AND r.post_id IS NULL  -- Exclude reported posts
                                 ORDER BY 
                                     p.date_time DESC 
                                 LIMIT 
-                                    $limit OFFSET $offset;");
+                                    $limit OFFSET $offset");
         $query->execute(array(
             ':id' => encode_uuid($_SESSION['user_id']),
         ));
