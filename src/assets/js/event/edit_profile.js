@@ -2,7 +2,7 @@ import { send_file, test_response } from '../utils/request.js'
 import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
-	const result = document.querySelector('.result')
+	// const result = document.querySelector('.result')
 
 	const edit_profile_modal = document.querySelector('#edit_profile_modal')
 	const edit_profile_form = document.querySelector('#edit_profile_form')
@@ -61,10 +61,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 				throw new Error(test['message'])
 			}
 
+			alert(response['message'])
 			form_reset(edit_profile_form)
 			location.reload()
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 

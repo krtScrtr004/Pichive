@@ -10,7 +10,7 @@ let is_loading = false // Flag to prevent multiple calls
 
 // document.addEventListener('DOMContentLoaded', async () => {
 const post_modal = document.querySelector('#post_modal')
-const result_box = document.querySelector('.result')
+// const result_box = document.querySelector('.result')
 const center = document.querySelector('.center')
 
 await load_posts()
@@ -109,7 +109,8 @@ export async function load_posts() {
 		loading.style.display = 'none'
 		is_loading = false // Reset loading flag
 	} catch (error) {
-		result_box.innerHTML = error
+		alert(error.message)
+		console.error(error.message)
 	}
 }
 // })

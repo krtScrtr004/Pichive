@@ -1,6 +1,6 @@
 import { send_data, test_response } from './request.js'
 
-const result_box = document.querySelector('.result')
+// const result_box = document.querySelector('.result')
 
 export function add_modal_event(post) {
 	const modal = document.querySelector('#post_modal>.modal')
@@ -20,8 +20,8 @@ export function add_modal_event(post) {
 }
 
 function add_icon_event(post) {
-    const like = document.querySelector('#like')
-    const edit = document.querySelector('#edit_post')
+	const like = document.querySelector('#like')
+	const edit = document.querySelector('#edit_post')
 	const copy_link = document.querySelector('#copy_link')
 	const report = document.querySelector('#report')
 
@@ -37,11 +37,11 @@ function add_icon_event(post) {
 		navigator.clipboard
 			.writeText(post['img_url'])
 			.then(() => {
-				// TODO:
-				// result_box.innerHTML = 'URL copied to clipboard!';
+				alert('Image link copied successfully!')
 			})
 			.catch((error) => {
-				result_box.innerHTML = error
+				alert(error.message)
+				console.error(error.message)
 			})
 	}
 
@@ -50,17 +50,21 @@ function add_icon_event(post) {
 			try {
 				edit_event(post)
 			} catch (error) {
-				result_box.innerHTML = error
+				alert(error.message)
+				console.error(error.message)
 			}
 		}
 	}
 
 	if (report) {
-		report.onclick = async () => {try {
-            report_event(post)
-        } catch (error) {
-            result_box.innerHTML = error
-        }}
+		report.onclick = async () => {
+			try {
+				report_event(post)
+			} catch (error) {
+				alert(error.message)
+				console.error(error.message)
+			}
+		}
 	}
 }
 
@@ -126,7 +130,7 @@ async function edit_event(post) {
 		}
 
 		// TODO:
-        location.reload()
+		location.reload()
 	}
 }
 

@@ -19,7 +19,9 @@ if (search_term) {
 	try {
 		await fetch_user('search')
 	} catch (error) { 
-		console.error(error)
+		alert(error.message)
+		console.error(error.message)
+
 	}
 
 	document.querySelector('.center').addEventListener('scroll', handle_scroll)

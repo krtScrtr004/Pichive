@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Create post form event
 
-	const result_box = document.querySelector('.result_box')
+	// const result_box = document.querySelector('.result_box')
 
 	// Dynamically change image preiew when user select another image
 	const image_picker = document.querySelector('#file_picker')
@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			form_reset(create_post_form)
 			create_post_modal.classList.remove('show-modal')
 		} catch (error) {
-			result_box.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 			create_post_form.reset()
 		}
 	}

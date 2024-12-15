@@ -106,6 +106,7 @@ export async function fetch_user(content) {
         has_loaded = true
 		offset += limit
 	} catch (error) {
-		sidenav_result.innerHTML = error
+		alert(error.message)
+		console.error(error.message)
 	}
 }

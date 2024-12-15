@@ -1,7 +1,7 @@
 import { load_posts, offset } from './fetch_post.js'
 
 const tabs = document.querySelectorAll('.post-tabs>form>button')
-const result_box = document.querySelector('.post-result-box')
+// const result_box = document.querySelector('.post-result-box')
 
 function remove_active_tab() {
 	const active_tab = document.querySelector('.content.active')
@@ -24,8 +24,8 @@ async function load_own_posts() {
 	try {
 		await load_posts()
 	} catch (error) {
-		console.error('Error loading posts:', error)
-		result_box.innerHTML = error
+		alert(error.message)
+		console.error(error.message)
 	}
 }
 
@@ -40,13 +40,13 @@ async function load_liked_posts() {
 	try {
 		await load_posts()
 	} catch (error) {
-		console.error('Error loading posts:', error)
-		result_box.innerHTML = error
+		alert(error.message)
+		console.error(error.message)
 	}
 }
 
 if (tabs.length > 0) {
-    // Default to own post tab
+	// Default to own post tab
 	own_post_tab.style.borderBottom = '5px solid rgb(253, 210, 0)'
 	liked_post_tab.style.borderBottom = 'none'
 

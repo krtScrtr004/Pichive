@@ -4,7 +4,7 @@ import { has_already_ran } from '../utils/comment.util.js'
 import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-	const result = document.querySelector('.result')
+	// const result = document.querySelector('.result')
 	const submit_comment_btn = document.querySelector('#submit_comment_btn')
 
 	const input_comment = document.querySelector('#input_comment')
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				throw new Error(test['message'])
 			}
 
-			result.innserHTML = response['message']
+			alert(response['message'])
 			display_comment({
 				// Display new comment
 				img_url: response['data']['img_url'],
@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			form_reset(document.querySelector('#comment_form'))
 		} catch (error) {
-			result.innserHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 
@@ -68,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			has_already_ran['status'] = true // Set to true to prevent fetching comments again in the next interval
 			is_loading = false
 		} catch (error) {
-			result.innserHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}, 10000)
 })

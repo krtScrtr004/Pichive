@@ -1,7 +1,7 @@
 import { get_data, test_response } from '../utils/request.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const result_box = document.querySelector('.result-box');
+    // const result_box = document.querySelector('.result-box');
     const profile_details = document.querySelector('.profile-details');
 
     const profile_img = document.querySelector('#profile_img');
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     } catch (error) {
-        result_box.innerHTML = error
+        alert(error.message)
+        console.error(error.message)
     }
 })
