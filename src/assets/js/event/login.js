@@ -1,4 +1,5 @@
 import { send_data, test_response } from '../utils/request.js'
+import { form_reset } from '../utils/utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const email = document.querySelector('#login_form>#email')
@@ -15,28 +16,42 @@ document.addEventListener('DOMContentLoaded', () => {
 				password: password.value,
 			})
 
-			// TODO: Change this if possible
 			if (!response) {
-				throw new Error('Data cannot be processed!')
+				throw new Error('Data cannot be processed!');
 			} else if (response['status'] === 'fail') {
-				// TODO: Handle fauilure
+				// Handle failure
 				if (response.hasOwnProperty('error')) {
-					Object.values(response['error']).forEach((error) => {
-						const paragraph = document.createElement('p')
-						paragraph.textContent = error
-						result.appendChild(paragraph)
-					})
+					// Collect error messages
+					const error_msg = Object.values(response['error']);
+					
+					// Combine all error messages into a single string
+					const alert_msg = error_msg.join('\n');
+					
+					// Display the errors in an alert box
+					alert(alert_msg);
+					
+					// Optionally display errors on the page
+					error_msg.forEach((error) => {
+						const paragraph = document.createElement('p');
+						paragraph.textContent = error;
+						result.appendChild(paragraph);
+					});
 				} else {
-					result.textContent = response['message']
+					// Alert and display the failure message
+					alert(response['message']);
+					result.textContent = response['message'];
 				}
-				return
-			}
+			
+				// Reset the form
+				form_reset(document.querySelector('#login_form'));
+				return;
+			}			
 
-			// TODO: Display successfull message on modal
-			result.innerHTML = response['message']
+			alert(response['message'])
 			window.location.href = '../views/home_explore.php?page=home'
 		} catch (error) {
-			result.innerHTML = error
+			alert(error.message)
+			console.error(error.message)
 		}
 	}
 })
