@@ -145,28 +145,27 @@
 
 .comment-list {
     flex: 1;
+    gap: 0.5rem;
     overflow: hidden auto;
 }
 
 .comment-wrapper {
-    width: 100%;
+    width: fit-content;
 }
 
 .comment-box {
     width: 100%;
-    display: flex;
 }
 
 .commenter-img {
-    width: 8%;
     display: grid;
     grid-template-rows: 1fr 1fr;
     place-items: center;
 }
 
 .commenter-img>img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 2rem;
     aspect-ratio: 1/1;
     border: 1px solid black;
     border-radius: 50%;
@@ -224,4 +223,5 @@
 #submit_comment_btn {
     flex: 1;
     height: 100%;
+    max-height: 50px;
 }

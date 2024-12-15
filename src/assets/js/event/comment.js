@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				comment_content: input_comment.value,
 				comment_date: response['data']['comment_date'],
 			})
-			form_reset(write_comment_form)
+			form_reset(document.querySelector('#comment_form'))
 		} catch (error) {
 			result.innserHTML = error
 		}

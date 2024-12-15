@@ -2,6 +2,7 @@ import { get_data, send_data, test_response } from '../utils/request.js'
 import { add_post_details } from '../utils/fetch_post.util.js'
 import { remove_comment, has_already_ran } from '../utils/comment.util.js'
 import { remove_details } from '../utils/fetch_post.util.js'
+import { form_reset } from '../utils/utils.js'
 
 export let offset = { current_count: 0 }
 const limit = 9
@@ -23,6 +24,7 @@ post_modal.onclick = (e) => {
 		has_already_ran['status'] = false
 		remove_comment()
 		remove_details()
+		form_reset(document.querySelector('#comment_form'))
 	}
 }
 

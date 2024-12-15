@@ -6,7 +6,7 @@ export function display_comment(data) {
 	// Using a template string to create the comment structure
 	const comment_HTML = `
         <div class="comment-wrapper">
-            <section class="original-comment comment-box">
+            <section class="original-comment comment-box flex-row">
                 <div class="commenter-img">
                     <img src="${
 											data.img_url || '../assets/img/default_img_prev.png'

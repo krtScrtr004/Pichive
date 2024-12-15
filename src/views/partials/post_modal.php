@@ -49,8 +49,8 @@ if (
             </section>
 
             <section class="comment">
-                <section class="comment-list">
-                    <div class="comment-wrapper">
+                <section class="comment-list flex-column">
+                    <!-- <div class="comment-wrapper"> -->
                         <!-- Original comment -->
                         <!-- <section class="original_comment comment-box">
                             <div class="commenter-img">
@@ -85,7 +85,7 @@ if (
                                 </p>
                             </div>
                         </section> -->
-                    </div>
+                    <!-- </div> -->
                 </section>
 
                 <section class="write-comment-form">
