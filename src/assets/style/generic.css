@@ -3,6 +3,7 @@
     --default-black: rgb(28, 30, 31);
     --default-yellow: rgb(253, 210, 0);
     --default-dark_yellow: rgb(213, 168, 0);
+    --default-red: rgb(225, 62, 62);
 
     --default-light-hover: #bcbcbc80;
 
@@ -79,7 +80,7 @@ aside {
 
 textarea {
     resize: none;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
 
 button {
@@ -88,10 +89,12 @@ button {
 }
 
 input {
+    border: 1px solid var(--default-black);
     border-radius: var(--default-border-radius);
     color: var(--default-black) !important;
 }
 
+textarea:focus,
 input:focus {
     outline: none;
 }

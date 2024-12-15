@@ -13,8 +13,8 @@
     gap: 1rem;
 }
 
-.form-main.flex-row,
-.form-main.flex-row>div {
+#edit_post_modal .form-main.flex-row,
+#edit_post_modal .form-main.flex-row>div {
     flex: 1
 }
 

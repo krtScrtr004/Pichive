@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const result_box = document.querySelector('.result_box')
 		
 		// Dynamically change image preiew when user select another image
-		const image_picker = document.querySelector
-		const image_preview = document.querySelector('.img-preview')
-		('#file_picker')
+		const image_picker = document.querySelector('#file_picker')
+
+		const image_preview = document.querySelector('#img_preview')
 		image_picker.onchange = () => {
 			if (image_picker.files && image_picker.files[0]) {
 				image_preview.src = URL.createObjectURL(image_picker.files[0])
