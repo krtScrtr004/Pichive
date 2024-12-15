@@ -43,7 +43,7 @@
 
                     <hr class="halve-divider light-text">
 
-                    <li class="logout">
+                    <li id="logout" class="logout">
                         <a class="link-wrapper list" href="">
                             <img src="../assets/img/icons/Light/Logout.svg" alt="Logout Icon" width="24" height="24">
                             <h3>Logout</h3>
