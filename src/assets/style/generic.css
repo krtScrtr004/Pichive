@@ -4,9 +4,12 @@
     --default-yellow: rgb(253, 210, 0);
     --default-dark_yellow: rgb(213, 168, 0);
 
+    --default-light-hover: #bcbcbc80;
+
     --default-light-opacity-bg: rgba(233, 233, 233, 0.5);
     --default-dark-opacity-bg: rgba(28, 30, 31, 0.5);
 
+    --default-border-radius: 5px;
     --default-padding: 1em;
     --default-drop: 1px;
 }
@@ -81,8 +84,14 @@ textarea {
 
 button {
     cursor: pointer;
+    border-radius: var(--default-border-radius);
 }
 
 input {
+    border-radius: var(--default-border-radius);
     color: var(--default-black) !important;
+}
+
+input:focus {
+    outline: none;
 }

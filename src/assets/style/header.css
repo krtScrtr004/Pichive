@@ -43,6 +43,20 @@
     height: 100%;
 }
 
+#create_post_btn {
+    height: 100%;
+    background-color: transparent !important;
+    border: 1px solid var(--default-black);
+    color: var(--default-black);
+    font-size: 1rem !important;
+    font-weight: 600;
+}
+
+#search_btn:hover,
+#create_post_btn:hover {
+    background-color:var(--default-light-hover) !important;
+}
+
 .profile-icon-menu>img {
     border: 1px solid var(--default-black);
     position: relative;
@@ -70,6 +84,9 @@
     list-style-type: none;
 }
 
+.drop-down li:hover {
+    background-color: var(--default-light-hover);
+}
 
 .drop-down li>a>img {
     margin-right: 1rem;

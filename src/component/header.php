@@ -14,7 +14,7 @@
     </div>
 
     <div class="right-sub-menu flex-row">
-        <button id="create_post_btn">CREATE POST</button>
+        <button id="create_post_btn" class="button">CREATE POST</button>
 
         <span class="profile-icon-menu flex-row">
             <img class="circle" src="../assets/img/default_img_prev.png" alt="Profile Icon Menu" title="Profile Icon Menu" width="36" height="36">
