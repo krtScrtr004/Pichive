@@ -19,6 +19,7 @@
         <span class="profile-icon-menu flex-row">
             <img class="circle" src="../assets/img/default_img_prev.png" alt="Profile Icon Menu" title="Profile Icon Menu" width="36" height="36">
 
+            <!-- Drop Down Sub Menu -->
             <div class="drop-down">
                 <ul class="flex-column">
                     <li>
@@ -42,7 +43,7 @@
 
                     <hr class="halve-divider light-text">
 
-                    <li>
+                    <li class="logout">
                         <a class="link-wrapper list" href="">
                             <img src="../assets/img/icons/Light/Logout.svg" alt="Logout Icon" width="24" height="24">
                             <h3>Logout</h3>

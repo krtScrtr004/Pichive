@@ -11,6 +11,11 @@ profile_icon_menu.onclick = (e) => {
     }
 };
 
+profile_icon_menu.onmouseover = (e) => {
+    e.stopPropagation();
+    drop_down.style.display = 'flex';
+}
+
 window.onclick = () => {
     if (drop_down.style.display === 'flex') {
         drop_down.style.display = 'none';

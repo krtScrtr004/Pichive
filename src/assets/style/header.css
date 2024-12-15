@@ -68,7 +68,7 @@
     width: 15vw;
     background-color: var(--default-black);
     color: var(--default-white);
-    padding: 2rem;
+    padding: 0.5rem;
     position: absolute;
     top: 4.5rem;
     right: 0.5rem;
@@ -82,6 +82,8 @@
 
 .drop-down li {
     list-style-type: none;
+    padding: 0.5rem;
+    border-radius: var(--default-border-radius);
 }
 
 .drop-down li:hover {
